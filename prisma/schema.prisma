@@ -1,0 +1,54 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model SKIN {
+  SKINID           String           @id @db.Char(5)
+  SKINNAME         String           @db.VarChar(50)
+  SKINDESC         String           @db.VarChar(200)
+  SKINIMG          String           @db.VarChar(255)
+  users            User[]           // Perbaikan: Menghapus relasi menggunakan SKINID
+  products         Product[]
+  recommendations  Recommendation[]
+}
+
+model User {
+  USERID           String           @id @db.Char(16) @default(nanoid(16))
+  USERNAME         String           @db.VarChar(25)
+  EMAIL            String           @db.VarChar(200) @unique
+  PASSWORD         String           @db.VarChar(255)
+  PROFILEIMG       String?          @db.VarChar(255)
+  CREATEDAT        DateTime         @default(now()) @db.Timestamp(0)
+  UPDATEDAT        DateTime         @default(now()) @db.Timestamp(0)
+  skinId           String?
+  skin             SKIN?            @relation(fields: [skinId], references: [SKINID]) // Perbaikan: Menggunakan skinId
+  recommendations  Recommendation[]
+}
+
+
+model Product {
+  id          Int     @id @default(autoincrement())
+  name        String  @db.VarChar(50)
+  description String  @db.VarChar(200)
+  price       Float
+  skinType    String  @db.VarChar(50)
+  skinId      String?
+  skin        SKIN?   @relation(fields: [skinId], references: [SKINID])
+  recommendations Recommendation[]
+}
+
+model Recommendation {
+  id                  Int      @id @default(autoincrement())
+  recommendationText  String   @db.VarChar(255)
+  userId              String
+  skinId              String
+  productId           Int
+  user                User     @relation(fields: [userId], references: [USERID])
+  skin                SKIN     @relation(fields: [skinId], references: [SKINID])
+  product             Product  @relation(fields: [productId], references: [id])
+}
