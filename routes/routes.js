@@ -12,7 +12,7 @@ const multer = Multer({
     fileSize: 3 * 1024 * 1024
 });
 
-router.get("/", (req, res) => {
+router.get("/", (req, res) => { 
     res.status(200).json({
         "message": "Welcome to HiBeauty! API server. We recommend that you first register and login before accessing our endpoints."
     });
@@ -31,9 +31,9 @@ router.get('/users', accessValidation, auth.getUsers);
 // Skin routes
 router.get('/skins', accessValidation, skinController.getSkins);
 router.get('/skin/:skinId', accessValidation, skinController.getSkinById);
-router.post('/skins', accessValidation, skinController.createSkin);
-router.put('/skin/:skinId', accessValidation, skinController.updateSkin);
-router.delete('/skin/:skinId', accessValidation, skinController.deleteSkin);
+// router.post('/skins', accessValidation, skinController.createSkin);
+// router.put('/skin/:skinId', accessValidation, skinController.updateSkin);
+// router.delete('/skin/:skinId', accessValidation, skinController.deleteSkin);
 
 // Product routes
 router.get('/products', accessValidation, productController.getProducts);

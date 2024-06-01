@@ -1,0 +1,14 @@
+-- AddForeignKey
+ALTER TABLE `User` ADD CONSTRAINT `User_skinId_fkey` FOREIGN KEY (`skinId`) REFERENCES `SKIN`(`SKINID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Product` ADD CONSTRAINT `Product_skinId_fkey` FOREIGN KEY (`skinId`) REFERENCES `SKIN`(`SKINID`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Recommendation` ADD CONSTRAINT `Recommendation_userId_fkey` FOREIGN KEY (`userId`) REFERENCES `User`(`USERID`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Recommendation` ADD CONSTRAINT `Recommendation_skinId_fkey` FOREIGN KEY (`skinId`) REFERENCES `SKIN`(`SKINID`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `Recommendation` ADD CONSTRAINT `Recommendation_productId_fkey` FOREIGN KEY (`productId`) REFERENCES `Product`(`id`) ON DELETE RESTRICT ON UPDATE CASCADE;

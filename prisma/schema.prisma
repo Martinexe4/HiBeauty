@@ -12,8 +12,8 @@ model SKIN {
   SKINNAME         String           @db.VarChar(50)
   SKINDESC         String           @db.VarChar(200)
   SKINIMG          String           @db.VarChar(255)
-  users            User[]           // Perbaikan: Menghapus relasi menggunakan SKINID
-  products         Product[]
+  users            UserSkin[]       //Many-to-many relation of User and Skin
+  products         Product[]        //untuk apa skin terhubung product jika dari rekomendas sistem sudah mengetahui kulit user
   recommendations  Recommendation[]
 }
 
@@ -26,10 +26,18 @@ model User {
   CREATEDAT        DateTime         @default(now()) @db.Timestamp(0)
   UPDATEDAT        DateTime         @default(now()) @db.Timestamp(0)
   skinId           String?
-  skin             SKIN?            @relation(fields: [skinId], references: [SKINID]) // Perbaikan: Menggunakan skinId
+  skins            UserSkin[]       //Many-to-many relation of Skin and User
   recommendations  Recommendation[]
 }
 
+model UserSkin {
+  UserId    String
+  SkinId    String
+  user      User      @relation(fields: [UserId], references: [USERID])
+  skin      SKIN      @relation(fields: [SkinId], references: [SKINID])
+
+  @@id([UserId, SkinId]) // Composite primary key
+}
 
 model Product {
   id          Int     @id @default(autoincrement())
@@ -51,4 +59,4 @@ model Recommendation {
   user                User     @relation(fields: [userId], references: [USERID])
   skin                SKIN     @relation(fields: [skinId], references: [SKINID])
   product             Product  @relation(fields: [productId], references: [id])
-}
+} //Apa sebenarnya isi recommendations?

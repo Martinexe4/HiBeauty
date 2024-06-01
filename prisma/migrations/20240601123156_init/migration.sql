@@ -1,0 +1,16 @@
+-- DropForeignKey
+ALTER TABLE `user` DROP FOREIGN KEY `User_skinId_fkey`;
+
+-- CreateTable
+CREATE TABLE `UserSkin` (
+    `UserId` VARCHAR(191) NOT NULL,
+    `SkinId` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`UserId`, `SkinId`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- AddForeignKey
+ALTER TABLE `UserSkin` ADD CONSTRAINT `UserSkin_UserId_fkey` FOREIGN KEY (`UserId`) REFERENCES `User`(`USERID`) ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE `UserSkin` ADD CONSTRAINT `UserSkin_SkinId_fkey` FOREIGN KEY (`SkinId`) REFERENCES `SKIN`(`SKINID`) ON DELETE RESTRICT ON UPDATE CASCADE;

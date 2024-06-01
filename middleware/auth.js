@@ -14,6 +14,7 @@ const createToken = (payload) => {
 exports.register = async (req, res) => {
 
     const { username, email, password, confirmpassword } = req.body
+    console.log(req.body)
 
     if (password !== confirmpassword) {
         return res.status(400).json({
@@ -25,9 +26,11 @@ exports.register = async (req, res) => {
     //check if email already exists
     const exists = await prisma.user.count({
         where: {
-            EMAIL: email
+            EMAIL:email
         }
-     });
+    });
+    console.log(`${email} : ${exists}`)
+    console.log(req.body)
     if (exists > 0) {
         return res.status(400).json({
             "status": false,
