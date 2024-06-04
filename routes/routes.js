@@ -30,24 +30,17 @@ router.get('/users', accessValidation, auth.getUsers);
 
 // Skin routes
 router.get('/skins', accessValidation, skinController.getSkins);
-router.get('/skin/:skinId', accessValidation, skinController.getSkinById);
+router.get('/skin/:SKINID', accessValidation, skinController.getSkinById);
 // router.post('/skins', accessValidation, skinController.createSkin);
 // router.put('/skin/:skinId', accessValidation, skinController.updateSkin);
 // router.delete('/skin/:skinId', accessValidation, skinController.deleteSkin);
 
 // Product routes
 router.get('/products', accessValidation, productController.getProducts);
-router.get('/product/:productId', accessValidation, productController.getProductById);
-router.post('/products', accessValidation, productController.createProduct);
-router.put('/product/:productId', accessValidation, productController.updateProduct);
-router.delete('/product/:productId', accessValidation, productController.deleteProduct);
+router.get('/products/:id', accessValidation, productController.getProductById);
+
 
 // Recommendation routes
-router.get('/recommendations', accessValidation, recommendationController.getRecommendations);
-router.get('/recommendation/:recommendationId', accessValidation, recommendationController.getRecommendationById);
-router.post('/recommendations', accessValidation, recommendationController.createRecommendation);
-router.put('/recommendation/:recommendationId', accessValidation, recommendationController.updateRecommendation);
-router.delete('/recommendation/:recommendationId', accessValidation, recommendationController.deleteRecommendation);
-
+router.get('/recommendations/:id', accessValidation, recommendationController.getRecommendations);
 
 module.exports = router;

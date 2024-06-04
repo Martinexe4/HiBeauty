@@ -2,20 +2,21 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
 exports.getSkins = async (req, res) => {
-    const skins = await prisma.skin.findMany();
+    const skins = await prisma.SKIN.findMany();
     res.status(200).json({
         "status": true,
         "message": "Skins retrieved successfully",
         "data": skins
     });
+    // add erorhandling
 }
 
 exports.getSkinById = async (req, res) => {
-    const skinId = req.params.skinId;
+    const SKINID = req.params.SKINID;
 
-    const skin = await prisma.skin.findUnique({
+    const skin = await prisma.SKIN.findUnique({
         where: {
-            SKINID: skinId
+            SKINID: SKINID
         }
     });
 
