@@ -43,4 +43,10 @@ router.get('/products/:id', accessValidation, productController.getProductById);
 // Recommendation routes
 router.get('/recommendations/:id', accessValidation, recommendationController.getRecommendations);
 
+
+// User routes
+router.put('/user/:userId', accessValidation, multer.single('IMAGE'), images.uploadToGcs, userController.updateProfile)
+router.get('/users', accessValidation, auth.getUsers )
+router.get('/user/:userId', accessValidation, userController.getProfile)
+
 module.exports = router;
