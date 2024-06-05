@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".article.ArticleFragment">
+
+    <!-- Judul -->
+    <TextView
+        android:id="@+id/beauty_news_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Beauty News"
+        android:textSize="24sp"
+        android:fontFamily="@font/poppins_bold"
+        android:padding="10dp"
+        android:gravity="center"
+        android:paddingBottom="8dp"/>
+
+    <!-- SearchView tetap di bagian atas -->
+    <SearchView
+        android:id="@+id/search_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Search Article"
+        android:padding="8dp"
+        android:background="@drawable/search_background"
+        android:drawableStart="@drawable/search__4_"
+        android:layout_margin="8dp"
+        android:inputType="text" />
+
+    <!-- SwipeRefreshLayout meliputi RecyclerView -->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/item_article" />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</LinearLayout>
+

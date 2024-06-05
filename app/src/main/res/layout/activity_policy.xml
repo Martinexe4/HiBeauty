@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".profile.PolicyActivity">
+
+    <ImageButton
+        android:id="@+id/closeButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentStart="true"
+        android:layout_margin="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Close"
+        android:src="@drawable/ic_close" />
+
+    <TextView
+        android:id="@+id/privacyPolicyTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Kebijakan Privasi"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_below="@id/closeButton"
+        android:layout_centerHorizontal="true"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/privacyPolicyTextView"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/privacyPolicyContentTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Isi Kebijakan Privasi akan ditampilkan di sini."
+            android:textSize="16sp"/>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparant">#00000000</color>
+
+    <!-- Primary Colors -->
+    <color name="colorPrimarySoft">#FFC1B9</color> <!-- Purple 500 -->
+    <color name="colorPrimary">#FF8473</color> <!-- Purple 500 -->
+    <color name="colorPrimaryDark">#CC2710</color> <!-- Purple 700 -->
+    <color name="colorAccent">#03DAC5</color> <!-- Teal 200 -->
+
+    <!-- Secondary Colors -->
+    <color name="colorSecondary">#018786</color> <!-- Teal 500 -->
+    <color name="colorSecondaryDark">#00695C</color> <!-- Teal 700 -->
+
+    <!-- Background Colors -->
+    <color name="colorBackground">#FFFFFF</color> <!-- White -->
+    <color name="colorSurface">#F5F5F5</color> <!-- Light Gray -->
+
+    <!-- Text Colors -->
+    <color name="colorOnPrimary">#FFFFFF</color> <!-- White (for text on primary) -->
+    <color name="colorOnSecondary">#FFFFFF</color> <!-- White (for text on secondary) -->
+    <color name="colorOnBackground">#000000</color> <!-- Black (for text on background) -->
+
+    <!-- Error and Warning Colors -->
+    <color name="colorError">#B00020</color> <!-- Red (for errors) -->
+    <color name="colorWarning">#FFA000</color> <!-- Amber 700 (for warnings) -->
+
+    <!-- Neutral Colors -->
+    <color name="colorGrayLight">#E0E0E0</color> <!-- Gray 300 -->
+    <color name="colorGrayDark">#616161</color> <!-- Gray 700 -->
+
+    <!-- Additional Colors -->
+    <color name="colorBlue">#2196F3</color> <!-- Blue 500 -->
+    <color name="colorGreen">#4CAF50</color> <!-- Green 500 -->
+    <color name="colorGreenSoft">#4CAF50</color> <!-- Green 500 -->
+    <color name="colorOrange">#FF9800</color> <!-- Orange 500 -->
+    <color name="colorYellow">#FFEB3B</color> <!-- Yellow 500 -->
+    <color name="colorPink">#E91E63</color> <!-- Pink 500 -->
+
+    <!-- Custom Colors -->
+    <color name="colorCustom1">#FF5722</color> <!-- Deep Orange 500 -->
+    <color name="colorCustom2">#9C27B0</color> <!-- Deep Purple 500 -->
+</resources>

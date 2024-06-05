@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "956616711391",
+    "project_id": "cpv2-e23c9",
+    "storage_bucket": "cpv2-e23c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:956616711391:android:06392312aa19894f315d6a",
+        "android_client_info": {
+          "package_name": "com.redy.cpv2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "956616711391-e685e71hek9q26nsj911oogr8fnem5vu.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.redy.cpv2",
+            "certificate_hash": "103727e33d4fc4016bf6a91d0590701120d80417"
+          }
+        },
+        {
+          "client_id": "956616711391-9e0khru3t57olff8nabqstd2c39eplqh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDcUTh61Ss-Dnr-xmCPAtx8ro8rujEAqAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "956616711391-9e0khru3t57olff8nabqstd2c39eplqh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

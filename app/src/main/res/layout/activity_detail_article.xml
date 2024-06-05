@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- ImageView untuk menampilkan gambar -->
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
+                android:scaleType="centerCrop"
+                android:layout_margin="8dp"
+                android:background="@drawable/rounded_corner"
+                android:src="@drawable/placeholder_image" />
+
+            <!-- TextView untuk judul artikel -->
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_marginTop="16dp"
+                tools:text="Sample Title" />
+
+            <!-- TextView untuk nama penulis -->
+            <TextView
+                android:id="@+id/author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_light"
+                tools:text="Author: John Doe" />
+
+            <!-- TextView untuk tanggal terbit -->
+            <TextView
+                android:id="@+id/published_at"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12sp"
+                android:fontFamily="@font/poppins_light"
+                tools:text="Published on: 2023-01-01" />
+
+            <!-- TextView untuk deskripsi artikel -->
+            <TextView
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_medium"
+                android:maxLines="3"
+                android:ellipsize="end"
+                android:layout_marginTop="8dp"
+                tools:text="This is a short description of the content. It provides a summary or teaser for the full content." />
+
+            <!-- TextView untuk konten artikel -->
+            <TextView
+                android:id="@+id/content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_marginTop="16dp"
+                tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at ipsum vel libero euismod tincidunt sit amet quis turpis. Donec ut lorem tellus. Ut eu leo ipsum. Nullam luctus, magna et pharetra suscipit, mi ligula condimentum velit, in vehicula velit metus non mi." />
+
+            <!-- ConstraintLayout untuk mengatur tombol di tengah -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+                <Button
+                    android:id="@+id/open_in_browser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Buka di Browser"
+                    android:fontFamily="@font/poppins_medium"
+                    android:background="@drawable/button_selector"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- FloatingActionButton for close action -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/close_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_close"
+        android:layout_margin="16dp"
+        app:backgroundTint="@android:color/white"
+        android:contentDescription="Close"
+        app:layout_anchorGravity="top|start" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

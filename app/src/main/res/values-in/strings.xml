@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HiBeauty</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="default_web_client_id">956616711391-9e0khru3t57olff8nabqstd2c39eplqh.apps.googleusercontent.com</string>
+    <string name="profile">Profile id</string>
+
+    <string name="probability_format">Probability: %.2f%%</string>
+
+</resources>
