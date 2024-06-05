@@ -9,9 +9,6 @@
     <string name="probability_format">Probability: %.2f%%</string>
 
 
-
-
-
     <!--    Profile-->
     <string name="privacy_policy_content">
     <![CDATA[
@@ -67,7 +64,6 @@
     ]]>
 
 </string>
-
 
 
 </resources>

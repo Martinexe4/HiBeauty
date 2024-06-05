@@ -99,6 +99,8 @@ dependencies {
     implementation("com.facebook.shimmer:shimmer:0.5.0")
 
     //personalization
+    implementation("androidx.viewpager2:viewpager2:1.0.0")
+
 
 
     //home
@@ -115,4 +117,5 @@ dependencies {
 
 //error cameraactivity
     implementation("com.google.guava:guava:31.1-android")
+
 }
