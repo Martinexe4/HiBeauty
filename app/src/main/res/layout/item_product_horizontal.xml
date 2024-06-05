@@ -24,10 +24,10 @@
         android:layout_marginTop="8dp"/>
 
     <TextView
-        android:id="@+id/product_price"
+        android:id="@+id/product_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Rp.150.000"
+        android:text="Desc"
         android:layout_marginTop="4dp"/>
 </LinearLayout>

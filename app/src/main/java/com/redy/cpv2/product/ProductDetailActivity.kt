@@ -17,9 +17,7 @@ class ProductDetailActivity : AppCompatActivity() {
 
         product?.let {
             binding.productTitle.text = it.name
-            binding.productPrice.text = it.price
             binding.productDescription.text = it.description
-            binding.productRating.rating = it.rating
 
             val adapter = ImageSliderAdapter(this, it.imageList)
             binding.productImageSlider.adapter = adapter

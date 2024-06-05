@@ -1,43 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".profile.PolicyActivity">
 
     <ImageButton
         android:id="@+id/closeButton"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentStart="true"
-        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Close"
-        android:src="@drawable/ic_close" />
+        android:padding="16dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
 
     <TextView
-        android:id="@+id/privacyPolicyTextView"
-        android:layout_width="match_parent"
+        android:id="@+id/toolbar_title"
+        app:layout_constraintBottom_toBottomOf="@+id/closeButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/closeButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:text="Kebijakan Privasi"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_below="@id/closeButton"
-        android:layout_centerHorizontal="true"/>
+        android:fontFamily="@font/poppins_bold"
+        android:text="Privacy Policy"
+        android:textSize="20sp" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/privacyPolicyTextView"
-        android:padding="16dp">
 
-        <TextView
-            android:id="@+id/privacyPolicyContentTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Isi Kebijakan Privasi akan ditampilkan di sini."
-            android:textSize="16sp"/>
-    </ScrollView>
+    <TextView
+        android:id="@+id/privacyPolicyContentTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Isi Kebijakan Privasi akan ditampilkan di sini."
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_title" />
 
-</RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

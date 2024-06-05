@@ -1,78 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".product.ProductDetailActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".product.ProductDetailActivity"
+    android:id="@+id/relativeLayout3">
 
     <ImageButton
         android:id="@+id/close_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@android:drawable/ic_menu_close_clear_cancel"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Close"
-        android:layout_alignParentStart="true"
-        android:layout_margin="16dp" />
+        android:padding="16dp"
+        android:src="@android:drawable/ic_menu_close_clear_cancel" />
+
+    <TextView
+        android:id="@+id/toolbar_title"
+        app:layout_constraintBottom_toBottomOf="@+id/close_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Product Detail"
+        android:textSize="20sp" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/product_image_slider"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@id/close_button"
-        android:layout_marginTop="16dp" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_title" />
+
 
     <TextView
         android:id="@+id/product_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="Product Title"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_below="@id/product_image_slider"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_image_slider" />
 
     <TextView
-        android:id="@+id/product_price"
+        android:id="@+id/productDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Product Price"
-        android:textSize="20sp"
-        android:textColor="@android:color/holo_green_dark"
-        android:layout_below="@id/product_title"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp" />
+        android:fontFamily="@font/poppins_regular"
+        android:text="Description: "
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_title" />
 
     <TextView
         android:id="@+id/product_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="Product Description"
-        android:layout_below="@id/product_price"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp" />
-
-    <RatingBar
-        android:id="@+id/product_rating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:rating="4.5"
-        android:layout_below="@id/product_description"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/productDescription" />
 
     <Button
         android:id="@+id/go_to_shop_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to Shop"
         android:backgroundTint="?attr/colorPrimary"
+        android:text="Go to Shop"
         android:textColor="@android:color/white"
-        android:layout_below="@id/product_rating"
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/product_description" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
