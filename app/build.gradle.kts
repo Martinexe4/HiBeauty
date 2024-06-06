@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
-    id("com.google.gms.google-services")
-    id("kotlin-parcelize")
-    id("kotlin-kapt")
-
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.kapt)
 }
-
 
 android {
     namespace = "com.redy.cpv2"
@@ -57,64 +55,64 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx)
     implementation(libs.firebase.firestore.ktx)
     implementation(libs.firebase.firestore)
+
+    implementation(kotlin("stdlib"))
+    implementation(libs.androidx.appcompat.v140)
+    implementation(libs.androidx.constraintlayout.v212)
+    implementation(libs.androidx.legacy.support.v4)
+    implementation(libs.material.v140)
+    implementation(libs.androidx.core.ktx.v170)
+    implementation(libs.androidx.viewpager2.v100)
+    implementation(libs.androidx.fragment.ktx)
+
+    //firebase
+    implementation(libs.firebase.auth)
+    implementation(libs.play.services.auth)
+    implementation(platform(libs.firebase.bom))
+
+    //onboarding
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
+
+    //scan
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.converter.gson)
+    implementation(libs.logging.interceptor)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
+
+    //cameraX
+    implementation(libs.androidx.camera.camera2)
+    implementation(libs.androidx.camera.lifecycle)
+    implementation(libs.androidx.camera.view)
+
+    //news
+    implementation(libs.shimmer)
+
+    //personalization
+    implementation(libs.androidx.viewpager2.v100)
+
+    //testing
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    implementation(libs.androidx.appcompat.v140)
-    implementation(libs.androidx.constraintlayout.v212)
-    implementation(kotlin("stdlib"))
-    implementation(libs.androidx.legacy.support.v4)
-    testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit.v113)
     androidTestImplementation(libs.androidx.espresso.core.v340)
-    implementation("com.google.android.material:material:1.4.0")
-    implementation("androidx.core:core-ktx:1.7.0")
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
-    implementation("androidx.fragment:fragment-ktx:1.6.0")
-
-    implementation("com.google.firebase:firebase-auth:22.3.1")
-    implementation("com.google.android.gms:play-services-auth:21.1.0")
-    implementation(platform("com.google.firebase:firebase-bom:32.8.1"))
-
-    //onboarding
-    implementation("com.github.bumptech.glide:glide:4.16.0")
-    annotationProcessor("com.github.bumptech.glide:compiler:4.15.1")
-
-
-
-    //scan
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-
-    val cameraxVersion = "1.3.0"
-    implementation("androidx.camera:camera-camera2:$cameraxVersion")
-    implementation("androidx.camera:camera-lifecycle:$cameraxVersion")
-    implementation("androidx.camera:camera-view:$cameraxVersion")
-
-    //news
-    implementation("com.facebook.shimmer:shimmer:0.5.0")
-
-    //personalization
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
-
-
 
     //home
-    implementation("androidx.navigation:navigation-fragment-ktx:2.7.4")
-    implementation("androidx.navigation:navigation-ui-ktx:2.7.4")
+    implementation(libs.androidx.navigation.fragment.ktx.v274)
+    implementation(libs.androidx.navigation.ui.ktx.v274)
 
     //scan
-    implementation ("org.tensorflow:tensorflow-lite:2.13.0")
-    implementation("org.tensorflow:tensorflow-lite-support:0.4.4")
-    implementation("org.tensorflow:tensorflow-lite-metadata:0.4.4")
-    implementation("org.tensorflow:tensorflow-lite-task-vision:0.4.4")
-    implementation("androidx.room:room-runtime:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
+    implementation (libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite.support)
+    implementation(libs.tensorflow.tensorflow.lite.metadata)
+    implementation(libs.tensorflow.tensorflow.lite.task.vision)
+    implementation(libs.androidx.room.runtime)
 
-//error cameraactivity
-    implementation("com.google.guava:guava:31.1-android")
+    //noinspection KaptUsageInsteadOfKsp
+    kapt(libs.androidx.room.compiler)
+
+    //error camera activity
+    implementation(libs.guava)
 
 }
