@@ -37,6 +37,10 @@ class ResultActivity : AppCompatActivity() {
         binding.saveResultButton.setOnClickListener {
             saveResultToFirestore()
         }
+
+        binding.backButton.setOnClickListener {
+            finish()
+        }
     }
 
     private fun displayResult() {

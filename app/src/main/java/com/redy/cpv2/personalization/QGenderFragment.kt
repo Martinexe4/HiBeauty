@@ -29,6 +29,10 @@ class QGenderFragment : Fragment() {
         }
     }
 
+    fun isValid(): Boolean {
+        return getGender().isNotEmpty()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

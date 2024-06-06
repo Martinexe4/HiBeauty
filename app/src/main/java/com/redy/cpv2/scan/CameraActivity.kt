@@ -141,7 +141,8 @@ class CameraActivity : AppCompatActivity() {
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val savedUri = Uri.fromFile(photoFile)
+                    val compressedPhotoFile = photoFile.reduceFileImage()
+                    val savedUri = Uri.fromFile(compressedPhotoFile)
                     val intent = Intent(this@CameraActivity, ScanActivity::class.java).apply {
                         putExtra(EXTRA_CAMERAX_IMAGE, savedUri.toString())
                     }

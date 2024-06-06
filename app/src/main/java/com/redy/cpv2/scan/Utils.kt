@@ -66,21 +66,20 @@ fun uriToFile(imageUri: Uri, context: Context): File {
     while (inputStream.read(buffer).also { length = it } > 0) outputStream.write(buffer, 0, length)
     outputStream.close()
     inputStream.close()
-    return myFile
+    return myFile.reduceFileImage()
 }
 
 fun File.reduceFileImage(): File {
-    val file = this
-    val bitmap = BitmapFactory.decodeFile(file.path)
+    val bitmap = BitmapFactory.decodeFile(this.path)
     var compressQuality = 100
     var streamLength: Int
     do {
         val bmpStream = ByteArrayOutputStream()
-        bitmap?.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream)
         val bmpPicByteArray = bmpStream.toByteArray()
         streamLength = bmpPicByteArray.size
         compressQuality -= 5
-    } while (streamLength > MAXIMAL_SIZE)
-    bitmap?.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(file))
-    return file
+    } while (streamLength > MAXIMAL_SIZE && compressQuality > 0)
+    bitmap.compress(Bitmap.CompressFormat.JPEG, compressQuality, FileOutputStream(this))
+    return this
 }

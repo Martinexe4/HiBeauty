@@ -25,6 +25,10 @@ class QAgeFragment : Fragment() {
         return binding.etAge.text.toString()
     }
 
+    fun isValid(): Boolean {
+        return getAge().isNotEmpty()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

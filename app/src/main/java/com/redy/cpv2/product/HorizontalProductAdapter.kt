@@ -20,7 +20,7 @@ class HorizontalProductAdapter(private val productList: List<Product>) : Recycle
         val product = productList[position]
         holder.productImage.setImageResource(product.imageResId)
         holder.productName.text = product.name
-        holder.productPrice.text = product.price
+        holder.productDescription.text = product.description
 
         holder.itemView.setOnClickListener {
             val context = holder.itemView.context
@@ -38,6 +38,6 @@ class HorizontalProductAdapter(private val productList: List<Product>) : Recycle
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val productImage: ImageView = itemView.findViewById(R.id.product_image)
         val productName: TextView = itemView.findViewById(R.id.product_name)
-        val productPrice: TextView = itemView.findViewById(R.id.product_price)
+        val productDescription: TextView = itemView.findViewById(R.id.product_description)
     }
 }

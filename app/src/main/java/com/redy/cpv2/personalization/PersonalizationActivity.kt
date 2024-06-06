@@ -27,12 +27,26 @@ class PersonalizationActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
 
         binding.btnNext.setOnClickListener {
-            if (binding.viewPager.currentItem < adapter.itemCount - 1) {
-                binding.viewPager.currentItem += 1
+            if (validateCurrentFragment()) {
+                if (binding.viewPager.currentItem < adapter.itemCount - 1) {
+                    binding.viewPager.currentItem += 1
+                } else {
+                    saveUserData()
+                    goToMainActivity()
+                }
             } else {
-                saveUserData()
-                goToMainActivity()
+                Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    private fun validateCurrentFragment(): Boolean {
+        val currentFragment = supportFragmentManager.findFragmentByTag("f${binding.viewPager.currentItem}")
+        return when (currentFragment) {
+            is QNameFragment -> currentFragment.isValid()
+            is QAgeFragment -> currentFragment.isValid()
+            is QGenderFragment -> currentFragment.isValid()
+            else -> false
         }
     }
 
@@ -45,15 +59,11 @@ class PersonalizationActivity : AppCompatActivity() {
         val age = ageFragment.getAge()
         val gender = genderFragment.getGender()
 
-        if (name.isNotEmpty() && age.isNotEmpty() && gender.isNotEmpty()) {
-            with(sharedPreferences.edit()) {
-                putString("name", name)
-                putString("age", age)
-                putString("gender", gender)
-                apply()
-            }
-        } else {
-            Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
+        with(sharedPreferences.edit()) {
+            putString("name", name)
+            putString("age", age)
+            putString("gender", gender)
+            apply()
         }
     }
 

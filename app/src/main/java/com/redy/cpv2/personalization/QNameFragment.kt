@@ -25,6 +25,10 @@ class QNameFragment : Fragment() {
         return binding.etName.text.toString()
     }
 
+    fun isValid(): Boolean {
+        return getName().isNotEmpty()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
