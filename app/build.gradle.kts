@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
     id("com.google.gms.google-services")
-
     id("kotlin-parcelize")
     id("kotlin-kapt")
 
@@ -62,13 +61,13 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation("androidx.appcompat:appcompat:1.4.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.2")
+    implementation(libs.androidx.appcompat.v140)
+    implementation(libs.androidx.constraintlayout.v212)
     implementation(kotlin("stdlib"))
-    implementation("androidx.legacy:legacy-support-v4:1.0.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    implementation(libs.androidx.legacy.support.v4)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit.v113)
+    androidTestImplementation(libs.androidx.espresso.core.v340)
     implementation("com.google.android.material:material:1.4.0")
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.viewpager2:viewpager2:1.0.0")
