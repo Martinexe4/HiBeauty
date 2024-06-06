@@ -3,6 +3,7 @@ package com.redy.cpv2.personalization
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -17,6 +18,11 @@ class PersonalizationActivity : AppCompatActivity() {
     private lateinit var adapter: PersonalizationAdapter
     private lateinit var sharedPreferences: SharedPreferences
 
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPersonalizationBinding.inflate(layoutInflater)
@@ -25,6 +31,15 @@ class PersonalizationActivity : AppCompatActivity() {
         adapter = PersonalizationAdapter(this)
         binding.viewPager.adapter = adapter
         sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
+
+
+        // Periksa apakah personalisasi sudah selesai
+        if (sharedPreferences.getBoolean("isPersonalized", false)) {
+            goToMainActivity()
+            return
+        }
+        adapter = PersonalizationAdapter(this)
+        binding.viewPager.adapter = adapter
 
         binding.btnNext.setOnClickListener {
             if (validateCurrentFragment()) {
@@ -59,12 +74,15 @@ class PersonalizationActivity : AppCompatActivity() {
         val age = ageFragment.getAge()
         val gender = genderFragment.getGender()
 
+        Log.d("PersonalizationActivity", "Nama dari fragment: $name")
+
         with(sharedPreferences.edit()) {
             putString("name", name)
             putString("age", age)
             putString("gender", gender)
             apply()
         }
+
     }
 
     private fun goToMainActivity() {

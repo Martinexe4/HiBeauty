@@ -91,75 +91,49 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/infoUser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="#00FFFFFF">
+
                 <ImageView
-                    android:id="@+id/iconEditDisplayName"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:contentDescription="Edit Display Name"
-                    android:src="@drawable/ic_edit"
-                    app:layout_constraintStart_toEndOf="@+id/txtDisplayName"
-                    app:layout_constraintTop_toTopOf="@+id/txtDisplayName" />
-
-                <EditText
-                    android:id="@+id/edtDisplayName"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:fontFamily="@font/poppins_medium"
-                    android:hint="Enter new display name"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/imageView101"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/txtDisplayName" />
-
-                <Button
-                    android:id="@+id/btnEditProfile"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/button_selector"
-                    android:fontFamily="@font/poppins_bold"
-                    android:text="Save Change"
-                    android:textSize="10sp"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="@+id/edtDisplayName"
-                    app:layout_constraintTop_toBottomOf="@+id/edtDisplayName" />
-
-                <Button
-                    android:id="@+id/btnCancelEdit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_bold"
-                    android:background="@drawable/button_selector2"
-                    android:text="Cancel"
-                    android:textSize="10sp"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/btnEditProfile"
-                    app:layout_constraintEnd_toStartOf="@+id/btnEditProfile"
-                    app:layout_constraintStart_toStartOf="@+id/edtDisplayName"
-                    app:layout_constraintTop_toTopOf="@+id/btnEditProfile" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_history"
+                    />
 
                 <TextView
-                    android:id="@+id/txtEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#00FFFFFF"
-                    android:fontFamily="@font/poppins_light"
-                    android:text="email@gmail.com"
-                    android:textAlignment="center"
-                    android:textSize="14sp"
-                    app:layout_constraintTop_toBottomOf="@+id/txtDisplayName" />
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
+                    android:id="@+id/textView101"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    android:indeterminate="true"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="14dp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:background="#00FFFFFF"
+                    android:text="Edit Profile"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView101"
+                    app:layout_constraintStart_toEndOf="@+id/imageView101"
+                    app:layout_constraintTop_toTopOf="@+id/imageView101" />
+
+                <ImageView
+                    android:id="@+id/imageView111"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#00FFFFFF"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/btnEditProfile" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/arrow" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
