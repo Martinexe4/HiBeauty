@@ -24,10 +24,10 @@
         android:layout_marginTop="8dp"/>
 
     <TextView
-        android:id="@+id/product_description"
+        android:id="@+id/product_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Desc"
+        android:text="Moisturizer"
         android:layout_marginTop="4dp"/>
 </LinearLayout>

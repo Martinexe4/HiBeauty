@@ -15,7 +15,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            goToPersonalizationActivity()
+            goToOnboardingActivity()
         }, 3000L)
     }
 
@@ -26,12 +26,12 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToPersonalizationActivity(){
-        Intent(this, PersonalizationActivity::class.java).also{
-            startActivity(it)
-            finish()
-        }
-    }
+//    private fun goToPersonalizationActivity(){
+//        Intent(this, PersonalizationActivity::class.java).also{
+//            startActivity(it)
+//            finish()
+//        }
+//    }
 
     private fun goToOnboardingActivity(){
         Intent(this, OnboardingActivity::class.java).also{

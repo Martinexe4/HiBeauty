@@ -58,14 +58,14 @@ class ScanActivity : AppCompatActivity() {
             currentImageUri?.let { uri ->
                 startLoadingAnimation()
 
-                analyzeImage(uri) { categoryLabel, probability ->
+                analyzeImage(uri) { results ->
                     runOnUiThread {
                         // Ensure loading animation is hidden
                         binding.darkOverlayView.visibility = android.view.View.GONE
                         binding.loadingPercentageTextView.visibility = android.view.View.GONE
 
                         // Move to result activity
-                        moveToResult(uri, categoryLabel, probability)
+                        moveToResult(uri, results)
                     }
                 }
             } ?: showToast("Pilih gambar terlebih dahulu")
@@ -91,10 +91,10 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
-    private fun analyzeImage(imageUri: Uri, callback: (String, Float) -> Unit) {
+    private fun analyzeImage(imageUri: Uri, callback: (Map<String, Float>) -> Unit) {
         if (isAllowedImageType(imageUri)) {
-            val (categoryLabel, probability) = imageClassifierHelper.classifyStaticImage(imageUri)
-            callback(categoryLabel, probability)
+            val results = imageClassifierHelper.classifyStaticImage(imageUri)
+            callback(results)
         } else {
             showToast("File harus berupa PNG, JPG, atau JPEG")
         }
@@ -108,11 +108,10 @@ class ScanActivity : AppCompatActivity() {
         } ?: false
     }
 
-    private fun moveToResult(imageUri: Uri, category: String, probability: Float) {
+    private fun moveToResult(imageUri: Uri, results: Map<String, Float>) {
         val intent = Intent(this, ResultActivity::class.java).apply {
             putExtra("imageUri", imageUri.toString())
-            putExtra("category", category)
-            putExtra("probability", probability)
+            putExtra("results", HashMap(results))
         }
         startActivity(intent)
     }

@@ -17,8 +17,7 @@ class ResultActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResultBinding
     private var imageUri: Uri? = null
-    private var category: String? = null
-    private var probability: Float? = null
+    private var results: Map<String, Float>? = null
     private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +28,7 @@ class ResultActivity : AppCompatActivity() {
         firestore = Firebase.firestore
 
         imageUri = intent.getStringExtra("imageUri")?.toUri()
-        category = intent.getStringExtra("category")
-        probability = intent.getFloatExtra("probability", 0f)
+        results = intent.getSerializableExtra("results") as? Map<String, Float>
 
         displayResult()
 
@@ -48,16 +46,20 @@ class ResultActivity : AppCompatActivity() {
             val bitmap = BitmapFactory.decodeStream(contentResolver.openInputStream(it))
             binding.resultImageView.setImageBitmap(bitmap)
         }
-        binding.categoryTextView.text = category
-        binding.probabilityTextView.text = getString(R.string.probability_format, probability)
+
+        results?.let {
+            val resultsText = it.entries.joinToString("\n") { entry ->
+                "${entry.key}: ${String.format("%.2f%%", entry.value * 100)}"
+            }
+            binding.categoryTextView.text = resultsText
+        }
     }
 
     private fun saveResultToFirestore() {
-        if (imageUri != null && category != null && probability != null) {
+        if (imageUri != null && results != null) {
             val resultData = hashMapOf(
                 "imageUri" to imageUri.toString(),
-                "category" to category!!,
-                "probability" to probability!!
+                "results" to results!!
             )
 
             firestore.collection("results")

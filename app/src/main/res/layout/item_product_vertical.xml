@@ -38,10 +38,10 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/product_price"
+                android:id="@+id/product_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$0"
+                android:text="Sunscreen"
                 android:textSize="14sp"
                 android:layout_marginTop="4dp" />
         </LinearLayout>

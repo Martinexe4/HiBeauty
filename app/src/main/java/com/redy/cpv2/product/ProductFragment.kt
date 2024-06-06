@@ -37,20 +37,20 @@ class ProductFragment : Fragment() {
     private fun getHorizontalProducts(): List<Product> {
         // Replace with real data fetching logic
         return listOf(
-            Product(R.drawable.placeholder_image, "New Product 1", "$15", "Description for New Product 1", 4.5f, listOf(R.drawable.placeholder_image, R.drawable.placeholder_image)),
-            Product(R.drawable.placeholder_image, "New Product 2", "$25", "Description for New Product 2", 4.0f, listOf(R.drawable.placeholder_image, R.drawable.placeholder_image)),
-            Product(R.drawable.placeholder_image, "New Product 3", "$35", "Description for New Product 3", 3.5f, listOf(R.drawable.placeholder_image, R.drawable.placeholder_image))
+            Product(R.drawable.placeholder_image, "New Product 1", "$15", "Description for New Product 1", "Ingredient for New Product 1", listOf(R.drawable.placeholder_image, R.drawable.placeholder_image)),
+            Product(R.drawable.placeholder_image, "New Product 2", "$25", "Description for New Product 2", "Ingredient for New Product 2", listOf(R.drawable.placeholder_image, R.drawable.placeholder_image)),
+            Product(R.drawable.placeholder_image, "New Product 3", "$35", "Description for New Product 3", "Ingredient for New Product 3", listOf(R.drawable.placeholder_image, R.drawable.placeholder_image))
         )
     }
 
     private fun getVerticalProducts(): List<Product> {
         // Replace with real data fetching logic
         return listOf(
-            Product(R.drawable.placeholder_image, "New Product 4", "$45", "Description for New Product 4", 5.0f, listOf(R.drawable.placeholder_image, R.drawable.placeholder_image)),
-            Product(R.drawable.placeholder_image, "New Product 5", "$55", "Description for New Product 5", 4.5f, listOf(R.drawable.placeholder_image, R.drawable.placeholder_image)),
-            Product(R.drawable.placeholder_image, "New Product 6", "$65", "Description for New Product 6", 4.0f, listOf(R.drawable.placeholder_image, R.drawable.placeholder_image)),
-            Product(R.drawable.placeholder_image, "New Product 7", "$75", "Description for New Product 7", 3.5f, listOf(R.drawable.placeholder_image, R.drawable.placeholder_image)),
-            Product(R.drawable.placeholder_image, "New Product 8", "$85", "Description for New Product 8", 3.0f, listOf(R.drawable.placeholder_image, R.drawable.placeholder_image))
+            Product(R.drawable.placeholder_image, "New Product 4", "$45", "Description for New Product 4", "Ingredient for New Product 4", listOf(R.drawable.placeholder_image, R.drawable.placeholder_image)),
+            Product(R.drawable.placeholder_image, "New Product 5", "$55", "Description for New Product 5", "Ingredient for New Product 5", listOf(R.drawable.placeholder_image, R.drawable.placeholder_image)),
+            Product(R.drawable.placeholder_image, "New Product 6", "$65", "Description for New Product 6", "Ingredient for New Product 6", listOf(R.drawable.placeholder_image, R.drawable.placeholder_image)),
+            Product(R.drawable.placeholder_image, "New Product 7", "$75", "Description for New Product 7", "Ingredient for New Product 7", listOf(R.drawable.placeholder_image, R.drawable.placeholder_image)),
+            Product(R.drawable.placeholder_image, "New Product 8", "$85", "Description for New Product 8", "Ingredient for New Product 8", listOf(R.drawable.placeholder_image, R.drawable.placeholder_image))
         )
     }
 }

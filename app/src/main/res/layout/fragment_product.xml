@@ -17,17 +17,17 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="@color/white"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:title="Product List"
-            app:titleTextColor="@android:color/white" />
+            app:titleTextColor="@color/colorPrimaryDark"/>
 
         <!-- Search Product -->
         <EditText
             android:id="@+id/search_product"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search Product"
+            android:hint=" Search Product"
             android:padding="8dp"
             android:background="@drawable/search_background"
             android:drawableStart="@drawable/search__4_"
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             tools:listitem="@layout/item_product_horizontal"
-            tools:itemCount="3" />
+            tools:itemCount="5" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- ScrollView for vertical products -->

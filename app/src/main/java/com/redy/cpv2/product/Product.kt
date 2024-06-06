@@ -7,8 +7,8 @@ import kotlinx.parcelize.Parcelize
 data class Product(
     val imageResId: Int,
     val name: String,
-    val price: String,
+    val type: String,
     val description: String,
-    val rating: Float,
+    val ingredient: String,
     val imageList: List<Int>
 ) : Parcelable

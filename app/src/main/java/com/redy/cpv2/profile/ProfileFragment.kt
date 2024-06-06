@@ -48,7 +48,8 @@ class ProfileFragment : Fragment() {
 
         sharedPreferences = requireContext().getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
 
-        loadUserProfile() // Tambahkan ini agar data profil dimuat saat tampilan dibuat
+        loadUserProfile()
+        loadUserData()
 
         binding?.iconEditPhoto?.setOnClickListener {
             choosePhoto()
@@ -124,9 +125,15 @@ class ProfileFragment : Fragment() {
                 .circleCrop()
                 .into(binding?.imgProfile!!)
         }
-        val displayName = sharedPreferences.getString("name", "")
-        Log.d("ProfileFragment", "Nama dari SharedPreferences: $displayName")
-        binding?.txtDisplayName?.text = displayName
+//        val displayName = sharedPreferences.getString("name", "")
+//        Log.d("ProfileFragment", "Nama dari SharedPreferences: $displayName")
+//        binding?.txtDisplayName?.text = displayName
+    }
+
+    private fun loadUserData() {
+        val name = sharedPreferences.getString("name", "")
+        binding?.txtDisplayName?.text = "$name"
+
     }
 
     private fun showLogoutConfirmationDialog() {
