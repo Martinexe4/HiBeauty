@@ -16,5 +16,9 @@
         <item name="android:background">@drawable/button_selector</item>
     </style>
 
+    <style name="BackgroundNightDay">
+        <item name="android:background">@color/white</item>
+    </style>
+
     <style name="Theme.CPV2" parent="Base.Theme.CPV2" />
 </resources>
