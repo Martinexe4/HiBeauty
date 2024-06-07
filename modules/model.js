@@ -12,7 +12,7 @@ exports.predict = async (image) => {
     const prediction = model.predict(tensor);
     const score = await prediction.data()
     const confidenceScore = Math.max(...score) * 100;
-    classes = ["Kantung Mata", "Jerawat", "Ruam"]
+    classes = ["Acne", "Eye Bags", "Oily"]
     const classResult = tf.argMax(prediction, 1).dataSync()[0];
     const label = classes[classResult];
     const result = { label, confidenceScore }
