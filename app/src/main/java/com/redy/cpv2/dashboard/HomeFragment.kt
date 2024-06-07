@@ -33,7 +33,7 @@ class HomeFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val view = binding.root
         return view
@@ -52,9 +52,6 @@ class HomeFragment : Fragment() {
         binding.btnReadNow2.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_homeFragment_to_cameraActivity)
         }
-
-
-
 
         val slides = listOf(
             mapOf(
@@ -106,6 +103,4 @@ class HomeFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
-
 }
