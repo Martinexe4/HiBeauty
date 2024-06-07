@@ -8,9 +8,8 @@
 
     <string name="probability_format">Probability: %.2f%%</string>
 
-
     <!--    Profile-->
-    <string name="privacy_policy_content">
+    <string name="privacy_policy_content" translatable="false">
     <![CDATA[
     Kebijakan Privasi
 
@@ -61,9 +60,10 @@
 
     [Informasi Kontak]
     Email: redy.wijaya24@gmail.com
-    ]]>
-
-</string>
-
-
+    ]]></string>
+    <string name="close">Close</string>
+    <string name="open_browser">Open in Browser</string>
+    <string name="sample_image" translatable="false">Sample Image</string>
+    <string name="sample_text" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus at ipsum vel libero euismod tincidunt sit amet quis turpis. Donec ut lorem tellus. Ut eu leo ipsum. Nullam luctus, magna et pharetra suscipit, mi ligula condimentum velit, in vehicula velit metus non mi.</string>
+    <string name="sample_desc_text" translatable="false">This is a short description of the content. It provides a summary or teaser for the full content.</string>
 </resources>
