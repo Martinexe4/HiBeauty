@@ -16,6 +16,15 @@
     <string name="privacy_policy_content"/>
     <string name="close">Tutup</string>
     <string name="open_browser">Buka di Browser</string>
+    <string name="sign_in">Masuk</string>
+    <string name="sign_up">Daftar</string>
+    <string name="don_t_have_an_account">Belum memiliki akun?</string>
+    <string name="logo">Logo</string>
+    <string name="login_desc_text">Masuk sekarang untuk mengakses pengelamanmu di aplikasi ini.</string>
+    <string name="continue_with_google">Lanjutkan dengan Google</string>
+    <string name="or">ATAU</string>
+    <string name="forgot_password">Lupa Password?</string>
+    <string name="sign_in_btn_text">MASUK</string>
     <![CDATA[
     Kebijakan Privasi
 

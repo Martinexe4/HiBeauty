@@ -72,6 +72,7 @@ dependencies {
 
     //onboarding
     implementation(libs.glide)
+    implementation(libs.androidx.runtime.android)
     annotationProcessor(libs.compiler)
 
     //scan

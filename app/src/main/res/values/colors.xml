@@ -41,5 +41,6 @@
 
     <!-- Custom Colors -->
     <color name="colorCustom1">#FF5722</color> <!-- Deep Orange 500 -->
-    <color name="colorCustom2">#9C27B0</color> <!-- Deep Purple 500 -->
+    <color name="colorCustom2">#9C27B0</color>
+    <color name="dark_gray">#FF333333</color> <!-- Deep Purple 500 -->
 </resources>
