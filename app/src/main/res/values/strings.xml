@@ -77,4 +77,8 @@
     <string name="password" translatable="false">Password</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="sign_in_btn_text">SIGN IN</string>
+    <string name="beauty_news_headline">Beauty News</string>
+    <string name="search_article_hint">Search Article</string>
+    <string name="center_button">Center button</string>
+    <string name="image_article">Imgae Article</string>
 </resources>

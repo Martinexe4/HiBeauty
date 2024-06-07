@@ -25,7 +25,8 @@
         android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginVertical="8dp"
+        android:layout_marginHorizontal="48dp"
         android:background="@drawable/search_background"
         android:backgroundTint="@color/colorPrimarySoft"
         android:drawableStart="@drawable/search__4_"
@@ -36,7 +37,8 @@
     <!-- SwipeRefreshLayout meliputi RecyclerView -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
-        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_width="475dp"
         android:layout_height="match_parent"
         android:layout_marginBottom="64dp">
 

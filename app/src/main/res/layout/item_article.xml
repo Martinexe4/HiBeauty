@@ -5,15 +5,16 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:minWidth="300dp"
     android:layout_margin="8dp"
-    app:cardCornerRadius="16dp"
+    app:cardCornerRadius="8dp"
     app:cardElevation="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:background="@color/colorPrimarySoft">
+        android:background="@color/colorPrimarySoft"
+        android:padding="4dp">
 
         <TextView
             android:id="@+id/title"
@@ -22,6 +23,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/colorGrayDark"
             android:textSize="14sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,6 +35,7 @@
             android:layout_height="160dp"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
+            android:contentDescription="@string/image_article"
             android:padding="10dp"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
@@ -46,11 +49,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/poppins_light"
+            android:textColor="@color/colorGrayDark"
             android:textSize="10sp"
             app:layout_constraintStart_toStartOf="@+id/title"
             app:layout_constraintTop_toBottomOf="@+id/image"
+            tools:ignore="SmallSp"
             tools:text="Published on: 2023-01-01" />
-
 
         <TextView
             android:id="@+id/description"
@@ -60,14 +64,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:ellipsize="end"
-            android:maxLines="3"
-            android:textSize="12sp"
             android:fontFamily="@font/poppins_medium"
+            android:maxLines="3"
+            android:textColor="@color/colorGrayDark"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/title"
             app:layout_constraintTop_toBottomOf="@+id/published_at"
             tools:text="This is a short description of the content. It provides a summary or teaser for the full content." />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.cardview.widget.CardView>

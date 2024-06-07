@@ -25,6 +25,10 @@
     <string name="or">ATAU</string>
     <string name="forgot_password">Lupa Password?</string>
     <string name="sign_in_btn_text">MASUK</string>
+    <string name="beauty_news_headline">Berita Kecantikan</string>
+    <string name="search_article_hint">Cari Artikel</string>
+    <string name="center_button">Tombol tengah</string>
+    <string name="image_article">Gambar Artikel</string>
     <![CDATA[
     Kebijakan Privasi
 

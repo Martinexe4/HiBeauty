@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,8 +12,8 @@
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:navGraph="@navigation/nav_home"
-        app:defaultNavHost="true" />
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_home" />
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/nav"
@@ -32,7 +31,7 @@
             android:layout_gravity="bottom"
             android:layout_marginEnd="16dp"
             android:background="@drawable/transparent"
-            app:menu="@menu/bottom_menu"/>
+            app:menu="@menu/bottom_menu" />
 
     </com.google.android.material.bottomappbar.BottomAppBar>
 
@@ -40,9 +39,8 @@
         android:id="@+id/floating_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:srcCompat="@drawable/ic_scan"
+        android:contentDescription="@string/center_button"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_anchor="@id/nav"
-        android:contentDescription="TODO"/>
-
-
+        app:srcCompat="@drawable/ic_scan" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
