@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:956616711391:android:06392312aa19894f315d6a",
         "android_client_info": {
-          "package_name": "com.redy.cpv2"
+          "package_name": "com.capstone.hibeauty"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "956616711391-e685e71hek9q26nsj911oogr8fnem5vu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.redy.cpv2",
+            "package_name": "com.capstone.hibeauty",
             "certificate_hash": "103727e33d4fc4016bf6a91d0590701120d80417"
           }
         },
