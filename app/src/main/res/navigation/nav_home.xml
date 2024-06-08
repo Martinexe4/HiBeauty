@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.redy.cpv2.dashboard.HomeFragment"
+        android:name="com.capstone.hibeauty.dashboard.HomeFragment"
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_productFragment"
@@ -21,17 +21,17 @@
     </fragment>
     <activity
         android:id="@+id/cameraActivity"
-        android:name="com.redy.cpv2.scan.CameraActivity"
+        android:name="com.capstone.hibeauty.scan.CameraActivity"
         android:label="activity_camera"
         tools:layout="@layout/activity_camera" />
     <fragment
         android:id="@+id/productFragment"
-        android:name="com.redy.cpv2.product.ProductFragment"
+        android:name="com.capstone.hibeauty.product.ProductFragment"
         android:label="fragment_product"
         tools:layout="@layout/fragment_product" />
     <fragment
         android:id="@+id/articleFragment2"
-        android:name="com.redy.cpv2.article.ArticleFragment"
+        android:name="com.capstone.hibeauty.article.ArticleFragment"
         android:label="fragment_article"
         tools:layout="@layout/fragment_article" />
 </navigation>

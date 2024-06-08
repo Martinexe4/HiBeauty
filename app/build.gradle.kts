@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.redy.cpv2"
+    namespace = "com.capstone.hibeauty"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.redy.cpv2"
+        applicationId = "com.capstone.hibeauty"
         minSdk = 21
         targetSdk = 34
         versionCode = 1

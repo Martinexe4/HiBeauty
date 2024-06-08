@@ -87,7 +87,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.redy.cpv2.fileprovider"
+            android:authorities="com.capstone.hibeauty.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
