@@ -1,0 +1,115 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:id="@+id/view_pager_with_custom_indicator"
+        android:layout_width="456dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <!-- ViewPager2 untuk slide onboarding -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <!-- Custom Indicator -->
+        <LinearLayout
+            android:id="@+id/indicatorLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
+
+            <!-- Indikator untuk tiga halaman -->
+            <!-- Indikator pertama (aktif) -->
+            <View
+                android:id="@+id/indicator1"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@drawable/indicator_active"
+                android:layout_margin="4dp"/>
+
+            <!-- Indikator kedua (tidak aktif) -->
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@drawable/indicator_inactive"
+                android:layout_margin="4dp"/>
+
+            <!-- Indikator ketiga (tidak aktif) -->
+            <View
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="@drawable/indicator_inactive"
+                android:layout_margin="4dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Tombol Navigasi dengan Desain Lebih Menarik -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_app_logo"
+            android:layout_width="144dp"
+            android:layout_height="144dp"
+            android:layout_marginTop="24dp"
+            android:src="@drawable/logo_no_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/buttonStart"
+            android:layout_width="250dp"
+            android:layout_height="52dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/button_selector"
+            android:fontFamily="@font/poppins_bold"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Get Started"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/iv_app_logo"
+            app:layout_constraintTop_toBottomOf="@id/iv_app_logo"
+            app:layout_constraintStart_toStartOf="@id/iv_app_logo"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/buttonStart"
+            app:layout_constraintStart_toStartOf="@+id/buttonStart"
+            app:layout_constraintTop_toBottomOf="@+id/buttonStart">
+
+            <TextView
+                android:id="@+id/already_have_account"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:text="Already have an account?"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:id="@+id/login_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Login"
+                android:textColor="@color/colorAccent" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.redy.cpv2.welcome
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -9,6 +10,7 @@ import com.redy.cpv2.MainActivity
 import com.redy.cpv2.R
 import com.redy.cpv2.personalization.PersonalizationActivity
 
+@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

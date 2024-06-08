@@ -1,11 +1,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".authentication.RegisterActivity"
-    android:padding="26dp">
+    android:padding="26dp"
+    tools:context=".authentication.RegisterActivity">
 
     <ImageView
         android:id="@+id/icon"
@@ -21,6 +20,7 @@
         android:layout_below="@id/icon"
         android:layout_marginTop="16dp"
         android:text="Sign Up"
+        android:textColor="@color/colorGrayDark"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -31,6 +31,7 @@
         android:layout_below="@id/register_title"
         android:layout_marginTop="8dp"
         android:text="Sign up now for free and start explore HiBeauty."
+        android:textColor="@color/colorGrayDark"
         android:textSize="14sp" />
 
     <!-- Input fields for Name, Email, and Password -->
@@ -40,7 +41,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/register_description"
         android:layout_marginTop="8dp"
-        app:boxBackgroundColor="@color/white">
+        android:textColorHint="@color/colorGrayDark"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/colorGrayDark"
+        app:endIconTint="@color/colorGrayDark">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/register_name"
@@ -48,7 +52,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Username"
-            android:inputType="textPersonName" />
+            android:inputType="textPersonName"
+            android:textColor="@color/colorGrayDark" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -57,7 +62,10 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textInputLayout1"
         android:layout_marginTop="8dp"
-        app:boxBackgroundColor="@color/white">
+        android:textColorHint="@color/colorGrayDark"
+        app:boxBackgroundColor="@color/white"
+        app:boxStrokeColor="@color/colorGrayDark"
+        app:endIconTint="@color/colorGrayDark">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/register_email"
@@ -65,7 +73,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:inputType="textEmailAddress"
+            android:textColor="@color/colorGrayDark" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -75,9 +84,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textInputLayout2"
         android:layout_marginTop="8dp"
-        app:passwordToggleEnabled="true"
+        android:textColorHint="@color/colorGrayDark"
         app:boxBackgroundColor="@color/white"
-        app:endIconTint="@android:color/black">
+        app:boxStrokeColor="@color/colorGrayDark"
+        app:endIconTint="@color/colorGrayDark"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorGrayDark">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/register_password"
@@ -85,7 +97,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/colorGrayDark" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -94,9 +107,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/textInputLayout3"
         android:layout_marginTop="8dp"
-        app:passwordToggleEnabled="true"
+        android:textColorHint="@color/colorGrayDark"
         app:boxBackgroundColor="@color/white"
-        app:endIconTint="@android:color/black">
+        app:boxStrokeColor="@color/colorGrayDark"
+        app:endIconTint="@color/colorGrayDark"
+        app:passwordToggleEnabled="true"
+        app:passwordToggleTint="@color/colorGrayDark">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/register_password_confirm"
@@ -104,7 +120,8 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="Password Confirmation"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColor="@color/colorGrayDark" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Signup Button -->
@@ -133,6 +150,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:gravity="center"
             android:orientation="horizontal"
             android:paddingBottom="24dp"
@@ -155,13 +173,16 @@
                 android:textColor="@color/colorAccent" />
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/registerProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ProgressBar
-        android:id="@+id/registerProgressBar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone" />
-
 </RelativeLayout>

@@ -81,4 +81,6 @@
     <string name="search_article_hint">Search Article</string>
     <string name="center_button">Center button</string>
     <string name="image_article">Imgae Article</string>
+    <string name="team_name" translatable="false">Created by C241-PS430</string>
+    <string name="splash_app_name" translatable="false">HiBeauty!</string>
 </resources>

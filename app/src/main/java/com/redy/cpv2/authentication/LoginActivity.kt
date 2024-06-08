@@ -71,6 +71,7 @@ class LoginActivity : AppCompatActivity() {
         // Event handler untuk Register Button
         binding.registerButton.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
         }
 
         binding.forgotPassword.setOnClickListener {

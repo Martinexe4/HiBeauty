@@ -24,9 +24,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-        </androidx.appcompat.widget.AppCompatImageView>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ProgressBar
             android:id="@+id/splash_progressBar"
@@ -34,8 +32,8 @@
             android:layout_width="50dp"
             android:layout_height="16dp"
             android:indeterminate="true"
-            android:progressTint="@color/colorPrimary"
             android:progressDrawable="@drawable/splash_progress_bar"
+            android:progressTint="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_splash_logo" />
@@ -46,10 +44,11 @@
         android:id="@+id/tv_splash_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:includeFontPadding="false"
-        android:fontFamily="@font/poppins_medium"
-        android:text="HiBeauty!"
         android:layout_marginBottom="30dp"
+        android:fontFamily="@font/poppins_medium"
+        android:includeFontPadding="false"
+        android:text="@string/splash_app_name"
+        android:textColor="@color/colorGrayDark"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -60,14 +59,14 @@
         android:id="@+id/tv_splash_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:includeFontPadding="false"
         android:layout_marginBottom="10dp"
         android:fontFamily="@font/poppins_light"
-        android:text="Created by C241-PS430"
+        android:includeFontPadding="false"
+        android:text="@string/team_name"
+        android:textColor="@color/colorGrayDark"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
