@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "hibeauty"
+rootProject.name = "HiBeauty"
 include(":app")
  
