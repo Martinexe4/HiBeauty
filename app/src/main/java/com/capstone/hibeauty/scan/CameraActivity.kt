@@ -116,7 +116,8 @@ class CameraActivity : AppCompatActivity() {
                     it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
                 }
 
-            imageCapture = ImageCapture.Builder() // Ensure correct rotation
+            imageCapture = ImageCapture.Builder()
+                .setTargetAspectRatio(RATIO_1_1)
                 .setFlashMode(currentFlashMode)
                 .build()
 
@@ -243,6 +244,7 @@ class CameraActivity : AppCompatActivity() {
     companion object {
         private const val TAG = "CameraActivity"
         const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
+        const val RATIO_1_1 = 1 / 1
         private const val FLASH_MODE_ON = ImageCapture.FLASH_MODE_ON
         private const val FLASH_MODE_OFF = ImageCapture.FLASH_MODE_OFF
         private const val FLASH_MODE_AUTO = ImageCapture.FLASH_MODE_AUTO
