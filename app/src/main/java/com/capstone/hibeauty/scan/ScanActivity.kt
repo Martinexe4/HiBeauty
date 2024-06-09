@@ -28,31 +28,10 @@ class ScanActivity : AppCompatActivity() {
     // ML
     private lateinit var imageClassifierHelper: ImageClassifierHelper
 
-    private val requestPermissionLauncher =
-        registerForActivityResult(
-            ActivityResultContracts.RequestPermission()
-        ) { isGranted: Boolean ->
-            if (isGranted) {
-                Toast.makeText(this, "Permission request granted", Toast.LENGTH_LONG).show()
-            } else {
-                Toast.makeText(this, "Permission request denied", Toast.LENGTH_LONG).show()
-            }
-        }
-
-    private fun allPermissionsGranted() =
-        ContextCompat.checkSelfPermission(
-            this,
-            REQUIRED_PERMISSION
-        ) == PackageManager.PERMISSION_GRANTED
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        if (!allPermissionsGranted()) {
-            requestPermissionLauncher.launch(REQUIRED_PERMISSION)
-        }
 
         handleIntent()
 
@@ -150,12 +129,6 @@ class ScanActivity : AppCompatActivity() {
                 }
             }
         })
-    }
-
-    private fun startResultActivity() {
-        val intent = Intent(this, ResultActivity::class.java)
-        startActivity(intent)
-        finish() // Optional: finish ScanActivity if you don't want to return to it
     }
 
     private fun showToast(message: String) {
