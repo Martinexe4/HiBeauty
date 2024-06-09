@@ -2,16 +2,13 @@ package com.capstone.hibeauty.scan
 
 import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
 import com.capstone.hibeauty.databinding.ActivityScanBinding
@@ -39,7 +36,7 @@ class ScanActivity : AppCompatActivity() {
 
         binding.uploadButton.setOnClickListener {
             currentImageUri?.let { uri ->
-                analyzeImage(uri) { results ->
+                processImage(uri) { results ->
                     lifecycleScope.launch(Dispatchers.Default) {
                         for (i in 0..100) {
                             delay(500)
@@ -48,11 +45,13 @@ class ScanActivity : AppCompatActivity() {
                                 if (progress == 100) {
                                     // Loading animation complete
                                     binding.darkOverlayView.visibility = android.view.View.GONE
-                                    binding.loadingPercentageTextView.visibility = android.view.View.GONE
+                                    binding.loadingPercentageTextView.visibility =
+                                        android.view.View.GONE
                                     moveToResult(uri, results)
                                 } else {
                                     binding.darkOverlayView.visibility = android.view.View.VISIBLE
-                                    binding.loadingPercentageTextView.visibility = android.view.View.VISIBLE
+                                    binding.loadingPercentageTextView.visibility =
+                                        android.view.View.VISIBLE
                                 }
                             }
                         }
@@ -81,22 +80,10 @@ class ScanActivity : AppCompatActivity() {
         }
     }
 
-    private fun analyzeImage(imageUri: Uri, callback: (Map<String, Float>) -> Unit) {
-        if (isAllowedImageType(imageUri)) {
-            val results = imageClassifierHelper.classifyStaticImage(imageUri)
-            callback(results)
-            startLoadingAnimation()
-        } else {
-            showToast("File harus berupa PNG, JPG, atau JPEG")
-        }
-    }
-
-    private fun isAllowedImageType(uri: Uri): Boolean {
-        val contentResolver = contentResolver
-        val type = contentResolver.getType(uri)
-        return type?.let {
-            it == "image/png" || it == "image/jpeg" || it == "image/jpg"
-        } ?: false
+    private fun processImage(imageUri: Uri, callback: (Map<String, Float>) -> Unit) {
+        val results = imageClassifierHelper.classifyStaticImage(imageUri)
+        callback(results)
+        startLoadingAnimation()
     }
 
     private fun moveToResult(imageUri: Uri, results: Map<String, Float>) {

@@ -52,8 +52,12 @@ private fun getImageUriForPreQ(context: Context): Uri {
 }
 
 fun createCustomTempFile(context: Context): File {
-    val filesDir = context.externalCacheDir
-    return File.createTempFile(timeStamp, ".jpg", filesDir)
+    val storageDir: File? = context.getExternalFilesDir(null)
+    return File.createTempFile(
+        "JPEG_${System.currentTimeMillis()}_",
+        ".jpg",
+        storageDir
+    )
 }
 
 //kita membutuhkan berkas gambar untuk diunggah ke API Online Image Classification.

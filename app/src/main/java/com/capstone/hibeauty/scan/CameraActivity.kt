@@ -116,8 +116,7 @@ class CameraActivity : AppCompatActivity() {
                     it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
                 }
 
-            imageCapture = ImageCapture.Builder()
-                .setTargetRotation(Surface.ROTATION_0) // Ensure correct rotation
+            imageCapture = ImageCapture.Builder() // Ensure correct rotation
                 .setFlashMode(currentFlashMode)
                 .build()
 
@@ -152,8 +151,7 @@ class CameraActivity : AppCompatActivity() {
             ContextCompat.getMainExecutor(this),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
-                    val compressedPhotoFile = photoFile.reduceFileImage()
-                    val savedUri = Uri.fromFile(compressedPhotoFile)
+                    val savedUri = Uri.fromFile(photoFile)
                     val intent = Intent(this@CameraActivity, ScanActivity::class.java).apply {
                         putExtra(EXTRA_CAMERAX_IMAGE, savedUri.toString())
                     }
@@ -203,21 +201,6 @@ class CameraActivity : AppCompatActivity() {
         supportActionBar?.hide()
     }
 
-    private fun checkGalleryPermission() {
-        when {
-            ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                startGallery()
-            }
-
-            else -> {
-                galleryPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
-            }
-        }
-    }
-
     private val orientationEventListener by lazy {
         object : OrientationEventListener(this) {
             override fun onOrientationChanged(orientation: Int) {
@@ -242,27 +225,26 @@ class CameraActivity : AppCompatActivity() {
         orientationEventListener.enable()
     }
 
-    override fun onStop() {
-        super.onStop()
-        orientationEventListener.disable()
+    private fun checkGalleryPermission() {
+        when {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                startGallery()
+            }
+
+            else -> {
+                galleryPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
+        }
     }
 
     companion object {
         private const val TAG = "CameraActivity"
         const val EXTRA_CAMERAX_IMAGE = "CameraX Image"
-        const val CAMERAX_RESULT = 200
-
         private const val FLASH_MODE_ON = ImageCapture.FLASH_MODE_ON
         private const val FLASH_MODE_OFF = ImageCapture.FLASH_MODE_OFF
         private const val FLASH_MODE_AUTO = ImageCapture.FLASH_MODE_AUTO
-
-        fun createCustomTempFile(context: android.content.Context): File {
-            val storageDir: File? = context.getExternalFilesDir(null)
-            return File.createTempFile(
-                "JPEG_${System.currentTimeMillis()}_",
-                ".jpg",
-                storageDir
-            )
-        }
     }
 }
