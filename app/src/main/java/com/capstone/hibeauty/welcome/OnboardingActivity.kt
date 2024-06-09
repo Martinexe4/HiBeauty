@@ -2,16 +2,20 @@ package com.capstone.hibeauty.welcome
 
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.authentication.LoginActivity
 import com.capstone.hibeauty.databinding.ActivityOnboardingBinding
 import com.capstone.hibeauty.profile.LanguageUtils
 
+@Suppress("DEPRECATION")
 class OnboardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnboardingBinding
     private lateinit var handler: Handler
@@ -27,6 +31,15 @@ class OnboardingActivity : AppCompatActivity() {
         if (hasOnboarded) {
             navigateToLogin()
             return
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsetsCompat.Type.statusBars())
+        } else {
+            window.setFlags(
+                WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
         }
 
         binding = ActivityOnboardingBinding.inflate(layoutInflater)

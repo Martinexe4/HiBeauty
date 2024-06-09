@@ -13,7 +13,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
+import androidx.lifecycle.lifecycleScope
 import com.capstone.hibeauty.databinding.ActivityScanBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ScanActivity : AppCompatActivity() {
 
@@ -55,16 +60,23 @@ class ScanActivity : AppCompatActivity() {
 
         binding.uploadButton.setOnClickListener {
             currentImageUri?.let { uri ->
-                startLoadingAnimation()
-
                 analyzeImage(uri) { results ->
-                    runOnUiThread {
-                        // Ensure loading animation is hidden
-                        binding.darkOverlayView.visibility = android.view.View.GONE
-                        binding.loadingPercentageTextView.visibility = android.view.View.GONE
-
-                        // Move to result activity
-                        moveToResult(uri, results)
+                    lifecycleScope.launch(Dispatchers.Default) {
+                        for (i in 0..100) {
+                            delay(500)
+                            val progress = i * 10
+                            withContext(Dispatchers.Main) {
+                                if (progress == 100) {
+                                    // Loading animation complete
+                                    binding.darkOverlayView.visibility = android.view.View.GONE
+                                    binding.loadingPercentageTextView.visibility = android.view.View.GONE
+                                    moveToResult(uri, results)
+                                } else {
+                                    binding.darkOverlayView.visibility = android.view.View.VISIBLE
+                                    binding.loadingPercentageTextView.visibility = android.view.View.VISIBLE
+                                }
+                            }
+                        }
                     }
                 }
             } ?: showToast("Pilih gambar terlebih dahulu")
@@ -94,6 +106,7 @@ class ScanActivity : AppCompatActivity() {
         if (isAllowedImageType(imageUri)) {
             val results = imageClassifierHelper.classifyStaticImage(imageUri)
             callback(results)
+            startLoadingAnimation()
         } else {
             showToast("File harus berupa PNG, JPG, atau JPEG")
         }
@@ -113,6 +126,7 @@ class ScanActivity : AppCompatActivity() {
             putExtra("results", HashMap(results))
         }
         startActivity(intent)
+        finish()
     }
 
     private fun startLoadingAnimation() {

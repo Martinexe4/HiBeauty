@@ -44,7 +44,7 @@
                             android:layout_height="250dp"
                             android:background="@drawable/rounded_corner"
                             android:contentDescription="@string/sample_image"
-                            android:scaleType="centerCrop"
+                            android:scaleType="fitXY"
                             android:src="@drawable/placeholder_image" />
                     </androidx.cardview.widget.CardView>
 

@@ -14,7 +14,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Back"
+        android:contentDescription="@string/back"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,47 +26,61 @@
         android:layout_marginTop="24dp"
         android:layout_marginBottom="32dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Image Preview"
+        android:text="@string/image_preview"
+        android:textColor="@color/colorGrayDark"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/overlayFrameLayout"
-        android:layout_width="360dp"
-        android:layout_height="480dp"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_image_preview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:strokeColor="@color/colorPrimarySoft"
+        app:strokeWidth="2dp">
 
-        <ImageView
-            android:id="@+id/previewImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/item_product_background"
-            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+        <FrameLayout
+            android:id="@+id/overlayFrameLayout"
+            android:layout_width="360dp"
+            android:layout_height="480dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-        <View
-            android:id="@+id/darkOverlayView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-            android:background="#80000000" />
+            <ImageView
+                android:id="@+id/previewImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView2"
+                tools:src="@drawable/ic_galery_button_black" />
 
-        <TextView
-            android:id="@+id/loadingPercentageTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="0%"
-            android:fontFamily="@font/poppins_bold"
-            android:textColor="@android:color/white"
-            android:textSize="48sp"
-            android:visibility="gone"/>
-    </FrameLayout>
+            <View
+                android:id="@+id/darkOverlayView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#80000000"
+                android:visibility="gone"
+                tools:visibility="visible" />
 
+            <TextView
+                android:id="@+id/loadingPercentageTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins_bold"
+                android:textColor="@android:color/white"
+                android:textSize="48sp"
+                android:visibility="gone"
+                tools:text="0%"
+                tools:visibility="visible" />
+        </FrameLayout>
+    </com.google.android.material.card.MaterialCardView>
 
     <Button
         android:id="@+id/uploadButton"
@@ -77,13 +91,11 @@
         android:fontFamily="@font/poppins_bold"
         android:gravity="center"
         android:padding="8dp"
-        android:text="Analyze"
+        android:text="@string/analyze"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/overlayFrameLayout" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/card_image_preview" />
 </androidx.constraintlayout.widget.ConstraintLayout>
