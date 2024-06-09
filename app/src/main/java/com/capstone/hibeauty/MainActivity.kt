@@ -1,8 +1,13 @@
 package com.capstone.hibeauty
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -16,7 +21,14 @@ import com.google.firebase.FirebaseApp
 class MainActivity : AppCompatActivity() {
     private lateinit var bottomNavView: BottomNavigationView
     private lateinit var floatButton: FloatingActionButton  // Tambahkan FAB ke sini
-
+    private val cameraPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                startCamera()
+            } else {
+                Toast.makeText(this, getString(R.string.required_camera), Toast.LENGTH_SHORT).show()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,28 +40,32 @@ class MainActivity : AppCompatActivity() {
 
         // Setup listener untuk FAB
         floatButton.setOnClickListener {
-            startActivity(Intent(this, CameraActivity::class.java))  // Buka ScanActivity
+            checkCameraPermission()
         }
 
         // Gunakan OnNavigationItemSelectedListener untuk Bottom Navigation
         bottomNavView.setOnNavigationItemSelectedListener {
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.home -> {
                     replace(HomeFragment())
                     true
                 }
+
                 R.id.product -> {
                     replace(ProductFragment())
                     true
                 }
+
                 R.id.news -> {
                     replace(ArticleFragment())
                     true
                 }
+
                 R.id.profile -> {
                     replace(ProfileFragment())
                     true
                 }
+
                 else -> false
             }
         }
@@ -63,5 +79,24 @@ class MainActivity : AppCompatActivity() {
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.navhost, fragment)
         fragmentTransaction.commit()
+    }
+
+    private fun startCamera() {
+        startActivity(Intent(this, CameraActivity::class.java))  // Buka ScanActivity
+    }
+
+    private fun checkCameraPermission() {
+        when {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                startCamera()
+            }
+
+            else -> {
+                cameraPermission.launch(Manifest.permission.CAMERA)
+            }
+        }
     }
 }

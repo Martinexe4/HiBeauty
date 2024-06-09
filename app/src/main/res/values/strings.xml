@@ -87,4 +87,5 @@
     <string name="image_preview">Image Preview</string>
     <string name="analyze">Analyze</string>
     <string name="required_storage">Storage permission required!</string>
+    <string name="required_camera">Camera permission is required!</string>
 </resources>
