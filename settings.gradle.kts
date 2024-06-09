@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "CPV2"
+rootProject.name = "hibeauty"
 include(":app")
  

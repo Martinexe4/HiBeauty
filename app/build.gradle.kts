@@ -104,7 +104,7 @@ dependencies {
     implementation(libs.androidx.navigation.ui.ktx.v274)
 
     //scan
-    implementation (libs.tensorflow.lite)
+    implementation(libs.tensorflow.lite)
     implementation(libs.tensorflow.lite.support)
     implementation(libs.tensorflow.tensorflow.lite.metadata)
     implementation(libs.tensorflow.tensorflow.lite.task.vision)
