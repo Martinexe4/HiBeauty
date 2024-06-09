@@ -13,7 +13,6 @@ This repository contains the machine learning model developed for the Capstone P
 - [Results](#results)
 - [Usage](#usage)
 - [Contributors](#contributors)
-- [License](#license)
 
 ## Overview
 
@@ -131,10 +130,6 @@ To use the model, follow these steps:
 
 ## Contributors
 
-- Muhammad Ridho Mujahid (https://github.com/Moedjaheed)
-- Martin Ompusunggu (https://github.com/Martinexe4)
+- [Muhammad Ridho Mujahid] (https://github.com/Moedjaheed)
+- [Martin Ompusunggu] (https://github.com/Martinexe4)
 - Yanuar Putra Kharisma Adhiyasa
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
