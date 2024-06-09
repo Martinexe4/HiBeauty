@@ -4,7 +4,10 @@ const auth = require("../middleware/auth");
 const accessValidation = require("../middleware/accessValidation");
 const skinController = require("../controllers/skinController");
 const productController = require("../controllers/productController");
+const modelController = require("../controllers/modelController");
+const userController = require("../controllers/userController");
 const recommendationController = require("../controllers/recommendationController");
+const skinRecommendationController = require("../controllers/skinRecommendationController");
 const images = require("../modules/images");
 const Multer = require('multer');
 const multer = Multer({
@@ -23,17 +26,10 @@ router.post('/register', auth.register);
 router.post('/login', auth.login);
 router.get('/users', accessValidation, auth.getUsers);
 
-// Image routes
-// router.post("/uploadImage", multer.single('image'), images.uploadToGcs);
-// router.get("/getimage/:imageid",  images.viewImgSpecific);
-
 
 // Skin routes
 router.get('/skins', accessValidation, skinController.getSkins);
 router.get('/skin/:SKINID', accessValidation, skinController.getSkinById);
-// router.post('/skins', accessValidation, skinController.createSkin);
-// router.put('/skin/:skinId', accessValidation, skinController.updateSkin);
-// router.delete('/skin/:skinId', accessValidation, skinController.deleteSkin);
 
 // Product routes
 router.get('/products', accessValidation, productController.getProducts);
@@ -43,10 +39,15 @@ router.get('/products/:id', accessValidation, productController.getProductById);
 // Recommendation routes
 router.get('/recommendations/:id', accessValidation, recommendationController.getRecommendations);
 
+// Prediction routes (POST)
+router.post('/predictions', skinRecommendationController.postPredictions);
+
+// Machine Learning routes
+router.post("/predict", accessValidation, multer.single('attachment'), modelController.predict );
+router.get("/predict/:id", accessValidation, multer.single('attachment'), modelController.getSkinTypeById );
 
 // User routes
 router.put('/user/:userId', accessValidation, multer.single('IMAGE'), images.uploadToGcs, userController.updateProfile)
 router.get('/users', accessValidation, auth.getUsers )
-router.get('/user/:userId', accessValidation, userController.getProfile)
 
 module.exports = router;

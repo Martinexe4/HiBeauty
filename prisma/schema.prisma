@@ -9,12 +9,9 @@ generator client {
 
 model SKIN {
   SKINID           String           @id @db.Char(5)
-  SKINNAME         String           @db.VarChar(50)
-  SKINDESC         String           @db.VarChar(200)
   SKINIMG          String           @db.VarChar(255)
   users            UserSkin[]       //Many-to-many relation of User and Skin
-  products         Product[]        //untuk apa skin terhubung product jika dari rekomendas sistem sudah mengetahui kulit user
-  recommendations  Recommendation[]
+  recommendations  SkinRecomendation[]
 }
 
 model User {
@@ -27,7 +24,6 @@ model User {
   UPDATEDAT        DateTime         @default(now()) @db.Timestamp(0)
   skinId           String?
   skins            UserSkin[]       //Many-to-many relation of Skin and User
-  recommendations  Recommendation[]
 }
 
 model UserSkin {
@@ -40,23 +36,35 @@ model UserSkin {
 }
 
 model Product {
-  id          Int     @id @default(autoincrement())
-  name        String  @db.VarChar(50)
-  description String  @db.VarChar(200)
-  price       Float
-  skinType    String  @db.VarChar(50)
-  skinId      String?
-  skin        SKIN?   @relation(fields: [skinId], references: [SKINID])
-  recommendations Recommendation[]
+  id              Int             @id @default(autoincrement())
+  name            String          @db.VarChar(50)
+  description     String          @db.VarChar(200)
+  ingridients     String          
+  link            String
+  recomId         Int             
+  recommendation  Recommendation  @relation(fields: [recomId], references : [id])
+  typeId          Int             
+  typeProd        ProductType     @relation(fields: [typeId], references : [id])
+}
+
+model ProductType {
+  id              Int             @id @default(autoincrement())
+  type            String
+  products        Product[]
 }
 
 model Recommendation {
   id                  Int      @id @default(autoincrement())
-  recommendationText  String   @db.VarChar(255)
-  userId              String
-  skinId              String
-  productId           Int
-  user                User     @relation(fields: [userId], references: [USERID])
-  skin                SKIN     @relation(fields: [skinId], references: [SKINID])
-  product             Product  @relation(fields: [productId], references: [id])
+  skinType            String
+  skins               SkinRecomendation[]
+  products            Product[]
 } //Apa sebenarnya isi recommendations?
+
+model SkinRecomendation {
+  skinId           String
+  recommendationId Int
+  percentage       Float
+  skin             SKIN          @relation(fields: [skinId], references: [SKINID])
+  recommendation   Recommendation @relation(fields: [recommendationId], references: [id])
+  @@id([skinId, recommendationId]) // Composite primary key
+}

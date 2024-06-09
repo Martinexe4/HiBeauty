@@ -1,51 +1,49 @@
-const { profile } = require("@tensorflow/tfjs-node")
-const prisma = require("../prisma/prisma")
-
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 exports.updateProfile = async (req, res) => {
-    var USERNAME = req.body.USERNAME
-    const USERID = req.params.userId
+    const { USERNAME } = req.body;
+    const { userId } = req.params;
 
     const user = await prisma.user.findUnique({
         where: {
-            USERID: USERID
+            USERID: userId
         },
-    })
+    });
 
-    if (!user){
+    if (!user) {
         return res.status(404).json({
             "status": false,
             "message": "User not found",
-        })
+        });
     }
 
-    if(req.file && req.file.cloudStoragePublicUrl){
-        imageUrl = req.file.cloudStoragePublicUrl
-    } else {
-        imageUrl = user.PROFILEIMG
+    let imageUrl = user.PROFILEIMG;
+    if (req.file && req.file.cloudStoragePublicUrl) {
+        imageUrl = req.file.cloudStoragePublicUrl;
     }
 
-    try{
+    try {
         const updatedUser = await prisma.user.update({
             where: {
-                USERID: USERID
+                USERID: userId
             },
             data: {
                 USERNAME: USERNAME,
                 PROFILEIMG: imageUrl,
                 UPDATEDAT: new Date()
             }
-        
-        })
+        });
         res.status(200).json({
             "status": true,
             "message": "User profile updated successfully",
             "data": updatedUser,
-        })
-    }catch{
+        });
+    } catch (error) {
+        console.error(error);
         res.status(500).json({
             "status": false,
             "message": "An unexpected error occurred on the server",
-        })
+        });
     }
-}
+};
