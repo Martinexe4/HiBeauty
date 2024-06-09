@@ -1,6 +1,8 @@
 package com.capstone.hibeauty.scan
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -37,6 +39,15 @@ class CameraActivity : AppCompatActivity() {
         "Gunakan ekspresi wajah netral"
     )
     private var textIndex = 0
+    private val galleryPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                startGallery()
+            } else {
+                Toast.makeText(this, getString(R.string.required_storage), Toast.LENGTH_SHORT)
+                    .show()
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +61,7 @@ class CameraActivity : AppCompatActivity() {
             startCamera()
         }
         binding.captureImage.setOnClickListener { takePhoto() }
-        binding.openGallery.setOnClickListener { startGallery() }
+        binding.openGallery.setOnClickListener { checkGalleryPermission() }
         binding.flashToggle.setOnClickListener { toggleFlash() }
         binding.backButton.setOnClickListener { onBackPressed() }
 
@@ -190,6 +201,21 @@ class CameraActivity : AppCompatActivity() {
             )
         }
         supportActionBar?.hide()
+    }
+
+    private fun checkGalleryPermission() {
+        when {
+            ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                startGallery()
+            }
+
+            else -> {
+                galleryPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
+            }
+        }
     }
 
     private val orientationEventListener by lazy {
