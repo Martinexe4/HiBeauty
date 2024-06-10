@@ -48,7 +48,7 @@ class ArticleFragment : Fragment() {
         fetchNews()
 
         // Mengatur SearchView untuk menyaring artikel
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
                     filterArticles(query)

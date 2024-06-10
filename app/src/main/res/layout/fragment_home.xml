@@ -191,7 +191,6 @@
                             android:text="Scan your skin now!"
                             android:textColor="@color/white"
                             android:textSize="20sp" />
-
                     </LinearLayout>
 
                     <Button
@@ -202,7 +201,6 @@
                         android:fontFamily="@font/poppins_bold"
                         android:text="Analyze >"
                         android:textColor="@android:color/holo_red_light" />
-
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
