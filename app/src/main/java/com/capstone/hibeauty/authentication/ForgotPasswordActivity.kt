@@ -17,6 +17,8 @@ class ForgotPasswordActivity : AppCompatActivity() {
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         firebaseAuth = FirebaseAuth.getInstance()
 
         // Tombol kembali khusus

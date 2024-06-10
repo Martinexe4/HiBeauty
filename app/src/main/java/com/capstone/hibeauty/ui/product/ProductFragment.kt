@@ -1,4 +1,4 @@
-package com.capstone.hibeauty.product
+package com.capstone.hibeauty.ui.product
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.hibeauty.R
+import com.capstone.hibeauty.adapter.HorizontalProductAdapter
+import com.capstone.hibeauty.product.Product
+import com.capstone.hibeauty.adapter.VerticalProductAdapter
 
 class ProductFragment : Fragment() {
 

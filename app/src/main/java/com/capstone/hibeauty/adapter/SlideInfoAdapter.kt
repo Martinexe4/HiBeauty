@@ -1,4 +1,4 @@
-package com.capstone.hibeauty.dashboard
+package com.capstone.hibeauty.adapter
 
 import android.view.LayoutInflater
 import android.view.View

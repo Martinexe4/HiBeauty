@@ -2,6 +2,7 @@ package com.capstone.hibeauty.product
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.capstone.hibeauty.adapter.ImageSliderAdapter
 import com.capstone.hibeauty.databinding.ActivityProductDetailBinding
 
 class ProductDetailActivity : AppCompatActivity() {
@@ -12,6 +13,8 @@ class ProductDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityProductDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
 
         val product = intent.getParcelableExtra<Product>("product")
 

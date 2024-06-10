@@ -5,6 +5,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.capstone.hibeauty.adapter.HistoryAdapter
+import com.capstone.hibeauty.adapter.HistoryItem
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.firestore
@@ -20,6 +22,8 @@ class HistoryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
 
         binding.recyclerViewHistory.layoutManager = LinearLayoutManager(this)
 

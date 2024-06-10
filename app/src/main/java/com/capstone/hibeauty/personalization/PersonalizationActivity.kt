@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.hibeauty.MainActivity
+import com.capstone.hibeauty.adapter.PersonalizationAdapter
 import com.capstone.hibeauty.databinding.ActivityPersonalizationBinding
 
 class PersonalizationActivity : AppCompatActivity() {
@@ -15,15 +16,12 @@ class PersonalizationActivity : AppCompatActivity() {
     private lateinit var adapter: PersonalizationAdapter
     private lateinit var sharedPreferences: SharedPreferences
 
-
-
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPersonalizationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        supportActionBar?.hide()
 
         adapter = PersonalizationAdapter(this)
         binding.viewPager.adapter = adapter

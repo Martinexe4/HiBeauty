@@ -17,6 +17,8 @@ class LanguageActivity : AppCompatActivity() {
         binding = ActivityLanguageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         sharedPreferences = getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
 
         binding.closeButton.setOnClickListener {

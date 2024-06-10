@@ -1,4 +1,4 @@
-package com.capstone.hibeauty.profile
+package com.capstone.hibeauty.ui.profile
 
 import android.app.Activity
 import android.content.Context
@@ -20,6 +20,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.capstone.hibeauty.authentication.LoginActivity
 import com.capstone.hibeauty.databinding.FragmentProfileBinding
 import com.capstone.hibeauty.R
+import com.capstone.hibeauty.profile.HistoryActivity
+import com.capstone.hibeauty.profile.InfoUserActivity
+import com.capstone.hibeauty.profile.LanguageActivity
+import com.capstone.hibeauty.profile.PolicyActivity
 
 class ProfileFragment : Fragment() {
     var binding: FragmentProfileBinding? = null // Hapus underscore dan kata kunci private agar dapat diakses dari luar kelas

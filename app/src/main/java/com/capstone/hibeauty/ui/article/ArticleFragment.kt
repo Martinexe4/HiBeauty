@@ -1,4 +1,4 @@
-package com.capstone.hibeauty.article
+package com.capstone.hibeauty.ui.article
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +12,11 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import android.widget.SearchView
+import com.capstone.hibeauty.article.ApiConfigNews
+import com.capstone.hibeauty.article.ApiServiceNews
+import com.capstone.hibeauty.adapter.ArticleAdapter
+import com.capstone.hibeauty.article.ArticlesItem
+import com.capstone.hibeauty.article.NewsResponse
 
 class ArticleFragment : Fragment() {
     private var _binding: FragmentArticleBinding? = null

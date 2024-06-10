@@ -23,6 +23,8 @@ class ResultActivity : AppCompatActivity() {
         binding = ActivityResultBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         firestore = Firebase.firestore
 
         imageUri = intent.getStringExtra("imageUri")?.toUri()

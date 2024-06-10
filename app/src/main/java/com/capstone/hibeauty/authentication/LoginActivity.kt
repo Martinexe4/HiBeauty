@@ -35,6 +35,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         // Jika pengguna sudah masuk, langsung ke MainActivity
         if (firebaseAuth.currentUser != null) {
             startActivity(Intent(this, MainActivity::class.java))

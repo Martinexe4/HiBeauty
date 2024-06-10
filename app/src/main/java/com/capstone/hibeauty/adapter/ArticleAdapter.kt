@@ -1,4 +1,4 @@
-package com.capstone.hibeauty.article
+package com.capstone.hibeauty.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.hibeauty.R
+import com.capstone.hibeauty.article.ArticlesItem
+import com.capstone.hibeauty.article.DetailArticleActivity
 
 class ArticleAdapter(private var articles: List<ArticlesItem?>) :
     RecyclerView.Adapter<ArticleAdapter.NewsViewHolder>() {

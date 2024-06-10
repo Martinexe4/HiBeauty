@@ -1,16 +1,18 @@
 package com.capstone.hibeauty.scan
 
-import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.lifecycleScope
+import com.capstone.hibeauty.R
 import com.capstone.hibeauty.databinding.ActivityScanBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -30,11 +32,14 @@ class ScanActivity : AppCompatActivity() {
         binding = ActivityScanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         handleIntent()
 
         imageClassifierHelper = ImageClassifierHelper(this)
 
         binding.uploadButton.setOnClickListener {
+            markButtonDisable(binding.uploadButton)
             currentImageUri?.let { uri ->
                 processImage(uri) { results ->
                     lifecycleScope.launch(Dispatchers.Default) {
@@ -122,7 +127,9 @@ class ScanActivity : AppCompatActivity() {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
-    companion object {
-        private const val REQUIRED_PERMISSION = Manifest.permission.CAMERA
+    private fun markButtonDisable(button: Button) {
+        button?.isEnabled = false
+        button?.setTextColor(ContextCompat.getColor(this, R.color.colorGrayDark))
+        button?.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimarySoft))
     }
 }

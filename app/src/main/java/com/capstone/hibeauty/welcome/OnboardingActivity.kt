@@ -25,6 +25,8 @@ class OnboardingActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        supportActionBar?.hide()
+
         // Check if onboarding has already been completed
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         val hasOnboarded = sharedPreferences.getBoolean("has_onboarded", false)

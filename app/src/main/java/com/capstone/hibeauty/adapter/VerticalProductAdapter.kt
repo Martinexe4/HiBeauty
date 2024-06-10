@@ -1,4 +1,4 @@
-package com.capstone.hibeauty.product
+package com.capstone.hibeauty.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,11 +8,13 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.hibeauty.R
+import com.capstone.hibeauty.product.Product
+import com.capstone.hibeauty.product.ProductDetailActivity
 
-class HorizontalProductAdapter(private val productList: List<Product>) : RecyclerView.Adapter<HorizontalProductAdapter.ViewHolder>() {
+class VerticalProductAdapter(private val productList: List<Product>) : RecyclerView.Adapter<VerticalProductAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product_horizontal, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_product_vertical, parent, false)
         return ViewHolder(view)
     }
 

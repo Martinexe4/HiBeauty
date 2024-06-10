@@ -1,23 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_home"
-    app:startDestination="@id/homeFragment">
-
+    app:startDestination="@id/navigation_home">
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.capstone.hibeauty.dashboard.HomeFragment"
-        android:label="HomeFragment" >
+        android:id="@+id/navigation_home"
+        android:name="com.capstone.hibeauty.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_homeFragment_to_productFragment"
-            app:destination="@id/productFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_articleFragment2"
-            app:destination="@id/articleFragment2" />
+            app:destination="@id/navigation_product"
+            app:launchSingleTop="false" />
         <action
             android:id="@+id/action_homeFragment_to_cameraActivity"
             app:destination="@id/cameraActivity" />
+        <action
+            android:id="@+id/action_homeFragment_to_articleFragment2"
+            app:destination="@id/navigation_article" />
+        <action
+            android:id="@+id/action_homeFragment_to_profileFragment"
+            app:destination="@id/navigation_profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_product"
+        android:name="com.capstone.hibeauty.ui.product.ProductFragment"
+        android:label="fragment_product"
+        tools:layout="@layout/fragment_product" >
     </fragment>
     <activity
         android:id="@+id/cameraActivity"
@@ -25,13 +35,13 @@
         android:label="activity_camera"
         tools:layout="@layout/activity_camera" />
     <fragment
-        android:id="@+id/productFragment"
-        android:name="com.capstone.hibeauty.product.ProductFragment"
-        android:label="fragment_product"
-        tools:layout="@layout/fragment_product" />
-    <fragment
-        android:id="@+id/articleFragment2"
-        android:name="com.capstone.hibeauty.article.ArticleFragment"
+        android:id="@+id/navigation_article"
+        android:name="com.capstone.hibeauty.ui.article.ArticleFragment"
         android:label="fragment_article"
         tools:layout="@layout/fragment_article" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.capstone.hibeauty.ui.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 </navigation>

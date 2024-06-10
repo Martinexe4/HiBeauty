@@ -27,6 +27,8 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         // Event handler untuk tombol Login
         binding.loginButton.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))

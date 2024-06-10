@@ -19,6 +19,8 @@ class InfoUserActivity : AppCompatActivity() {
         binding = ActivityInfoUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
 
         loadUserData()

@@ -15,6 +15,8 @@ class PolicyActivity : AppCompatActivity() {
         binding = ActivityPolicyBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         // Mengisi TextView dengan kebijakan privasi
         binding.privacyPolicyContentTextView.text = getString(R.string.privacy_policy_content)
 

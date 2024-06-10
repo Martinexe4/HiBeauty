@@ -24,6 +24,8 @@ class DetailArticleActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_article)
 
+        supportActionBar?.hide()
+
         // Temukan komponen UI
         title = findViewById(R.id.title)
         description = findViewById(R.id.description)

@@ -1,4 +1,4 @@
-package com.capstone.hibeauty.dashboard
+package com.capstone.hibeauty.ui.home
 
 import android.os.Bundle
 import android.os.Handler
@@ -7,18 +7,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.capstone.hibeauty.R
+import com.capstone.hibeauty.adapter.SlideInfoAdapter
+import com.capstone.hibeauty.databinding.FragmentHomeBinding
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.capstone.hibeauty.R
-import com.capstone.hibeauty.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
@@ -38,16 +37,15 @@ class HomeFragment : Fragment() {
         return view
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         currentUser = firebaseAuth.currentUser
         loadUserName()
 
-        binding.btnReadNow1.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_homeFragment_to_productFragment)
-        )
+        binding.btnReadNow1.setOnClickListener { view ->
+            view.findNavController().navigate(R.id.action_homeFragment_to_productFragment)
+        }
         binding.btnReadNow2.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_homeFragment_to_cameraActivity)
         }

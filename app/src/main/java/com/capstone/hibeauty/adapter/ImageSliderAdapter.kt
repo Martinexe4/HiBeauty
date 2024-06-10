@@ -1,4 +1,4 @@
-package com.capstone.hibeauty.product
+package com.capstone.hibeauty.adapter
 
 import android.content.Context
 import android.view.View

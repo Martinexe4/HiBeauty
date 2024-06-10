@@ -8,19 +8,18 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.capstone.hibeauty.article.ArticleFragment
-import com.capstone.hibeauty.dashboard.HomeFragment
-import com.capstone.hibeauty.product.ProductFragment
-import com.capstone.hibeauty.profile.ProfileFragment
+import com.capstone.hibeauty.databinding.ActivityMainBinding
 import com.capstone.hibeauty.scan.CameraActivity
 import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     private lateinit var bottomNavView: BottomNavigationView
-    private lateinit var floatButton: FloatingActionButton  // Tambahkan FAB ke sini
     private val cameraPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
@@ -33,52 +32,29 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         FirebaseApp.initializeApp(this)
-        setContentView(R.layout.activity_main)
 
-        bottomNavView = findViewById(R.id.nav_view)
-        floatButton = findViewById(R.id.floating_button)  // Referensi ke FAB
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Setup listener untuk FAB
-        floatButton.setOnClickListener {
+        bottomNavView = binding.navView
+
+        binding.floatingButton.setOnClickListener {
             checkCameraPermission()
         }
 
-        // Gunakan OnNavigationItemSelectedListener untuk Bottom Navigation
-        bottomNavView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.home -> {
-                    replace(HomeFragment())
-                    true
-                }
+        val navController = Navigation.findNavController(this, R.id.navhost)
 
-                R.id.product -> {
-                    replace(ProductFragment())
-                    true
-                }
-
-                R.id.news -> {
-                    replace(ArticleFragment())
-                    true
-                }
-
-                R.id.profile -> {
-                    replace(ProfileFragment())
-                    true
-                }
-
-                else -> false
-            }
-        }
-
-        // Inisialisasi dengan fragment default (misalnya, HomeFragment)
-        replace(HomeFragment())
-    }
-
-    private fun replace(fragment: Fragment) {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.navhost, fragment)
-        fragmentTransaction.commit()
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.navigation_home,
+                R.id.navigation_product,
+                R.id.navigation_article,
+                R.id.navigation_profile
+            )
+        )
+        supportActionBar?.hide()
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        bottomNavView.setupWithNavController(navController)
     }
 
     private fun startCamera() {

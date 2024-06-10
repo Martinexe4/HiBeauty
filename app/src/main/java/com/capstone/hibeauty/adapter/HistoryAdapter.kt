@@ -1,4 +1,4 @@
-package com.capstone.hibeauty.profile
+package com.capstone.hibeauty.adapter
 
 import android.view.LayoutInflater
 import android.view.View
