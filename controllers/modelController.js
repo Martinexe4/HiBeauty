@@ -1,48 +1,56 @@
-const predict = require('../modules/model');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-exports.predict = async (req, res) => {
-    const image = req.file;
-    if (!image) {
+exports.savePredictions = async (req, res) => {
+    const { skinId, predictions } = req.body;
+
+    if (!skinId || !predictions || !Array.isArray(predictions)) {
         return res.status(400).json({
             status: false,
-            message: "Invalid input"
-        });
+            message: "Invalid input data",
+        }); 
     }
+
     try {
-        const result = await predict.predict(image.buffer);
-        const skinType = result.label;
-
-        // Simpan jenis kulit ke model Recommendation
-        const recommendation = await prisma.recommendation.create({
-            data: {
-                skinType: skinType
-            }
+        // Check if skin exists
+        const skin = await prisma.sKIN.findUnique({
+            where: { SKINID: skinId },
         });
 
-        // Fetch recommended products based on the skin type
-        const recommendedProducts = await prisma.product.findMany({
-            where: {
-                recommendationId: recommendation.id // Ambil produk berdasarkan rekomendasi yang baru dibuat
-            }
+        if (!skin) {
+            return res.status(404).json({
+                status: false,
+                message: "Skin not found",
+            });
+        }
+
+        // Insert predictions
+        const predictionPromises = predictions.map(prediction => {
+            const { id, percentage } = prediction;
+            return prisma.skinRecomendation.create({
+                data: {
+                    skinId: skinId,
+                    recommendationId: id,
+                    percentage: percentage,
+                },
+            });
         });
 
-        return res.status(200).json({
+        await Promise.all(predictionPromises);
+
+        res.status(200).json({
             status: true,
-            message: "Scan successful",
-            result: result,
-            recommendedProducts: recommendedProducts
+            message: "Prediction results saved successfully",
         });
-    } catch (err) {
-        console.error(err);
-        return res.status(500).json({
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({
             status: false,
             message: "An unexpected error occurred on the server",
-            err: err.toString(),
         });
     }
 };
+
 
 exports.getSkinTypeById = async (req, res) => {
     const SKINID = req.params.id;
