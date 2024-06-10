@@ -7,7 +7,6 @@ const productController = require("../controllers/productController");
 const modelController = require("../controllers/modelController");
 const userController = require("../controllers/userController");
 const recommendationController = require("../controllers/recommendationController");
-const skinRecommendationController = require("../controllers/skinRecommendationController");
 const images = require("../modules/images");
 const Multer = require('multer');
 const multer = Multer({
@@ -39,15 +38,18 @@ router.get('/products/:id', accessValidation, productController.getProductById);
 // Recommendation routes
 router.get('/recommendations/:id', accessValidation, recommendationController.getRecommendations);
 
-// Prediction routes (POST)
-router.post('/predictions', skinRecommendationController.postPredictions);
-
 // Machine Learning routes
-router.post("/predict", accessValidation, multer.single('attachment'), modelController.predict );
 router.get("/predict/:id", accessValidation, multer.single('attachment'), modelController.getSkinTypeById );
 
+//Insert prediction to database
+router.post('/predictions',accessValidation, modelController.savePredictions);
+
 // User routes
-router.put('/user/:userId', accessValidation, multer.single('IMAGE'), images.uploadToGcs, userController.updateProfile)
+router.put('/user/:userId', accessValidation, multer.single('IMAGE'), images.uploadToGcs, userController.updateProfile);
 router.get('/users', accessValidation, auth.getUsers )
+
+//upload skin user
+router.post('/skin/upload', multer.single('file'), images.uploadToGcs, skinController.uploadSkinImage);
+
 
 module.exports = router;

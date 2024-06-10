@@ -10,6 +10,7 @@ exports.updateProfile = async (req, res) => {
             USERID: userId
         },
     });
+    console.log(user);
 
     if (!user) {
         return res.status(404).json({
