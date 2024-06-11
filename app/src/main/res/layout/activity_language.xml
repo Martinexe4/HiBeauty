@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/Theme.AppCompat.Light"
     tools:context=".profile.LanguageActivity">
 
     <ImageButton
@@ -22,9 +23,9 @@
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
         android:text="Language"
         android:textSize="20sp"
-        android:fontFamily="@font/poppins_bold"
         app:layout_constraintBottom_toBottomOf="@+id/closeButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,31 +37,31 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="?attr/selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_title"
-        android:gravity="center_vertical"
-        android:clickable="true"
-        android:focusable="true">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_title">
 
         <ImageView
             android:id="@+id/flag_english"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/img_usaflag"
-            android:contentDescription="USA Flag" />
+            android:contentDescription="USA Flag"
+            android:src="@drawable/img_usaflag" />
 
         <TextView
             android:id="@+id/text_english"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_bold"
             android:text="English"
-            android:textSize="18sp"
-            android:fontFamily="@font/poppins_bold" />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -68,31 +69,31 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
         android:padding="16dp"
-        android:background="?attr/selectableItemBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/language_english"
-        android:gravity="center_vertical"
-        android:clickable="true"
-        android:focusable="true">
+        app:layout_constraintTop_toBottomOf="@+id/language_english">
 
         <ImageView
             android:id="@+id/flag_indonesian"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/img_idnflag"
-            android:contentDescription="Indonesian Flag" />
+            android:contentDescription="Indonesian Flag"
+            android:src="@drawable/img_idnflag" />
 
         <TextView
             android:id="@+id/text_indonesian"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
+            android:fontFamily="@font/poppins_bold"
             android:text="Indonesian"
-            android:textSize="18sp"
-            android:fontFamily="@font/poppins_bold" />
+            android:textSize="18sp" />
     </LinearLayout>
 
 

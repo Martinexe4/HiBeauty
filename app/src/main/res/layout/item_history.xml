@@ -9,37 +9,39 @@
         android:id="@+id/imageViewHistory"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewCategory"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageViewHistory"
+        android:textAppearance="?attr/textAppearanceListItem"
+        android:theme="@style/Theme.AppCompat.Light"
         app:layout_constraintEnd_toStartOf="@id/buttonDelete"
-        android:textAppearance="?attr/textAppearanceListItem" />
+        app:layout_constraintStart_toEndOf="@id/imageViewHistory"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewProbability"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:textAppearance="?attr/textAppearanceCaption"
+        android:theme="@style/Theme.AppCompat.Light"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/imageViewHistory"
         app:layout_constraintEnd_toStartOf="@id/buttonDelete"
-        android:textAppearance="?attr/textAppearanceCaption" />
+        app:layout_constraintStart_toEndOf="@id/imageViewHistory" />
 
     <Button
         android:id="@+id/buttonDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
         android:background="@drawable/button_selector"
+        android:fontFamily="@font/poppins_bold"
         android:text="Delete"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
