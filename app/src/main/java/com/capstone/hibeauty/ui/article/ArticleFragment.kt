@@ -80,17 +80,23 @@ class ArticleFragment : Fragment() {
                     val articles = newsResponse?.articles
                     if (articles != null) {
                         allArticles = articles  // Simpan semua artikel
-                        newsAdapter.updateData(articles)
+                        if (isAdded) {
+                            newsAdapter.updateData(articles)
+                        }
                     }
                 } else {
                     handleError(response.message())
                 }
-                binding.swipeRefreshLayout.isRefreshing = false
+                if (isAdded) {
+                    binding.swipeRefreshLayout.isRefreshing = false
+                }
             }
 
             override fun onFailure(call: Call<NewsResponse>, t: Throwable) {
                 handleError(t.message ?: "Unknown error")
-                binding.swipeRefreshLayout.isRefreshing = false
+                if (isAdded) {
+                    binding.swipeRefreshLayout.isRefreshing = false
+                }
             }
         })
     }
@@ -101,11 +107,15 @@ class ArticleFragment : Fragment() {
             it?.title?.contains(query, true) == true ||
                     it?.description?.contains(query, true) == true
         }
-        newsAdapter.updateData(filteredArticles)  // Perbarui adapter dengan hasil filter
+        if (isAdded) {
+            newsAdapter.updateData(filteredArticles)  // Perbarui adapter dengan hasil filter
+        }
     }
 
     private fun handleError(errorMessage: String) {
-        Toast.makeText(context, "Error: $errorMessage", Toast.LENGTH_SHORT).show()
+        if (isAdded) {
+            Toast.makeText(context, "Error: $errorMessage", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onDestroyView() {
