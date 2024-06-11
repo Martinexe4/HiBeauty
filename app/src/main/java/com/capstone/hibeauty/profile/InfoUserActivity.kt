@@ -35,9 +35,9 @@ class InfoUserActivity : AppCompatActivity() {
         val age = sharedPreferences.getString("age", "")
         val gender = sharedPreferences.getString("gender", "")
 
-        binding.tvName.text = "Name: $name"
-        binding.tvAge.text = "Age: $age"
-        binding.tvGender.text = "Gender: $gender"
+        binding.tvName.text = "$name"
+        binding.tvAge.text = "$age"
+        binding.tvGender.text = "$gender"
     }
 
     private fun showEditDialog() {
