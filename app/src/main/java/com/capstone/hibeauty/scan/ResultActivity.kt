@@ -51,28 +51,12 @@ class ResultActivity : AppCompatActivity() {
             val resultsText = it.entries.joinToString("\n") { entry ->
                 "${entry.key}: ${String.format("%.2f%%", entry.value * 100)}"
             }
-            binding.categoryTextView.text = resultsText
+            binding.resultTextView?.text = resultsText
         }
     }
 
     private fun saveResultToFirestore() {
-        if (imageUri != null && results != null) {
-            val resultData = hashMapOf(
-                "imageUri" to imageUri.toString(),
-                "results" to results!!
-            )
 
-            firestore.collection("results")
-                .add(resultData)
-                .addOnSuccessListener {
-                    showToast("Result saved successfully")
-                }
-                .addOnFailureListener { e ->
-                    showToast("Error saving result: ${e.message}")
-                }
-        } else {
-            showToast("Incomplete data, cannot save result")
-        }
     }
 
     private fun showToast(message: String) {

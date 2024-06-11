@@ -4,63 +4,67 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="default_web_client_id">956616711391-9e0khru3t57olff8nabqstd2c39eplqh.apps.googleusercontent.com</string>
-    <string name="profile">Profile</string>
+    <string name="profile">User Profile</string>
 
     <string name="probability_format">Probability: %.2f%%</string>
 
     <!--    Profile-->
     <string name="privacy_policy_content">
-    <![CDATA[
-    Kebijakan Privasi
+        <![CDATA[
+        <h1>Kebijakan Privasi</h1>
 
-    Terakhir diperbarui: 28 Mei 2024
+        <p>Terakhir diperbarui: 28 Mei 2024</p>
 
-    1. Pengantar
-    Selamat datang di Hi Beauty. Privasi Anda sangat penting bagi kami. Kebijakan privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda saat Anda menggunakan aplikasi kami.
+        <h2>1. Pengantar</h2>
+        <p>Selamat datang di Hi Beauty. Privasi Anda sangat penting bagi kami. Kebijakan privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda saat Anda menggunakan aplikasi kami.</p>
 
-    2. Informasi yang Kami Kumpulkan
-    Kami mengumpulkan beberapa jenis informasi untuk menyediakan dan meningkatkan layanan kami kepada Anda, termasuk:
+        <h2>2. Informasi yang Kami Kumpulkan</h2>
+        <p>Kami mengumpulkan beberapa jenis informasi untuk menyediakan dan meningkatkan layanan kami kepada Anda, termasuk:</p>
+        <ul>
+            <li><b>Informasi Pribadi:</b> Nama, alamat email, dan informasi lainnya yang Anda berikan secara sukarela.</li>
+            <li><b>Informasi Penggunaan:</b> Data tentang bagaimana Anda berinteraksi dengan aplikasi kami, termasuk alamat IP, jenis perangkat, sistem operasi, dan aktivitas penggunaan.</li>
+            <li><b>Informasi Akses:</b> Data kamera, galery, dan lokasi geografis yang tepat jika Anda memberikan izin melalui pengaturan perangkat Anda.</li>
+        </ul>
 
-    - Informasi Pribadi: Nama, alamat email, dan informasi lainnya yang Anda berikan secara sukarela.
-    - Informasi Penggunaan: Data tentang bagaimana Anda berinteraksi dengan aplikasi kami, termasuk alamat IP, jenis perangkat, sistem operasi, dan aktivitas penggunaan.
-    - Informasi Akses: Data kamera, galery, dan lokasi geografis yang tepat jika Anda memberikan izin melalui pengaturan perangkat Anda.
+        <h2>3. Penggunaan Informasi</h2>
+        <p>Informasi yang kami kumpulkan digunakan untuk berbagai tujuan, termasuk:</p>
+        <ul>
+            <li>Menyediakan dan memelihara layanan aplikasi.</li>
+            <li>Memperbaiki dan mempersonalisasi pengalaman pengguna.</li>
+            <li>Mengelola akun Anda dan memberikan dukungan pelanggan.</li>
+            <li>Mengirimkan pembaruan, promosi, dan informasi lain yang relevan.</li>
+            <li>Menganalisis penggunaan aplikasi untuk meningkatkan layanan kami.</li>
+        </ul>
 
-    3. Penggunaan Informasi
-    Informasi yang kami kumpulkan digunakan untuk berbagai tujuan, termasuk:
+        <h2>4. Pembagian Informasi</h2>
+        <p>Kami tidak akan membagikan informasi pribadi Anda kepada pihak ketiga kecuali dalam keadaan berikut:</p>
+        <ul>
+            <li>Dengan persetujuan Anda.</li>
+            <li>Untuk mematuhi kewajiban hukum atau melindungi hak dan kepentingan kami.</li>
+            <li>Dengan penyedia layanan pihak ketiga yang membantu kami dalam menjalankan aplikasi, dengan syarat mereka menjaga kerahasiaan informasi Anda.</li>
+            <li>Dalam kaitannya dengan merger, akuisisi, atau penjualan aset, dengan ketentuan bahwa pihak ketiga tersebut sepakat untuk mematuhi kebijakan privasi ini.</li>
+        </ul>
 
-    - Menyediakan dan memelihara layanan aplikasi.
-    - Memperbaiki dan mempersonalisasi pengalaman pengguna.
-    - Mengelola akun Anda dan memberikan dukungan pelanggan.
-    - Mengirimkan pembaruan, promosi, dan informasi lain yang relevan.
-    - Menganalisis penggunaan aplikasi untuk meningkatkan layanan kami.
+        <h2>5. Keamanan Informasi</h2>
+        <p>Kami mengambil langkah-langkah keamanan yang wajar untuk melindungi informasi Anda dari akses, penggunaan, atau pengungkapan yang tidak sah. Namun, tidak ada metode transmisi data melalui internet atau metode penyimpanan elektronik yang 100% aman, sehingga kami tidak dapat menjamin keamanan absolut.</p>
 
-    4. Pembagian Informasi
-    Kami tidak akan membagikan informasi pribadi Anda kepada pihak ketiga kecuali dalam keadaan berikut:
+        <h2>6. Hak Pengguna</h2>
+        <p>Anda memiliki hak untuk:</p>
+        <ul>
+            <li>Mengakses, memperbarui, atau menghapus informasi pribadi Anda yang kami miliki.</li>
+            <li>Menarik persetujuan yang Anda berikan sebelumnya terkait penggunaan informasi pribadi Anda.</li>
+            <li>Mengajukan keluhan kepada otoritas perlindungan data terkait jika Anda merasa hak privasi Anda dilanggar.</li>
+        </ul>
 
-    - Dengan persetujuan Anda.
-    - Untuk mematuhi kewajiban hukum atau melindungi hak dan kepentingan kami.
-    - Dengan penyedia layanan pihak ketiga yang membantu kami dalam menjalankan aplikasi, dengan syarat mereka menjaga kerahasiaan informasi Anda.
-    - Dalam kaitannya dengan merger, akuisisi, atau penjualan aset, dengan ketentuan bahwa pihak ketiga tersebut sepakat untuk mematuhi kebijakan privasi ini.
+        <h2>7. Perubahan Kebijakan Privasi</h2>
+        <p>Kami dapat memperbarui kebijakan privasi ini dari waktu ke waktu. Setiap perubahan akan diberitahukan melalui aplikasi atau metode lain yang sesuai sebelum perubahan berlaku. Anda dianjurkan untuk meninjau kebijakan privasi ini secara berkala.</p>
 
-    5. Keamanan Informasi
-    Kami mengambil langkah-langkah keamanan yang wajar untuk melindungi informasi Anda dari akses, penggunaan, atau pengungkapan yang tidak sah. Namun, tidak ada metode transmisi data melalui internet atau metode penyimpanan elektronik yang 100% aman, sehingga kami tidak dapat menjamin keamanan absolut.
+        <h2>8. Hubungi Kami</h2>
+        <p>Jika Anda memiliki pertanyaan atau kekhawatiran tentang kebijakan privasi ini, jangan ragu untuk menghubungi kami di:</p>
+        <p>Email: <a href="mailto:redy.wijaya24@gmail.com">redy.wijaya24@gmail.com</a></p>
+        ]]>
+    </string>
 
-    6. Hak Pengguna
-    Anda memiliki hak untuk:
-
-    - Mengakses, memperbarui, atau menghapus informasi pribadi Anda yang kami miliki.
-    - Menarik persetujuan yang Anda berikan sebelumnya terkait penggunaan informasi pribadi Anda.
-    - Mengajukan keluhan kepada otoritas perlindungan data terkait jika Anda merasa hak privasi Anda dilanggar.
-
-    7. Perubahan Kebijakan Privasi
-    Kami dapat memperbarui kebijakan privasi ini dari waktu ke waktu. Setiap perubahan akan diberitahukan melalui aplikasi atau metode lain yang sesuai sebelum perubahan berlaku. Anda dianjurkan untuk meninjau kebijakan privasi ini secara berkala.
-
-    8. Hubungi Kami
-    Jika Anda memiliki pertanyaan atau kekhawatiran tentang kebijakan privasi ini, jangan ragu untuk menghubungi kami di:
-
-    [Informasi Kontak]
-    Email: redy.wijaya24@gmail.com
-    ]]></string>
     <string name="close">Close</string>
     <string name="open_browser">Open in Browser</string>
     <string name="sample_image" translatable="false">Sample Image</string>

@@ -11,27 +11,21 @@
         android:layout_height="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/placeholder_image"/>
 
     <TextView
-        android:id="@+id/textViewCategory"
+        android:id="@+id/textViewResult"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textAppearance="?attr/textAppearanceListItem"
         android:theme="@style/Theme.AppCompat.Light"
         app:layout_constraintEnd_toStartOf="@id/buttonDelete"
         app:layout_constraintStart_toEndOf="@id/imageViewHistory"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewProbability"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?attr/textAppearanceCaption"
-        android:theme="@style/Theme.AppCompat.Light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/buttonDelete"
-        app:layout_constraintStart_toEndOf="@id/imageViewHistory" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Acne %, Oily %, Eye Bags %"
+        android:minLines="3"
+        android:maxLines="3"/>
 
     <Button
         android:id="@+id/buttonDelete"
