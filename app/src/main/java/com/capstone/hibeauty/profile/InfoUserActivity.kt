@@ -28,6 +28,9 @@ class InfoUserActivity : AppCompatActivity() {
         binding.btnEdit.setOnClickListener {
             showEditDialog()
         }
+        binding.closeButton.setOnClickListener {
+            finish()
+        }
     }
 
     private fun loadUserData() {

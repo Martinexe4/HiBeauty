@@ -24,8 +24,7 @@ class HistoryAdapter(
 
     class HistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.imageViewHistory)
-        val categoryTextView: TextView = itemView.findViewById(R.id.textViewCategory)
-        val probabilityTextView: TextView = itemView.findViewById(R.id.textViewProbability)
+        val textViewResult: TextView = itemView.findViewById(R.id.textViewResult)
         val deleteButton: Button = itemView.findViewById(R.id.buttonDelete)
     }
 
@@ -40,9 +39,6 @@ class HistoryAdapter(
         Glide.with(holder.imageView.context)
             .load(historyItem.imageUri)
             .into(holder.imageView)
-        holder.categoryTextView.text = historyItem.category
-        holder.probabilityTextView.text =
-            holder.itemView.context.getString(R.string.probability_format, historyItem.probability)
 
         holder.deleteButton.setOnClickListener {
             onDeleteClick(historyItem.id)

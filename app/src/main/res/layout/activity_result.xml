@@ -22,10 +22,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:fontFamily="@font/poppins_bold"
         android:text="@string/scan_result"
         android:textColor="@color/colorGrayDark"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:theme="@style/Theme.AppCompat.Light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,22 +41,22 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        app:strokeWidth="2dp"
-        app:cardCornerRadius="8dp"
-        app:strokeColor="@color/colorPrimarySoft"
         android:orientation="vertical"
+        app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_title">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_title"
+        app:strokeColor="@color/colorPrimarySoft"
+        app:strokeWidth="2dp">
 
         <!-- ImageView untuk gambar di atas judul -->
         <ImageView
             android:id="@+id/resultImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
             android:layout_gravity="center"
             android:contentDescription="Gambar Kotak Pertama"
+            android:scaleType="centerCrop"
             tools:src="@drawable/placeholder_image" />
     </com.google.android.material.card.MaterialCardView>
 

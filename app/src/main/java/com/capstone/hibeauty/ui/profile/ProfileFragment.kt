@@ -24,6 +24,7 @@ import com.capstone.hibeauty.profile.HistoryActivity
 import com.capstone.hibeauty.profile.InfoUserActivity
 import com.capstone.hibeauty.profile.LanguageActivity
 import com.capstone.hibeauty.profile.PolicyActivity
+import com.google.firebase.auth.FirebaseUser
 
 class ProfileFragment : Fragment() {
     var binding: FragmentProfileBinding? = null // Hapus underscore dan kata kunci private agar dapat diakses dari luar kelas
@@ -31,6 +32,7 @@ class ProfileFragment : Fragment() {
     private val PICK_IMAGE_REQUEST = 1
 
     private val firebaseAuth = FirebaseAuth.getInstance()
+    private var currentUser: FirebaseUser? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,9 +47,9 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         sharedPreferences = requireContext().getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
+        currentUser = firebaseAuth.currentUser
 
         loadUserProfile()
-        loadUserData()
 
         binding?.iconEditPhoto?.setOnClickListener {
             choosePhoto()
@@ -123,15 +125,15 @@ class ProfileFragment : Fragment() {
                 .circleCrop()
                 .into(binding?.imgProfile!!)
         }
-//        val displayName = sharedPreferences.getString("name", "")
-//        Log.d("ProfileFragment", "Nama dari SharedPreferences: $displayName")
-//        binding?.txtDisplayName?.text = displayName
+        currentUser?.let { user ->
+            val displayName = user.displayName ?: "User"
+            binding?.txtDisplayName?.text = displayName
+        }
     }
 
     private fun loadUserData() {
         val name = sharedPreferences.getString("name", "")
         binding?.txtDisplayName?.text = "$name"
-
     }
 
     private fun showLogoutConfirmationDialog() {

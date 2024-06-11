@@ -15,6 +15,7 @@
         android:contentDescription="Close"
         android:padding="16dp"
         android:src="@android:drawable/ic_menu_close_clear_cancel"
+        android:theme="@style/Theme.AppCompat.Light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,6 +42,7 @@
         android:orientation="horizontal"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
+        android:theme="@style/Theme.AppCompat.Light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_title">
@@ -70,6 +72,7 @@
         android:orientation="horizontal"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
+        android:theme="@style/Theme.AppCompat.Light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll1">
@@ -99,6 +102,7 @@
         android:orientation="horizontal"
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
+        android:theme="@style/Theme.AppCompat.Light"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll2">
@@ -123,9 +127,9 @@
         android:id="@+id/btn_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="Edit"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ll3"
-        android:layout_marginTop="32dp"/>
+        app:layout_constraintTop_toBottomOf="@+id/ll3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

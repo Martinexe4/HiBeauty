@@ -11,57 +11,58 @@
     <!--    Profile-->
     <string name="privacy_policy_content">
         <![CDATA[
-        <h1>Kebijakan Privasi</h1>
+        <h1>Privacy Policy</h1>
 
-        <p>Terakhir diperbarui: 28 Mei 2024</p>
+        <p>Last updated: May 28, 2024</p>
 
-        <h2>1. Pengantar</h2>
-        <p>Selamat datang di Hi Beauty. Privasi Anda sangat penting bagi kami. Kebijakan privasi ini menjelaskan bagaimana kami mengumpulkan, menggunakan, dan melindungi informasi pribadi Anda saat Anda menggunakan aplikasi kami.</p>
+        <h2>1. Introduction</h2>
+        <p>Welcome to Hi Beauty. Your privacy is very important to us. This privacy policy explains how we collect, use, and protect your personal information when you use our application.</p>
 
-        <h2>2. Informasi yang Kami Kumpulkan</h2>
-        <p>Kami mengumpulkan beberapa jenis informasi untuk menyediakan dan meningkatkan layanan kami kepada Anda, termasuk:</p>
+        <h2>2. Information We Collect</h2>
+        <p>We collect various types of information to provide and improve our services to you, including:</p>
         <ul>
-            <li><b>Informasi Pribadi:</b> Nama, alamat email, dan informasi lainnya yang Anda berikan secara sukarela.</li>
-            <li><b>Informasi Penggunaan:</b> Data tentang bagaimana Anda berinteraksi dengan aplikasi kami, termasuk alamat IP, jenis perangkat, sistem operasi, dan aktivitas penggunaan.</li>
-            <li><b>Informasi Akses:</b> Data kamera, galery, dan lokasi geografis yang tepat jika Anda memberikan izin melalui pengaturan perangkat Anda.</li>
+            <li><b>Personal Information:</b> Name, email address, and other information you provide voluntarily.</li>
+            <li><b>Usage Information:</b> Data on how you interact with our application, including IP address, device type, operating system, and usage activity.</li>
+            <li><b>Access Information:</b> Camera data, gallery, and precise geographic location if you grant permission through your device settings.</li>
         </ul>
 
-        <h2>3. Penggunaan Informasi</h2>
-        <p>Informasi yang kami kumpulkan digunakan untuk berbagai tujuan, termasuk:</p>
+        <h2>3. Use of Information</h2>
+        <p>The information we collect is used for various purposes, including:</p>
         <ul>
-            <li>Menyediakan dan memelihara layanan aplikasi.</li>
-            <li>Memperbaiki dan mempersonalisasi pengalaman pengguna.</li>
-            <li>Mengelola akun Anda dan memberikan dukungan pelanggan.</li>
-            <li>Mengirimkan pembaruan, promosi, dan informasi lain yang relevan.</li>
-            <li>Menganalisis penggunaan aplikasi untuk meningkatkan layanan kami.</li>
+            <li>Providing and maintaining the application services.</li>
+            <li>Improving and personalizing the user experience.</li>
+            <li>Managing your account and providing customer support.</li>
+            <li>Sending updates, promotions, and other relevant information.</li>
+            <li>Analyzing application usage to enhance our services.</li>
         </ul>
 
-        <h2>4. Pembagian Informasi</h2>
-        <p>Kami tidak akan membagikan informasi pribadi Anda kepada pihak ketiga kecuali dalam keadaan berikut:</p>
+        <h2>4. Sharing Information</h2>
+        <p>We will not share your personal information with third parties except in the following circumstances:</p>
         <ul>
-            <li>Dengan persetujuan Anda.</li>
-            <li>Untuk mematuhi kewajiban hukum atau melindungi hak dan kepentingan kami.</li>
-            <li>Dengan penyedia layanan pihak ketiga yang membantu kami dalam menjalankan aplikasi, dengan syarat mereka menjaga kerahasiaan informasi Anda.</li>
-            <li>Dalam kaitannya dengan merger, akuisisi, atau penjualan aset, dengan ketentuan bahwa pihak ketiga tersebut sepakat untuk mematuhi kebijakan privasi ini.</li>
+            <li>With your consent.</li>
+            <li>To comply with legal obligations or protect our rights and interests.</li>
+            <li>With third-party service providers who assist us in operating the application, provided they maintain the confidentiality of your information.</li>
+            <li>In connection with mergers, acquisitions, or sales of assets, provided that the third parties agree to adhere to this privacy policy.</li>
         </ul>
 
-        <h2>5. Keamanan Informasi</h2>
-        <p>Kami mengambil langkah-langkah keamanan yang wajar untuk melindungi informasi Anda dari akses, penggunaan, atau pengungkapan yang tidak sah. Namun, tidak ada metode transmisi data melalui internet atau metode penyimpanan elektronik yang 100% aman, sehingga kami tidak dapat menjamin keamanan absolut.</p>
+        <h2>5. Information Security</h2>
+        <p>We take reasonable security measures to protect your information from unauthorized access, use, or disclosure. However, no method of data transmission over the internet or electronic storage is 100% secure, so we cannot guarantee absolute security.</p>
 
-        <h2>6. Hak Pengguna</h2>
-        <p>Anda memiliki hak untuk:</p>
+        <h2>6. User Rights</h2>
+        <p>You have the right to:</p>
         <ul>
-            <li>Mengakses, memperbarui, atau menghapus informasi pribadi Anda yang kami miliki.</li>
-            <li>Menarik persetujuan yang Anda berikan sebelumnya terkait penggunaan informasi pribadi Anda.</li>
-            <li>Mengajukan keluhan kepada otoritas perlindungan data terkait jika Anda merasa hak privasi Anda dilanggar.</li>
+            <li>Access, update, or delete your personal information that we hold.</li>
+            <li>Withdraw consent you have previously given regarding the use of your personal information.</li>
+            <li>File a complaint with the relevant data protection authority if you believe your privacy rights have been violated.</li>
         </ul>
 
-        <h2>7. Perubahan Kebijakan Privasi</h2>
-        <p>Kami dapat memperbarui kebijakan privasi ini dari waktu ke waktu. Setiap perubahan akan diberitahukan melalui aplikasi atau metode lain yang sesuai sebelum perubahan berlaku. Anda dianjurkan untuk meninjau kebijakan privasi ini secara berkala.</p>
+        <h2>7. Changes to the Privacy Policy</h2>
+        <p>We may update this privacy policy from time to time. Any changes will be notified through the application or other appropriate means before they take effect. You are encouraged to review this privacy policy periodically.</p>
 
-        <h2>8. Hubungi Kami</h2>
-        <p>Jika Anda memiliki pertanyaan atau kekhawatiran tentang kebijakan privasi ini, jangan ragu untuk menghubungi kami di:</p>
+        <h2>8. Contact Us</h2>
+        <p>If you have any questions or concerns about this privacy policy, please feel free to contact us at:</p>
         <p>Email: <a href="mailto:redy.wijaya24@gmail.com">redy.wijaya24@gmail.com</a></p>
+        <p>Email: <a href="mailto:farhannn58@gmail.com">farhannn58@gmail.com</a></p>
         ]]>
     </string>
 

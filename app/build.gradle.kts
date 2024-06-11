@@ -115,6 +115,4 @@ dependencies {
 
     //error camera activity
     implementation(libs.guava)
-
-
 }
