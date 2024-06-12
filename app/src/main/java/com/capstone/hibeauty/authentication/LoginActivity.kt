@@ -1,9 +1,11 @@
 package com.capstone.hibeauty.authentication
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.capstone.hibeauty.MainActivity
 import com.capstone.hibeauty.databinding.ActivityLoginBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -22,6 +24,12 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.loginEmail.text.toString()
             val password = binding.loginPassword.text.toString()
 
+            // Validate input fields before sending the request
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Email and Password are required", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             showLoading(true)
 
             val loginRequest = LoginRequest(email, password)
@@ -30,6 +38,10 @@ class LoginActivity : AppCompatActivity() {
                     showLoading(false)
                     if (response.isSuccessful) {
                         Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
+                        // Start MainActivity
+                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                        startActivity(intent)
+                        finish() // Finish the current activity to remove it from the back stack
                     } else {
                         Toast.makeText(this@LoginActivity, "Login failed: ${response.message()}", Toast.LENGTH_SHORT).show()
                     }
@@ -41,6 +53,12 @@ class LoginActivity : AppCompatActivity() {
                 }
             })
         }
+
+
+        binding.registerButton.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
+        }
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -50,3 +68,7 @@ class LoginActivity : AppCompatActivity() {
         binding.loginPassword.isEnabled = !isLoading
     }
 }
+
+
+
+
