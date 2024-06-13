@@ -25,46 +25,43 @@ class RegisterActivity : AppCompatActivity() {
             val password = binding.registerPassword.text.toString()
             val confirmPassword = binding.registerPasswordConfirm.text.toString()
 
-            // Validate input fields before sending the request
-            if (username.isEmpty() || email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty()) {
-                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            if (password != confirmPassword) {
+            if (password == confirmPassword) {
+                registerUser(username, email, password)
+            } else {
                 Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
             }
-
-            showLoading(true)
-
-            val registerRequest = RegisterRequest(username, email, password, confirmPassword)
-            RetrofitInstance.api.register(registerRequest).enqueue(object : Callback<ApiResponse> {
-                override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
-                    showLoading(false)
-                    if (response.isSuccessful) {
-                        Toast.makeText(this@RegisterActivity, "Register successful", Toast.LENGTH_SHORT).show()
-                        // Start LoginActivity
-                        val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
-                        startActivity(intent)
-                        finish() // Finish the current activity to remove it from the back stack
-                    } else {
-                        Toast.makeText(this@RegisterActivity, "Register failed: ${response.message()}", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
-                    showLoading(false)
-                    Toast.makeText(this@RegisterActivity, "Register failed: ${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
         }
-
 
         binding.loginButton.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
+    }
+
+    private fun registerUser(username: String, email: String, password: String) {
+        val request = RegisterRequest(username, email, password, password)
+        val call = ApiConfig.apiService.registerUser(request)
+
+        showLoading(true)
+
+        call.enqueue(object : Callback<RegisterResponse> {
+            override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
+                showLoading(false)
+                if (response.isSuccessful) {
+                    Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this@RegisterActivity, "Registration failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                showLoading(false)
+                Toast.makeText(this@RegisterActivity, "Registration failed", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun showLoading(isLoading: Boolean) {

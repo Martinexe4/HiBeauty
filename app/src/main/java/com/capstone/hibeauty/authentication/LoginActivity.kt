@@ -24,41 +24,39 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.loginEmail.text.toString()
             val password = binding.loginPassword.text.toString()
 
-            // Validate input fields before sending the request
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Email and Password are required", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            showLoading(true)
-
-            val loginRequest = LoginRequest(email, password)
-            RetrofitInstance.api.login(loginRequest).enqueue(object : Callback<ApiResponse> {
-                override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
-                    showLoading(false)
-                    if (response.isSuccessful) {
-                        Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
-                        // Start MainActivity
-                        val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                        startActivity(intent)
-                        finish() // Finish the current activity to remove it from the back stack
-                    } else {
-                        Toast.makeText(this@LoginActivity, "Login failed: ${response.message()}", Toast.LENGTH_SHORT).show()
-                    }
-                }
-
-                override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
-                    showLoading(false)
-                    Toast.makeText(this@LoginActivity, "Login failed: ${t.message}", Toast.LENGTH_SHORT).show()
-                }
-            })
+            loginUser(email, password)
         }
-
 
         binding.registerButton.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
             finish()
         }
+    }
+
+    private fun loginUser(email: String, password: String) {
+        val request = LoginRequest(email, password)
+        val call = ApiConfig.apiService.loginUser(request)
+
+        showLoading(true)
+
+        call.enqueue(object : Callback<LoginResponse> {
+            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
+                showLoading(false)
+                if (response.isSuccessful) {
+                    Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
+                showLoading(false)
+                Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -68,7 +66,3 @@ class LoginActivity : AppCompatActivity() {
         binding.loginPassword.isEnabled = !isLoading
     }
 }
-
-
-
-
