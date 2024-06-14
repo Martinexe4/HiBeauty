@@ -36,7 +36,7 @@
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_marginTop="16dp"
-                        android:src="@drawable/logo_no_background"
+                        android:src="@drawable/app_logo_transparent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />

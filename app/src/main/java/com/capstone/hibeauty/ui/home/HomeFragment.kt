@@ -1,5 +1,7 @@
 package com.capstone.hibeauty.ui.home
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -7,8 +9,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.viewpager2.widget.ViewPager2
+import com.capstone.hibeauty.MainActivity
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.adapter.SlideInfoAdapter
 import com.capstone.hibeauty.databinding.FragmentHomeBinding
@@ -28,6 +35,15 @@ class HomeFragment : Fragment() {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private var currentUser: FirebaseUser? = null
 
+    private val cameraPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                Navigation.findNavController(requireView()).navigate(R.id.action_homeFragment_to_cameraActivity)
+            } else {
+                Toast.makeText(MainActivity(), getString(R.string.required_camera), Toast.LENGTH_SHORT).show()
+            }
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,8 +62,8 @@ class HomeFragment : Fragment() {
         binding.btnReadNow1.setOnClickListener { view ->
             view.findNavController().navigate(R.id.action_homeFragment_to_productFragment)
         }
-        binding.btnReadNow2.setOnClickListener { view ->
-            view.findNavController().navigate(R.id.action_homeFragment_to_cameraActivity)
+        binding.btnReadNow2.setOnClickListener {
+            checkCameraPermission()
         }
 
         val slides = listOf(
@@ -87,6 +103,22 @@ class HomeFragment : Fragment() {
             }
         }
         handler.postDelayed(runnable, 5000)
+    }
+
+    private fun checkCameraPermission() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                Navigation.findNavController(requireView())
+                    .navigate(R.id.action_homeFragment_to_cameraActivity)
+            }
+
+            else -> {
+                cameraPermission.launch(Manifest.permission.CAMERA)
+            }
+        }
     }
 
     private fun loadUserName() {

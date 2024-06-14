@@ -18,6 +18,8 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
+
+        supportActionBar?.hide()
         setContentView(binding.root)
 
         binding.loginSubmit.setOnClickListener {
@@ -29,7 +31,6 @@ class LoginActivity : AppCompatActivity() {
 
         binding.registerButton.setOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
-            finish()
         }
     }
 
