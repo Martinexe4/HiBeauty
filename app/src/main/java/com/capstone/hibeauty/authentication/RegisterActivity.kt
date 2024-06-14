@@ -5,86 +5,71 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.userProfileChangeRequest
-import com.capstone.hibeauty.MainActivity
 import com.capstone.hibeauty.databinding.ActivityRegisterBinding
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RegisterActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityRegisterBinding
-    private val firebaseAuth = FirebaseAuth.getInstance()
 
-    override fun onStart() {
-        super.onStart()
-        if (firebaseAuth.currentUser != null) {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()  // Mengakhiri RegisterActivity jika pengguna sudah login
-        }
-    }
+    private lateinit var binding: ActivityRegisterBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
-
-        // Event handler untuk tombol Login
-        binding.loginButton.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-            finish()  // Mengakhiri RegisterActivity
-        }
-
-        // Event handler untuk tombol Register
         binding.registerSubmit.setOnClickListener {
-            val name = binding.registerName.text.toString()
+            val username = binding.registerName.text.toString()
             val email = binding.registerEmail.text.toString()
             val password = binding.registerPassword.text.toString()
-            val passwordConfirm = binding.registerPasswordConfirm.text.toString()
+            val confirmPassword = binding.registerPasswordConfirm.text.toString()
 
-            if (name.isNotEmpty() && email.isNotEmpty() && password.isNotEmpty()) {
-                if (password == passwordConfirm) {
-                    showLoading(true)  // Indikator loading
-                    registerProcess(name, email, password)  // Memulai proses registrasi
-                } else {
-                    Toast.makeText(this, "Passwords don't match", Toast.LENGTH_SHORT).show()
-                }
+            if (password == confirmPassword) {
+                registerUser(username, email, password)
             } else {
-                Toast.makeText(this, "Registration data cannot be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
             }
+        }
+
+        binding.loginButton.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 
-    private fun registerProcess(name: String, email: String, password: String) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
+    private fun registerUser(username: String, email: String, password: String) {
+        val request = RegisterRequest(username, email, password, password)
+        val call = ApiConfig.apiService.registerUser(request)
+
+        showLoading(true)
+
+        call.enqueue(object : Callback<RegisterResponse> {
+            override fun onResponse(call: Call<RegisterResponse>, response: Response<RegisterResponse>) {
                 showLoading(false)
-                if (task.isSuccessful) {
-                    val userUpdateProfile = userProfileChangeRequest {
-                        displayName = name
-                    }
-                    val user = task.result?.user
-                    user!!.updateProfile(userUpdateProfile)
-                        .addOnCompleteListener {
-                            Toast.makeText(this, "Registration successful", Toast.LENGTH_SHORT).show()
-                            startActivity(Intent(this, LoginActivity::class.java))  // Navigasi ke LoginActivity
-                            finish()  // Mengakhiri RegisterActivity
-                        }
-                        .addOnFailureListener { error ->
-                            Toast.makeText(this, error.localizedMessage, Toast.LENGTH_SHORT).show()
-                        }
+                if (response.isSuccessful) {
+                    Toast.makeText(this@RegisterActivity, "Registration successful", Toast.LENGTH_SHORT).show()
+                    val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
+                    startActivity(intent)
+                    finish()
                 } else {
-                    val errorMessage = task.exception?.localizedMessage ?: "Registration failed"
-                    Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@RegisterActivity, "Registration failed", Toast.LENGTH_SHORT).show()
                 }
             }
-            .addOnFailureListener { error ->
+
+            override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                 showLoading(false)
-                Toast.makeText(this, error.localizedMessage, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RegisterActivity, "Registration failed", Toast.LENGTH_SHORT).show()
             }
+        })
     }
 
     private fun showLoading(isLoading: Boolean) {
         binding.registerProgressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+        binding.registerSubmit.isEnabled = !isLoading
+        binding.registerName.isEnabled = !isLoading
+        binding.registerEmail.isEnabled = !isLoading
+        binding.registerPassword.isEnabled = !isLoading
+        binding.registerPasswordConfirm.isEnabled = !isLoading
     }
 }
