@@ -122,10 +122,7 @@ class ProfileFragment : Fragment() {
                                 // Load image using Picasso if PROFILEIMG is not null
                                 Picasso.get().load(it.PROFILEIMG).into(binding?.imgProfile)
                             } else {
-                                // Handle case where PROFILEIMG is null (e.g., show a placeholder image)
-                                // Example:
-                                // Picasso.get().load(R.drawable.placeholder_image).into(binding?.imgProfile)
-                                // or
+
                                  binding?.imgProfile?.setImageResource(R.drawable.placeholder_image)
                             }
                         }
