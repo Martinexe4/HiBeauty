@@ -62,7 +62,11 @@ class ArticleAdapter(private var articles: List<ArticlesItem?>) :
             description.text = article?.description
             publishedAt.text = article?.publishedAt
             article?.urlToImage?.let {
-                Glide.with(itemView.context).load(it).into(image)
+                Glide.with(itemView.context)
+                    .load(it)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .error(R.mipmap.ic_launcher)
+                    .into(image)
             }
         }
     }

@@ -15,6 +15,8 @@ class ProductDetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityProductDetailBinding.inflate(layoutInflater)
+
+        supportActionBar?.hide()
         setContentView(binding.root)
 
         val product = intent.getParcelableExtra<Product>("product")

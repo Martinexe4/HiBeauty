@@ -12,7 +12,6 @@ import com.capstone.hibeauty.adapter.HorizontalProductAdapter
 import com.capstone.hibeauty.authentication.ApiConfig
 import android.widget.Toast
 import com.capstone.hibeauty.adapter.VerticalProductAdapter
-import com.capstone.hibeauty.authentication.Product
 import com.capstone.hibeauty.authentication.ProductResponse
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import retrofit2.Call
@@ -39,7 +38,8 @@ class ProductFragment : Fragment() {
         verticalAdapter = VerticalProductAdapter(emptyList())
 
         // Set up horizontal RecyclerView
-        horizontalRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        horizontalRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         horizontalRecyclerView.adapter = horizontalAdapter
 
         // Set up vertical RecyclerView
@@ -60,7 +60,10 @@ class ProductFragment : Fragment() {
             val call = apiService.getAllProducts("Bearer $token")
 
             call.enqueue(object : Callback<ProductResponse> {
-                override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
+                override fun onResponse(
+                    call: Call<ProductResponse>,
+                    response: Response<ProductResponse>
+                ) {
                     if (response.isSuccessful) {
                         val productResponse = response.body()
 
