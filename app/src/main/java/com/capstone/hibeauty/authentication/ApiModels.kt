@@ -55,19 +55,10 @@ data class ProductType(
 ) : Parcelable
 
 data class ProductResponse(
-    val products: List<Product>
+    val status: Boolean,
+    val message: String,
+    val data: List<Product>
 )
-
-//data class User(
-//    val USERID: String,
-//    val USERNAME: String,
-//    val EMAIL: String,
-//    val PASSWORD: String,
-//    val PROFILEIMG: String,
-//    val CREATEDAT: Timestamp,
-//    val UPDATEDAT: Timestamp,
-//    val skinId: String
-//)
 
 data class ApiResponse(
     val status: Boolean,

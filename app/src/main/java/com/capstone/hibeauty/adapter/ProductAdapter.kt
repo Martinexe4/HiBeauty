@@ -34,9 +34,10 @@ class HorizontalProductAdapter(private var productList: List<Product>) : Recycle
     inner class ViewHolder(private val binding: ItemProductHorizontalBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             binding.productName.text = product.name
-            Glide.with(binding.productImage.context)
-                .load(product.link)
-                .into(binding.productImage)
+            binding.productType.text = product.description
+//            Glide.with(binding.productImage.context)
+//                .load(product.link)
+//                .into(binding.productImage)
 
             itemView.setOnClickListener {
                 val context = itemView.context
@@ -71,9 +72,10 @@ class VerticalProductAdapter(private var productList: List<Product>) : RecyclerV
     inner class ViewHolder(private val binding: ItemProductVerticalBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             binding.productName.text = product.name
-            Glide.with(binding.productImage.context)
-                .load(product.link)
-                .into(binding.productImage)
+            binding.productType.text = product.description
+//            Glide.with(binding.productImage.context)
+//                .load(product.link)
+//                .into(binding.productImage)
 
             itemView.setOnClickListener {
                 val context = itemView.context

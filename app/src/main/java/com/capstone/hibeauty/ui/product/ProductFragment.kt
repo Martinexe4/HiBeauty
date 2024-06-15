@@ -13,6 +13,7 @@ import com.capstone.hibeauty.authentication.ApiConfig
 import android.widget.Toast
 import com.capstone.hibeauty.adapter.VerticalProductAdapter
 import com.capstone.hibeauty.authentication.Product
+import com.capstone.hibeauty.authentication.ProductResponse
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import retrofit2.Call
 import retrofit2.Callback
@@ -58,20 +59,25 @@ class ProductFragment : Fragment() {
         if (token != null) {
             val call = apiService.getAllProducts("Bearer $token")
 
-            call.enqueue(object : Callback<List<Product>> {
-                override fun onResponse(call: Call<List<Product>>, response: Response<List<Product>>) {
+            call.enqueue(object : Callback<ProductResponse> {
+                override fun onResponse(call: Call<ProductResponse>, response: Response<ProductResponse>) {
                     if (response.isSuccessful) {
-                        val products = response.body()
-                        products?.let {
-                            horizontalAdapter.updateData(it.take(5)) // Take first 3 products for horizontal RecyclerView
-                            verticalAdapter.updateData(it.drop(5))  // Drop first 3 products for vertical RecyclerView
+                        val productResponse = response.body()
+
+                        if (productResponse != null) {
+                            val products = productResponse.data
+
+                            horizontalAdapter.updateData(products.take(5)) // Take first 5 products for horizontal RecyclerView
+                            verticalAdapter.updateData(products.drop(5))  // Drop first 5 products for vertical RecyclerView
+                        } else {
+                            showToast("Failed to fetch products: Response body is null")
                         }
                     } else {
                         showToast("Failed to fetch products: ${response.code()}")
                     }
                 }
 
-                override fun onFailure(call: Call<List<Product>>, t: Throwable) {
+                override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
                     showToast("Failed to fetch products: ${t.message}")
                 }
             })

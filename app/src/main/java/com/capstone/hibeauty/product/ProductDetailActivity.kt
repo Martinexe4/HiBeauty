@@ -1,5 +1,7 @@
 package com.capstone.hibeauty.product
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.hibeauty.adapter.ImageSliderAdapter
@@ -21,7 +23,7 @@ class ProductDetailActivity : AppCompatActivity() {
             with(binding) {
                 productTitle.text = it.name
                 productDescription.text = it.description
-                // Set other views with product details
+                productIngredients.text = it.ingridients
             }
         }
 
@@ -30,7 +32,10 @@ class ProductDetailActivity : AppCompatActivity() {
         }
 
         binding.goToShopButton.setOnClickListener {
-            // Add logic to handle "Go to Shop" action
+            product?.let {
+                val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it.link))
+                startActivity(browserIntent)
+            }
         }
     }
 }
