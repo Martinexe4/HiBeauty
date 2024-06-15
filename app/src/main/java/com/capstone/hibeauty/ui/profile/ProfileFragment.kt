@@ -119,7 +119,6 @@ class ProfileFragment : Fragment() {
                             binding?.txtDisplayName?.text = it.USERNAME
 
                             if (it.PROFILEIMG != null) {
-                                // Load image using Picasso if PROFILEIMG is not null
                                 Picasso.get().load(it.PROFILEIMG).into(binding?.imgProfile)
                             } else {
 
