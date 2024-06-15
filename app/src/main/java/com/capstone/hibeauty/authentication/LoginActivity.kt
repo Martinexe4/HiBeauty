@@ -1,5 +1,6 @@
 package com.capstone.hibeauty.authentication
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.hibeauty.MainActivity
 import com.capstone.hibeauty.databinding.ActivityLoginBinding
+import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -14,6 +16,7 @@ import retrofit2.Response
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityLoginBinding
+    private val sharedPref by lazy { getSharedPreferences("HiBeautyPrefs", Context.MODE_PRIVATE) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +24,12 @@ class LoginActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
         setContentView(binding.root)
+
+        // Check if user is already logged in
+        if (isUserLoggedIn()) {
+            navigateToMainActivity()
+            finish()
+        }
 
         binding.loginSubmit.setOnClickListener {
             val email = binding.loginEmail.text.toString()
@@ -44,10 +53,16 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 showLoading(false)
                 if (response.isSuccessful) {
-                    Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                    startActivity(intent)
-                    finish()
+                    val token = response.body()?.token // Ambil token dari response body
+                    if (!token.isNullOrEmpty()) {
+                        saveToken(token) // Simpan token ke Shared Preferences
+                        Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
+                        saveLoginStatus(true)
+                        navigateToMainActivity()
+                        finish()
+                    } else {
+                        Toast.makeText(this@LoginActivity, "Token is empty or null", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
                 }
@@ -58,6 +73,32 @@ class LoginActivity : AppCompatActivity() {
                 Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun saveToken(token: String) {
+        // Simpan token menggunakan SharedPreferenceUtil
+        SharedPreferenceUtil.saveToken(this, token)
+    }
+
+    private fun getToken(): String? {
+        // Ambil token menggunakan SharedPreferenceUtil
+        return SharedPreferenceUtil.getToken(this)
+    }
+
+    private fun saveLoginStatus(isLoggedIn: Boolean) {
+        with(sharedPref.edit()) {
+            putBoolean("IS_LOGGED_IN", isLoggedIn)
+            apply()
+        }
+    }
+
+    private fun isUserLoggedIn(): Boolean {
+        return sharedPref.getBoolean("IS_LOGGED_IN", false)
+    }
+
+    private fun navigateToMainActivity() {
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     private fun showLoading(isLoading: Boolean) {

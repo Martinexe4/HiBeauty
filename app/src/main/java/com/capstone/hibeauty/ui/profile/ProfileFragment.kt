@@ -24,6 +24,7 @@ import com.capstone.hibeauty.profile.HistoryActivity
 import com.capstone.hibeauty.profile.InfoUserActivity
 import com.capstone.hibeauty.profile.LanguageActivity
 import com.capstone.hibeauty.profile.PolicyActivity
+import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import com.google.firebase.auth.FirebaseUser
 
 class ProfileFragment : Fragment() {
@@ -136,14 +137,20 @@ class ProfileFragment : Fragment() {
         binding?.txtDisplayName?.text = "$name"
     }
 
+
     private fun showLogoutConfirmationDialog() {
-        AlertDialog.Builder(requireContext())
+        AlertDialog.Builder(requireActivity())
             .setTitle("Logout")
             .setMessage("Are you sure you want to logout?")
             .setPositiveButton("Yes") { dialog, which ->
-                firebaseAuth.signOut()
-                startActivity(Intent(activity, LoginActivity::class.java))
-                activity?.finish()
+                // Menghapus status login dari SharedPreference
+                SharedPreferenceUtil.saveLoginStatus(requireActivity(), false)
+
+                // Navigasi ke LoginActivity dan menutup semua activity sebelumnya
+                val intent = Intent(requireActivity(), LoginActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                requireActivity().finish()
             }
             .setNegativeButton("No", null)
             .show()

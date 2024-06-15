@@ -1,57 +1,35 @@
 package com.capstone.hibeauty.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.capstone.hibeauty.R
+import com.capstone.hibeauty.authentication.HistoryItem
+import com.capstone.hibeauty.databinding.ItemHistoryBinding
 
-data class HistoryItem(
-    val id: String,
-    val imageUri: String,
-    val category: String,
-    val probability: Float
-)
+class HistoryAdapter(private var items: List<HistoryItem>) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
 
-class HistoryAdapter(
-    private val historyList: MutableList<HistoryItem>,
-    private val onDeleteClick: (String) -> Unit
-) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
-
-    class HistoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.imageViewHistory)
-        val textViewResult: TextView = itemView.findViewById(R.id.textViewResult)
-        val deleteButton: Button = itemView.findViewById(R.id.buttonDelete)
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HistoryViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_history, parent, false)
-        return HistoryViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: HistoryViewHolder, position: Int) {
-        val historyItem = historyList[position]
-        Glide.with(holder.imageView.context)
-            .load(historyItem.imageUri)
-            .into(holder.imageView)
-
-        holder.deleteButton.setOnClickListener {
-            onDeleteClick(historyItem.id)
+    inner class ViewHolder(private val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: HistoryItem) {
+            binding.historyItemId.text = item.id
+            binding.historyItemPredictions.text = item.predictions.joinToString("\n") {
+                "Prediction ID: ${it.id}, Percentage: ${it.percentage * 100}%"
+            }
         }
     }
 
-    override fun getItemCount() = historyList.size
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ItemHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
+    }
 
-    fun removeItem(id: String) {
-        val index = historyList.indexOfFirst { it.id == id }
-        if (index != -1) {
-            historyList.removeAt(index)
-            notifyItemRemoved(index)
-        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(items[position])
+    }
+
+    override fun getItemCount(): Int = items.size
+
+    fun updateData(newItems: List<HistoryItem>) {
+        items = newItems
+        notifyDataSetChanged()
     }
 }

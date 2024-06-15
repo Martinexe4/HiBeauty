@@ -22,3 +22,13 @@ data class LoginResponse(
     val message: String,
     val token: String? // Add other fields as necessary
 )
+
+data class HistoryItem(
+    val id: String,
+    val predictions: List<Prediction>
+)
+
+data class Prediction(
+    val id: Int,
+    val percentage: Double
+)

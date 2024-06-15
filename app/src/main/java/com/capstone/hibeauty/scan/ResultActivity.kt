@@ -1,5 +1,6 @@
 package com.capstone.hibeauty.scan
 
+import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -7,16 +8,22 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import com.capstone.hibeauty.databinding.ActivityResultBinding
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.capstone.hibeauty.utils.SharedPreferenceUtil
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONObject
+import java.io.OutputStreamWriter
+import java.net.HttpURLConnection
+import java.net.URL
 
 class ResultActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResultBinding
     private var imageUri: Uri? = null
     private var results: Map<String, Float>? = null
-    private lateinit var firestore: FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,15 +32,13 @@ class ResultActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        firestore = Firebase.firestore
-
         imageUri = intent.getStringExtra("imageUri")?.toUri()
         results = intent.getSerializableExtra("results") as? Map<String, Float>
 
         displayResult()
 
         binding.saveResultButton.setOnClickListener {
-            saveResultToFirestore()
+            saveResultToDatabase()
         }
 
         binding.backButton.setOnClickListener {
@@ -55,8 +60,67 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveResultToFirestore() {
+    private fun saveResultToDatabase() {
+        // Ambil token dari SharedPreferenceUtil
+        val token = SharedPreferenceUtil.getToken(this)
 
+        // Pastikan token tidak kosong atau null sebelum menggunakan
+        if (token.isNullOrEmpty()) {
+            showToast("Token not found, please login again")
+            return
+        }
+
+        // Create JSON payload
+        val jsonObject = JSONObject().apply {
+            put("skinId", "3") // Sesuaikan skinId sesuai kebutuhan
+            val predictionsArray = JSONArray()
+            results?.forEach { (key, value) ->
+                val prediction = JSONObject().apply {
+                    put("id", key) // Menggunakan key sebagai string
+                    put("percentage", value)
+                }
+                predictionsArray.put(prediction)
+            }
+            put("predictions", predictionsArray)
+        }
+
+        // Coroutine untuk menjalankan operasi jaringan di thread background
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val url = URL("https://backend-q4bx5v5sia-et.a.run.app/predictions")
+                val connection = (url.openConnection() as HttpURLConnection).apply {
+                    requestMethod = "POST"
+                    setRequestProperty("Content-Type", "application/json; utf-8")
+                    setRequestProperty("Authorization", "Bearer $token") // Gunakan token dari SharedPreferenceUtil
+                    doOutput = true
+                }
+
+                connection.outputStream.use { outputStream ->
+                    OutputStreamWriter(outputStream).use { writer ->
+                        writer.write(jsonObject.toString())
+                        writer.flush()
+                    }
+                }
+
+                val responseCode = connection.responseCode
+                val responseBody = connection.inputStream.bufferedReader().use { it.readText() }
+
+                withContext(Dispatchers.Main) {
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        showToast("Results saved successfully!")
+                    } else {
+                        showToast("Failed to save results: $responseCode")
+                        // Tambahkan log untuk respons dari server
+                        println("Response body: $responseBody")
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    showToast("An error occurred: ${e.message}")
+                }
+            }
+        }
     }
 
     private fun showToast(message: String) {
