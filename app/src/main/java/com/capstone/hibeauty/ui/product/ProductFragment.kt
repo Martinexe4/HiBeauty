@@ -63,9 +63,8 @@ class ProductFragment : Fragment() {
                     if (response.isSuccessful) {
                         val products = response.body()
                         products?.let {
-                            // Update adapters with fetched products
-                            horizontalAdapter.updateData(it.take(3)) // Take first 3 products for horizontal RecyclerView
-                            verticalAdapter.updateData(it.drop(3))  // Drop first 3 products for vertical RecyclerView
+                            horizontalAdapter.updateData(it.take(5)) // Take first 3 products for horizontal RecyclerView
+                            verticalAdapter.updateData(it.drop(5))  // Drop first 3 products for vertical RecyclerView
                         }
                     } else {
                         showToast("Failed to fetch products: ${response.code()}")

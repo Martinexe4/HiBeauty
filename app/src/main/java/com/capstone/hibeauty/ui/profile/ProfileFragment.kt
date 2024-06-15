@@ -21,6 +21,7 @@ import com.capstone.hibeauty.R
 import com.capstone.hibeauty.authentication.LoginActivity
 import com.capstone.hibeauty.databinding.FragmentProfileBinding
 import com.capstone.hibeauty.authentication.ApiConfig
+import com.capstone.hibeauty.authentication.ApiResponse
 import com.capstone.hibeauty.profile.HistoryActivity
 import com.capstone.hibeauty.profile.InfoUserActivity
 import com.capstone.hibeauty.profile.LanguageActivity
@@ -108,22 +109,33 @@ class ProfileFragment : Fragment() {
         if (token != null) {
             val call = apiService.getUserProfile("Bearer $token")
 
-            call.enqueue(object : Callback<User> {
-                override fun onResponse(call: Call<User>, response: Response<User>) {
+            call.enqueue(object : Callback<ApiResponse> {
+                override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
                     if (response.isSuccessful) {
-                        val user = response.body()
+                        val apiResponse = response.body()
 
-                        Log.d("ProfileFragment", "Response body: ${response.body()}")
-                        user?.let {
-                            Log.d("ProfileFragment", "Username: ${it.USERNAME}")
-                            binding?.txtDisplayName?.text = it.USERNAME
+                        if (apiResponse != null) {
+                            val users = apiResponse.data
 
-                            if (it.PROFILEIMG != null) {
-                                Picasso.get().load(it.PROFILEIMG).into(binding?.imgProfile)
-                            } else {
+                            Log.d("ProfileFragment", "Response body: $users")
 
-                                 binding?.imgProfile?.setImageResource(R.drawable.placeholder_image)
+                            // Assuming you're displaying the first user's data
+                            if (users.isNotEmpty()) {
+                                val user = users[0]
+                                binding?.txtDisplayName?.text = user.USERNAME
+                                if (user.PROFILEIMG != null) {
+                                    Picasso.get().load(user.PROFILEIMG).into(binding?.imgProfile)
+                                } else {
+                                    // Handle case where PROFILEIMG is null
+                                    // Example:
+                                    // Picasso.get().load(R.drawable.placeholder_image).into(binding?.imgProfile)
+                                    // or
+                                    // binding?.imgProfile?.setImageResource(R.drawable.placeholder_image)
+                                }
                             }
+                        } else {
+                            Log.d("ProfileFragment", "Response body is null")
+                            showToast("Failed to fetch user profile: Response body is null")
                         }
                     } else {
                         Log.d("ProfileFragment", "Failed to fetch user profile: ${response.code()}")
@@ -131,7 +143,7 @@ class ProfileFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<User>, t: Throwable) {
+                override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
                     Log.d("ProfileFragment", "Failed to fetch user profile: ${t.message}")
                     showToast("Failed to fetch user profile: ${t.message}")
                 }

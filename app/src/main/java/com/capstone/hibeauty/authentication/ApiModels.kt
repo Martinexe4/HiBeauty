@@ -48,17 +48,40 @@ data class Product(
     val typeId: Int
 ) : Parcelable
 
+@Parcelize
+data class ProductType(
+    val id: Int,
+    val type: String
+) : Parcelable
+
 data class ProductResponse(
     val products: List<Product>
 )
 
+//data class User(
+//    val USERID: String,
+//    val USERNAME: String,
+//    val EMAIL: String,
+//    val PASSWORD: String,
+//    val PROFILEIMG: String,
+//    val CREATEDAT: Timestamp,
+//    val UPDATEDAT: Timestamp,
+//    val skinId: String
+//)
+
+data class ApiResponse(
+    val status: Boolean,
+    val message: String,
+    val data: List<User>
+)
+
 data class User(
-    val USERID: String,
-    val USERNAME: String,
-    val EMAIL: String,
-    val PASSWORD: String,
-    val PROFILEIMG: String,
-    val CREATEDAT: Timestamp,
-    val UPDATEDAT: Timestamp,
-    val skinId: String
+    val USERID: String?,
+    val USERNAME: String?,
+    val EMAIL: String?,
+    val PASSWORD: String?,
+    val PROFILEIMG: String?,
+    val CREATEDAT: String?,
+    val UPDATEDAT: String?,
+    val skinId: String?
 )
