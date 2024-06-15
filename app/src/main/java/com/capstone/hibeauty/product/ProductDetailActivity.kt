@@ -3,6 +3,7 @@ package com.capstone.hibeauty.product
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.hibeauty.adapter.ImageSliderAdapter
+import com.capstone.hibeauty.authentication.Product
 import com.capstone.hibeauty.databinding.ActivityProductDetailBinding
 
 class ProductDetailActivity : AppCompatActivity() {
@@ -14,16 +15,14 @@ class ProductDetailActivity : AppCompatActivity() {
         binding = ActivityProductDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
-
         val product = intent.getParcelableExtra<Product>("product")
 
         product?.let {
-            binding.productTitle.text = it.name
-            binding.productDescription.text = it.description
-
-            val adapter = ImageSliderAdapter(this, it.imageList)
-            binding.productImageSlider.adapter = adapter
+            with(binding) {
+                productTitle.text = it.name
+                productDescription.text = it.description
+                // Set other views with product details
+            }
         }
 
         binding.closeButton.setOnClickListener {

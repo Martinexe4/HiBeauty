@@ -1,5 +1,8 @@
 package com.capstone.hibeauty.authentication
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
 data class RegisterRequest(
     val username: String,
     val email: String,
@@ -31,4 +34,19 @@ data class HistoryItem(
 data class Prediction(
     val skinType: String,
     val percentage: Float
+)
+
+@Parcelize
+data class Product(
+    val id: Int,
+    val name: String,
+    val description: String,
+    val ingridients: String,
+    val link: String,
+    val recomId: Int,
+    val typeId: Int
+) : Parcelable
+
+data class ProductResponse(
+    val products: List<Product>
 )
