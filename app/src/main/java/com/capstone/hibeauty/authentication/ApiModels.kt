@@ -24,11 +24,11 @@ data class LoginResponse(
 )
 
 data class HistoryItem(
-    val id: String,
+    val id: String, // Assuming id is a String
     val predictions: List<Prediction>
 )
 
 data class Prediction(
-    val id: Int,
-    val percentage: Double
+    val skinType: String,
+    val percentage: Float
 )

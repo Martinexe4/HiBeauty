@@ -12,7 +12,7 @@ class HistoryAdapter(private var items: List<HistoryItem>) : RecyclerView.Adapte
         fun bind(item: HistoryItem) {
             binding.historyItemId.text = item.id
             binding.historyItemPredictions.text = item.predictions.joinToString("\n") {
-                "Prediction ID: ${it.id}, Percentage: ${it.percentage * 100}%"
+                "Prediction ID: ${it.skinType}, Percentage: ${it.percentage * 100}%"
             }
         }
     }

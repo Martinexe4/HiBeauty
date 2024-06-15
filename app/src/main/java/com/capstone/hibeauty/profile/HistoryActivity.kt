@@ -15,6 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONArray
+import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -59,27 +60,25 @@ class HistoryActivity : AppCompatActivity() {
                 val responseCode = connection.responseCode
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     val responseBody = connection.inputStream.bufferedReader().use { it.readText() }
-                    val jsonArray = JSONArray(responseBody)
-                    val historyItems = mutableListOf<HistoryItem>()
+                    val jsonResponse = JSONObject(responseBody)
 
-                    for (i in 0 until jsonArray.length()) {
-                        val jsonObject = jsonArray.getJSONObject(i)
-                        val id = jsonObject.getString("id")
-                        val predictions = jsonObject.getJSONArray("predictions")
-                        val predictionList = mutableListOf<Prediction>()
+                    if (jsonResponse.getBoolean("status")) {
+                        val jsonArray = jsonResponse.getJSONArray("data")
+                        val historyItems = mutableListOf<HistoryItem>()
 
-                        for (j in 0 until predictions.length()) {
-                            val predictionObject = predictions.getJSONObject(j)
-                            val predictionId = predictionObject.getInt("id")
-                            val percentage = predictionObject.getDouble("percentage")
-                            predictionList.add(Prediction(predictionId, percentage))
+                        for (i in 0 until jsonArray.length()) {
+                            val jsonObject = jsonArray.getJSONObject(i)
+                            val skinType = jsonObject.getString("skinType")
+                            val percentage = jsonObject.getDouble("percentage")
+                            val predictionList = mutableListOf<Prediction>(Prediction(skinType, percentage.toFloat()))
+                            historyItems.add(HistoryItem(skinType, predictionList))
                         }
 
-                        historyItems.add(HistoryItem(id, predictionList))
-                    }
-
-                    runOnUiThread {
-                        historyAdapter.updateData(historyItems)
+                        runOnUiThread {
+                            historyAdapter.updateData(historyItems)
+                        }
+                    } else {
+                        showToast("Failed to load history: ${jsonResponse.getString("message")}")
                     }
                 } else {
                     showToast("Failed to load history: $responseCode")
