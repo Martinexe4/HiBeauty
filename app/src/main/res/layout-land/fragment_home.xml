@@ -19,14 +19,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/poppins_bold"
+            android:text="Hello Lisa,"
             android:textColor="#FF8473"
             android:textSize="36sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_conversion_absoluteHeight="32dp"
-            tools:layout_conversion_absoluteWidth="112dp"
-            tools:text="Hello Lisa," />
+            tools:layout_conversion_absoluteWidth="112dp" />
 
         <TextView
             android:id="@+id/tvSubtitle"
@@ -202,9 +202,9 @@
                         android:fontFamily="@font/poppins_bold"
                         android:text="Analyze >"
                         android:textColor="@android:color/holo_red_light"
+                        app:layout_constraintBottom_toBottomOf="@id/tvTitle2"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/tvTitle2"
-                        app:layout_constraintBottom_toBottomOf="@id/tvTitle2"/>
+                        app:layout_constraintTop_toTopOf="@id/tvTitle2" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

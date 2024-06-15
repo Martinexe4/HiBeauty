@@ -19,14 +19,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/poppins_bold"
+            android:text="Hello Lisa,"
             android:textColor="#FF8473"
             android:textSize="24sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_conversion_absoluteHeight="32dp"
-            tools:layout_conversion_absoluteWidth="112dp"
-            tools:text="Hello Lisa," />
+            tools:layout_conversion_absoluteWidth="112dp" />
 
         <TextView
             android:id="@+id/tvSubtitle"

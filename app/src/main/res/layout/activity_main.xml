@@ -31,7 +31,9 @@
             android:layout_gravity="bottom"
             android:layout_marginEnd="16dp"
             android:background="@drawable/transparent"
-            app:itemIconTint="@color/colorPrimarySoft"
+            app:itemIconTint="@color/nav_icon_color"
+            app:itemRippleColor="@color/colorPrimarySoft"
+            app:itemTextAppearanceActiveBoldEnabled="true"
             app:menu="@menu/bottom_menu" />
     </com.google.android.material.bottomappbar.BottomAppBar>
 
