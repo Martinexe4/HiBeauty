@@ -2,6 +2,7 @@ package com.capstone.hibeauty.authentication
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import java.sql.Timestamp
 
 data class RegisterRequest(
     val username: String,
@@ -49,4 +50,15 @@ data class Product(
 
 data class ProductResponse(
     val products: List<Product>
+)
+
+data class User(
+    val USERID: String,
+    val USERNAME: String,
+    val EMAIL: String,
+    val PASSWORD: String,
+    val PROFILEIMG: String,
+    val CREATEDAT: Timestamp,
+    val UPDATEDAT: Timestamp,
+    val skinId: String
 )

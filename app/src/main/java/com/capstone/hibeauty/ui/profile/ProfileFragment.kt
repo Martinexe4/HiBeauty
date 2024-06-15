@@ -8,32 +8,34 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.bumptech.glide.Glide
-import com.google.firebase.auth.FirebaseAuth
+import com.capstone.hibeauty.R
 import com.capstone.hibeauty.authentication.LoginActivity
 import com.capstone.hibeauty.databinding.FragmentProfileBinding
-import com.capstone.hibeauty.R
+import com.capstone.hibeauty.authentication.ApiConfig
 import com.capstone.hibeauty.profile.HistoryActivity
 import com.capstone.hibeauty.profile.InfoUserActivity
 import com.capstone.hibeauty.profile.LanguageActivity
 import com.capstone.hibeauty.profile.PolicyActivity
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
-import com.google.firebase.auth.FirebaseUser
+import com.capstone.hibeauty.authentication.User
+import com.squareup.picasso.Picasso
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ProfileFragment : Fragment() {
-    var binding: FragmentProfileBinding? = null // Hapus underscore dan kata kunci private agar dapat diakses dari luar kelas
-    lateinit var sharedPreferences: SharedPreferences
+    var binding: FragmentProfileBinding? = null
     private val PICK_IMAGE_REQUEST = 1
 
-    private val firebaseAuth = FirebaseAuth.getInstance()
-    private var currentUser: FirebaseUser? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,10 +49,7 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedPreferences = requireContext().getSharedPreferences("UserProfile", Context.MODE_PRIVATE)
-        currentUser = firebaseAuth.currentUser
-
-        loadUserProfile()
+        fetchUserProfile()
 
         binding?.iconEditPhoto?.setOnClickListener {
             choosePhoto()
@@ -98,45 +97,59 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
-            val imageUri = data.data
-            savePhotoToSharedPreferences(imageUri)
+
+    private fun fetchUserProfile() {
+        val apiService = ApiConfig.apiService
+        val token = SharedPreferenceUtil.getToken(requireContext())
+
+        Log.d("ProfileFragment", "Token: $token")
+
+        if (token != null) {
+            val call = apiService.getUserProfile("Bearer $token")
+
+            call.enqueue(object : Callback<User> {
+                override fun onResponse(call: Call<User>, response: Response<User>) {
+                    if (response.isSuccessful) {
+                        val user = response.body()
+
+                        Log.d("ProfileFragment", "Response body: ${response.body()}")
+                        user?.let {
+                            Log.d("ProfileFragment", "Username: ${it.USERNAME}")
+                            binding?.txtDisplayName?.text = it.USERNAME
+
+                            if (it.PROFILEIMG != null) {
+                                // Load image using Picasso if PROFILEIMG is not null
+                                Picasso.get().load(it.PROFILEIMG).into(binding?.imgProfile)
+                            } else {
+                                // Handle case where PROFILEIMG is null (e.g., show a placeholder image)
+                                // Example:
+                                // Picasso.get().load(R.drawable.placeholder_image).into(binding?.imgProfile)
+                                // or
+                                 binding?.imgProfile?.setImageResource(R.drawable.placeholder_image)
+                            }
+                        }
+                    } else {
+                        Log.d("ProfileFragment", "Failed to fetch user profile: ${response.code()}")
+                        showToast("Failed to fetch user profile: ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<User>, t: Throwable) {
+                    Log.d("ProfileFragment", "Failed to fetch user profile: ${t.message}")
+                    showToast("Failed to fetch user profile: ${t.message}")
+                }
+            })
+        } else {
+            Log.d("ProfileFragment", "Token not found")
+            showToast("Token not found")
         }
     }
 
-    private fun savePhotoToSharedPreferences(imageUri: Uri?) {
-        imageUri?.let { uri ->
-            val editor = sharedPreferences.edit()
-            editor.putString("profile_photo", uri.toString())
-            editor.apply()
-            loadUserProfile()
-        }
-    }
 
-    private fun loadUserProfile() {
-        val profilePhotoUri = sharedPreferences.getString("profile_photo", null)
-        profilePhotoUri?.let { uri ->
-            Glide.with(requireContext())
-                .load(Uri.parse(uri))
-                .placeholder(R.drawable.placeholder_image)
-                .error(R.drawable.placeholder_image)
-                .circleCrop()
-                .into(binding?.imgProfile!!)
-        }
-        currentUser?.let { user ->
-            val displayName = user.displayName ?: "User"
-            binding?.txtDisplayName?.text = displayName
-        }
+    private fun showToast(message: String) {
+        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
-
-    private fun loadUserData() {
-        val name = sharedPreferences.getString("name", "")
-        binding?.txtDisplayName?.text = "$name"
-    }
-
 
     private fun showLogoutConfirmationDialog() {
         AlertDialog.Builder(requireActivity())

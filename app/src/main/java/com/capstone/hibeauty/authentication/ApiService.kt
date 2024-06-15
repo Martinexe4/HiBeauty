@@ -16,5 +16,8 @@ interface ApiService {
     @GET("products")
     fun getAllProducts(@Header("Authorization") token: String): Call<List<Product>>
 
+    @GET("users")
+    fun getUserProfile(@Header("Authorization") token: String): Call<User>
+
 
 }
