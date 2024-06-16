@@ -40,9 +40,6 @@
             android:name=".profile.LanguageActivity"
             android:exported="false" />
         <activity
-            android:name=".authentication.ForgotPasswordActivity"
-            android:exported="false" />
-        <activity
             android:name=".article.DetailArticleActivity"
             android:exported="false" />
         <activity

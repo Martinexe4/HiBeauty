@@ -1,18 +1,19 @@
 package com.capstone.hibeauty.profile
 
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
-import androidx.appcompat.app.AlertDialog
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.capstone.hibeauty.R
+import com.capstone.hibeauty.api.ApiConfig
+import com.capstone.hibeauty.api.UserProfileResponse
 import com.capstone.hibeauty.databinding.ActivityInfoUserBinding
-import com.capstone.hibeauty.databinding.DialogEditUserBinding
+import com.capstone.hibeauty.utils.SharedPreferenceUtil
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class InfoUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityInfoUserBinding
-    private lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,65 +22,36 @@ class InfoUserActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE)
-
-        loadUserData()
-
-        binding.btnEdit.setOnClickListener {
-            showEditDialog()
+        val userId = SharedPreferenceUtil.getUserId(this)
+        if (userId != null) {
+            fetchUserProfile(userId)
+        } else {
+            Toast.makeText(this, "User ID not found", Toast.LENGTH_SHORT).show()
         }
+
+
         binding.closeButton.setOnClickListener {
             finish()
         }
     }
 
-    private fun loadUserData() {
-        val name = sharedPreferences.getString("name", "")
-        val age = sharedPreferences.getString("age", "")
-        val gender = sharedPreferences.getString("gender", "")
-
-        binding.tvName.text = "$name"
-        binding.tvAge.text = "$age"
-        binding.tvGender.text = "$gender"
-    }
-
-    private fun showEditDialog() {
-        val dialogBinding = DialogEditUserBinding.inflate(LayoutInflater.from(this))
-
-        dialogBinding.etName.setText(sharedPreferences.getString("name", ""))
-        dialogBinding.etAge.setText(sharedPreferences.getString("age", ""))
-        when (sharedPreferences.getString("gender", "")) {
-            "Male" -> dialogBinding.rbMale.isChecked = true
-            "Female" -> dialogBinding.rbFemale.isChecked = true
-        }
-
-        val dialog = AlertDialog.Builder(this)
-            .setTitle("Edit User Info")
-            .setView(dialogBinding.root)
-            .setPositiveButton("Save") { _, _ ->
-                val name = dialogBinding.etName.text.toString()
-                val age = dialogBinding.etAge.text.toString()
-                val gender = when (dialogBinding.rgGender.checkedRadioButtonId) {
-                    R.id.rb_male -> "Male"
-                    R.id.rb_female -> "Female"
-                    else -> ""
+    private fun fetchUserProfile(userId: String) {
+        val call = ApiConfig.apiService.getUserProfile2(userId)
+        call.enqueue(object : Callback<UserProfileResponse> {
+            override fun onResponse(call: Call<UserProfileResponse>, response: Response<UserProfileResponse>) {
+                if (response.isSuccessful && response.body()?.status == true) {
+                    val userProfile = response.body()?.data
+                    binding.tvName.text = userProfile?.USERNAME
+                    binding.tvAge.text = userProfile?.AGE.toString()
+                    binding.tvGender.text = userProfile?.GENDER
+                } else {
+                    Toast.makeText(this@InfoUserActivity, "Failed to retrieve user profile", Toast.LENGTH_SHORT).show()
                 }
-
-                saveUserData(name, age, gender)
-                loadUserData()
             }
-            .setNegativeButton("Cancel", null)
-            .create()
 
-        dialog.show()
-    }
-
-    private fun saveUserData(name: String, age: String, gender: String) {
-        with(sharedPreferences.edit()) {
-            putString("name", name)
-            putString("age", age)
-            putString("gender", gender)
-            apply()
-        }
+            override fun onFailure(call: Call<UserProfileResponse>, t: Throwable) {
+                Toast.makeText(this@InfoUserActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

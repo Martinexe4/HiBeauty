@@ -64,6 +64,7 @@ class ProductFragment : Fragment() {
     private fun fetchProducts() {
         val apiService = ApiConfig.apiService
         val token = SharedPreferenceUtil.getToken(requireContext())
+        Log.d("ProductFragment", "User token: $token")  // Log the token
 
         if (token != null) {
             val call = apiService.getAllProducts("Bearer $token")

@@ -11,6 +11,7 @@ import com.capstone.hibeauty.api.ApiConfig
 import com.capstone.hibeauty.api.LoginRequest
 import com.capstone.hibeauty.api.LoginResponse
 import com.capstone.hibeauty.databinding.ActivityLoginBinding
+import com.capstone.hibeauty.personalization.PersonalizationActivity
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import retrofit2.Call
 import retrofit2.Callback
@@ -30,7 +31,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Check if user is already logged in
         if (isUserLoggedIn()) {
-            navigateToMainActivity()
+            handleLoginSuccess()
             finish()
         }
 
@@ -61,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                         saveToken(token) // Simpan token ke Shared Preferences
                         Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
                         saveLoginStatus(true)
-                        navigateToMainActivity()
+                        handleLoginSuccess()
                         finish()
                     } else {
                         Toast.makeText(this@LoginActivity, "Token is empty or null", Toast.LENGTH_SHORT).show()
@@ -83,11 +84,6 @@ class LoginActivity : AppCompatActivity() {
         SharedPreferenceUtil.saveToken(this, token)
     }
 
-    private fun getToken(): String? {
-        // Ambil token menggunakan SharedPreferenceUtil
-        return SharedPreferenceUtil.getToken(this)
-    }
-
     private fun saveLoginStatus(isLoggedIn: Boolean) {
         with(sharedPref.edit()) {
             putBoolean("IS_LOGGED_IN", isLoggedIn)
@@ -99,9 +95,23 @@ class LoginActivity : AppCompatActivity() {
         return sharedPref.getBoolean("IS_LOGGED_IN", false)
     }
 
+    private fun handleLoginSuccess() {
+        if (SharedPreferenceUtil.isPersonalizationCompleted(this)) {
+            navigateToPersonalizationActivity() //chaneee navigateToMainActivity()
+        } else {
+            navigateToPersonalizationActivity()
+        }
+    }
     private fun navigateToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
+        finish()
+    }
+
+    private fun navigateToPersonalizationActivity() {
+        val intent = Intent(this, PersonalizationActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun showLoading(isLoading: Boolean) {

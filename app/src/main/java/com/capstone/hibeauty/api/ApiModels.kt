@@ -16,19 +16,40 @@ data class LoginRequest(
 )
 
 data class RegisterResponse(
-    val success: Boolean,
-    val message: String
+    val status: Boolean,
+    val message: String,
+    val data: User?,
+    val token: String?
+)
+
+data class User(
+    val USERID: String,
+    val USERNAME: String,
+    val EMAIL: String,
+    val PASSWORD: String,
+    val PROFILEIMG: String?,
+    val CREATEDAT: String,
+    val UPDATEDAT: String,
+    val skinId: String?,
+    val AGE: Int?,
+    val GENDER: String?
 )
 
 data class LoginResponse(
     val success: Boolean,
     val message: String,
-    val token: String? // Add other fields as necessary
+    val token: String?,
+    val userid: String?
 )
 
-data class HistoryItem(
-    val id: String, // Assuming id is a String
-    val predictions: List<Prediction>
+data class AgeGenderRequest(
+    val AGE: Int,
+    val GENDER: String
+)
+
+data class AgeGenderResponse(
+    val status: Boolean,
+    val message: String
 )
 
 data class Prediction(
@@ -59,19 +80,22 @@ data class ProductResponse(
     val data: List<Product>
 )
 
+data class UserProfileResponse(
+    val status: Boolean,
+    val message: String,
+    val data: UserProfileData
+)
+
+data class UserProfileData(
+    val USERNAME: String,
+    val AGE: Int,
+    val GENDER: String
+)
+
 data class ApiResponse(
     val status: Boolean,
     val message: String,
     val data: List<User>
 )
 
-data class User(
-    val USERID: String?,
-    val USERNAME: String?,
-    val EMAIL: String?,
-    val PASSWORD: String?,
-    val PROFILEIMG: String?,
-    val CREATEDAT: String?,
-    val UPDATEDAT: String?,
-    val skinId: String?
-)
+
