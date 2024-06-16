@@ -1,112 +1,103 @@
 package com.capstone.hibeauty.profile
 
-import android.content.Intent
-import android.os.Bundle
 import android.widget.Toast
+import com.capstone.hibeauty.adapter.HistoryAdapter
+import com.capstone.hibeauty.adapter.Prediction
+import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.capstone.hibeauty.adapter.HistoryAdapter
-import com.capstone.hibeauty.api.HistoryItem
-import com.capstone.hibeauty.authentication.LoginActivity
-import com.capstone.hibeauty.api.Prediction
+import androidx.recyclerview.widget.RecyclerView
+import com.capstone.hibeauty.R
 import com.capstone.hibeauty.databinding.ActivityHistoryBinding
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 
 class HistoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHistoryBinding
-    private lateinit var historyAdapter: HistoryAdapter
+    private lateinit var adapter: HistoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHistoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
+        binding.historyRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        binding.recyclerViewHistory.layoutManager = LinearLayoutManager(this)
-        historyAdapter = HistoryAdapter(emptyList())
-        binding.recyclerViewHistory.adapter = historyAdapter
+        fetchSkinHistory()
 
         binding.closeButton.setOnClickListener {
             finish()
         }
-
-        loadHistory()
     }
 
-    private fun loadHistory() {
+    private fun fetchSkinHistory() {
         val token = SharedPreferenceUtil.getToken(this)
-        if (token.isNullOrEmpty()) {
-            showToast("Token not found. Please login again.")
-            navigateToLogin()
-            return
-        }
+        val sharedPreferences = getSharedPreferences("HiBeautyPreferences", MODE_PRIVATE)
+        val skinId = sharedPreferences.getString("SKINID", null)
 
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val url = URL("https://backend-q4bx5v5sia-et.a.run.app/predict/1")
-                val connection = url.openConnection() as HttpURLConnection
-                connection.requestMethod = "GET"
-                connection.setRequestProperty("Authorization", "Bearer $token")
+        if (skinId != null) {
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val url = URL("https://backend-q4bx5v5sia-et.a.run.app/predict/$skinId")
+                    val connection = url.openConnection() as HttpURLConnection
+                    connection.requestMethod = "GET"
+                    connection.setRequestProperty("Authorization", "Bearer $token")
 
-                val responseCode = connection.responseCode
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    val responseBody = connection.inputStream.bufferedReader().use { it.readText() }
-                    val jsonResponse = JSONObject(responseBody)
+                    val responseCode = connection.responseCode
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        val response = BufferedReader(InputStreamReader(connection.inputStream)).use { it.readText() }
+                        Log.d("Response", "Response: $response")  // Log the response for debugging
 
-                    if (jsonResponse.getBoolean("status")) {
-                        val jsonArray = jsonResponse.getJSONArray("data")
-                        val historyItems = mutableListOf<HistoryItem>()
-
-                        for (i in 0 until jsonArray.length()) {
-                            val jsonObject = jsonArray.getJSONObject(i)
-                            val skinType = jsonObject.getString("skinType")
-                            val percentage = jsonObject.getDouble("percentage")
-                            val predictionList = mutableListOf<Prediction>(Prediction(skinType, percentage.toFloat()))
-                            historyItems.add(HistoryItem(skinType, predictionList))
-                        }
-
-                        runOnUiThread {
-                            historyAdapter.updateData(historyItems)
+                        val jsonResponse = JSONObject(response)
+                        if (jsonResponse.getBoolean("status")) {
+                            val data = jsonResponse.getJSONArray("data")
+                            val predictions = mutableListOf<Prediction>()
+                            for (i in 0 until data.length()) {
+                                val item = data.getJSONObject(i)
+                                val skinType = item.getString("skinType")
+                                val percentage = item.getDouble("percentage").toFloat()
+                                predictions.add(Prediction(skinType, percentage))
+                            }
+                            withContext(Dispatchers.Main) {
+                                adapter = HistoryAdapter(predictions)
+                                binding.historyRecyclerView.adapter = adapter
+                            }
+                        } else {
+                            withContext(Dispatchers.Main) {
+                                showToast("Failed to retrieve history")
+                            }
                         }
                     } else {
-                        showToast("Failed to load history: ${jsonResponse.getString("message")}")
+                        Log.e("FetchError", "Failed to fetch history, response code: $responseCode")
+                        withContext(Dispatchers.Main) {
+                            showToast("Failed to fetch history")
+                        }
                     }
-                } else {
-                    showToast("Failed to load history: $responseCode")
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    withContext(Dispatchers.Main) {
+                        showToast("Error: ${e.message}")
+                    }
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                showToast("An error occurred: ${e.message}")
             }
+        } else {
+            showToast("No SKINID found in preferences")
         }
-    }
-
-    private fun deleteHistoryItem(id: String) {
-        // Implementation for deleting a history item
     }
 
     private fun showToast(message: String) {
         runOnUiThread {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun navigateToLogin() {
-        val intent = Intent(this, LoginActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-        startActivity(intent)
-        finish()
-    }
-
-    companion object {
-        private const val TAG = "HistoryActivity"
     }
 }

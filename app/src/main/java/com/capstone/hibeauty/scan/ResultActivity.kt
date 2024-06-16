@@ -3,6 +3,7 @@ package com.capstone.hibeauty.scan
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
@@ -39,7 +40,7 @@ class ResultActivity : AppCompatActivity() {
         displayResult()
 
         binding.saveResultButton.setOnClickListener {
-            saveResultToDatabase()
+            saveImageToDatabase()
         }
 
         binding.backButton.setOnClickListener {
@@ -61,83 +62,146 @@ class ResultActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveResultToDatabase() {
-        val url = "https://backend-q4bx5v5sia-et.a.run.app/predictions"
-        val skinId = "3" // Example skinId as a string
-        val jsonBody = JSONObject()
-        jsonBody.put("skinId", skinId)
+    private fun saveImageToDatabase() {
+        imageUri?.let { uri ->
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val url = URL("https://backend-q4bx5v5sia-et.a.run.app/skin/upload")
+                    val connection = url.openConnection() as HttpURLConnection
+                    connection.requestMethod = "POST"
+                    connection.setRequestProperty("Authorization", "Bearer <your_token_here>")
+                    connection.doOutput = true
+                    connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=boundary")
 
-        val predictionsArray = JSONArray()
-        results?.forEach { (key, value) ->
-            val predictionObject = JSONObject()
-            predictionObject.put("id", getIdForKey(key)) // You need to implement getIdForKey function
-            predictionObject.put("percentage", value)
-            predictionsArray.put(predictionObject)
+                    val boundary = "boundary"
+                    val LINE_FEED = "\r\n"
+
+                    connection.outputStream.use { outputStream ->
+                        OutputStreamWriter(outputStream).use { writer ->
+                            writer.append("--$boundary").append(LINE_FEED)
+                            writer.append("Content-Disposition: form-data; name=\"file\"; filename=\"image.jpg\"")
+                                .append(LINE_FEED)
+                            writer.append("Content-Type: image/jpeg").append(LINE_FEED)
+                            writer.append(LINE_FEED).flush()
+
+                            contentResolver.openInputStream(uri)?.use { inputStream ->
+                                inputStream.copyTo(outputStream)
+                            }
+                            outputStream.flush()
+
+                            writer.append(LINE_FEED).flush()
+                            writer.append("--$boundary--").append(LINE_FEED).flush()
+                        }
+                    }
+
+                    val responseCode = connection.responseCode
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        val response = BufferedReader(InputStreamReader(connection.inputStream)).use { it.readText() }
+                        Log.d("Response", "Response: $response")  // Log the response for debugging
+
+                        val jsonResponse = JSONObject(response)
+                        if (jsonResponse.has("data")) {
+                            val data = jsonResponse.getJSONObject("data")
+                            if (data.has("SKINID")) {
+                                val skinId = data.getString("SKINID")
+                                Log.d("SKINID", "SKINID: $skinId")
+                                saveSkinIdToPreferences(skinId)  // Save SKINID to SharedPreferences
+                                savePredictionToDatabase(skinId)
+                            } else {
+                                withContext(Dispatchers.Main) {
+                                    showToast("No SKINID found in response data")
+                                }
+                            }
+                        } else {
+                            withContext(Dispatchers.Main) {
+                                showToast("No data found in response")
+                            }
+                        }
+                    } else {
+                        Log.e("UploadError", "Failed to upload image, response code: $responseCode")
+                        withContext(Dispatchers.Main) {
+                            showToast("Failed to upload image")
+                        }
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    withContext(Dispatchers.Main) {
+                        showToast("Error: ${e.message}")
+                    }
+                }
+            }
         }
-        jsonBody.put("predictions", predictionsArray)
+    }
 
-        // Print the payload to logcat for debugging
-        println("Payload: $jsonBody")
+    private fun saveSkinIdToPreferences(skinId: String) {
+        val sharedPreferences = getSharedPreferences("HiBeautyPreferences", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("SKINID", skinId)
+        editor.apply()
+    }
+
+    private fun savePredictionToDatabase(skinId: String) {
+        val token = SharedPreferenceUtil.getToken(this)
 
         CoroutineScope(Dispatchers.IO).launch {
-            val token = SharedPreferenceUtil.getToken(this@ResultActivity)
-            if (token == null) {
-                withContext(Dispatchers.Main) {
-                    showToast("Authentication token is missing.")
-                }
-                return@launch
-            }
-
             try {
-                val urlConnection = URL(url).openConnection() as HttpURLConnection
-                urlConnection.requestMethod = "POST"
-                urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
-                urlConnection.setRequestProperty("Authorization", "Bearer $token")
-                urlConnection.doOutput = true
+                val url = URL("https://backend-q4bx5v5sia-et.a.run.app/predictions")
+                val connection = url.openConnection() as HttpURLConnection
+                connection.requestMethod = "POST"
+                connection.setRequestProperty("Authorization", "Bearer $token")
+                connection.setRequestProperty("Content-Type", "application/json")
+                connection.doOutput = true
 
-                val outputStreamWriter = OutputStreamWriter(urlConnection.outputStream)
-                outputStreamWriter.write(jsonBody.toString())
-                outputStreamWriter.flush()
-                outputStreamWriter.close()
+                val predictionMap = mapOf(
+                    "acne" to 1,
+                    "oily" to 2,
+                    "eye bags" to 3
+                )
 
-                val responseCode = urlConnection.responseCode
-                val responseMessage = urlConnection.responseMessage
+                val jsonBody = JSONObject().apply {
+                    put("skinId", skinId)
+                    put("predictions", JSONArray().apply {
+                        results?.forEach { (name, percentage) ->
+                            val id = predictionMap[name] ?: error("Unknown prediction name: $name")
+                            put(JSONObject().apply {
+                                put("id", id)
+                                put("percentage", percentage)
+                            })
+                        }
+                    })
+                }
 
-                if (responseCode in 200..299) {
+                Log.d("SavePredictionRequest", "Request Body: $jsonBody") // Log the request body
+
+                OutputStreamWriter(connection.outputStream).use { it.write(jsonBody.toString()) }
+
+                val responseCode = connection.responseCode
+                if (responseCode == HttpURLConnection.HTTP_OK) {
+                    val response = BufferedReader(InputStreamReader(connection.inputStream)).use { it.readText() }
+                    Log.d("SavePredictionResponse", "Response: $response")  // Log the response for debugging
                     withContext(Dispatchers.Main) {
-                        showToast("Results saved successfully.")
+                        showToast("Prediction saved successfully")
                     }
                 } else {
-                    val errorStream = BufferedReader(InputStreamReader(urlConnection.errorStream))
-                    val errorResponse = StringBuilder()
-                    var line: String?
-                    while (errorStream.readLine().also { line = it } != null) {
-                        errorResponse.append(line)
-                    }
-                    errorStream.close()
-
+                    val errorResponse = BufferedReader(InputStreamReader(connection.errorStream)).use { it.readText() }
+                    Log.e("SavePredictionError", "Failed to save prediction, response code: $responseCode, error: $errorResponse")
                     withContext(Dispatchers.Main) {
-                        showToast("Failed to save results: $responseCode $responseMessage")
-                        showToast("Error details: $errorResponse")
+                        showToast("Failed to save prediction")
                     }
                 }
             } catch (e: Exception) {
+                e.printStackTrace()
                 withContext(Dispatchers.Main) {
                     showToast("Error: ${e.message}")
                 }
             }
         }
     }
-    private fun getIdForKey(key: String): Int {
-        return when (key) {
-            "acne" -> 1
-            "eye bags" -> 2
-            "oily" -> 3
-            else -> -1 // Handle unknown keys appropriately
-        }
-    }
+
 
     private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        runOnUiThread {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        }
     }
 }

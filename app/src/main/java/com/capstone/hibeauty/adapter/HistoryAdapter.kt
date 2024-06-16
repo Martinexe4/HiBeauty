@@ -1,35 +1,33 @@
 package com.capstone.hibeauty.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.capstone.hibeauty.api.HistoryItem
-import com.capstone.hibeauty.databinding.ItemHistoryBinding
+import com.capstone.hibeauty.R
 
-class HistoryAdapter(private var items: List<HistoryItem>) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+data class Prediction(val skinType: String, val percentage: Float)
 
-    inner class ViewHolder(private val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: HistoryItem) {
-            binding.historyItemId.text = item.id
-            binding.historyItemPredictions.text = item.predictions.joinToString("\n") {
-                "Prediction ID: ${it.skinType}, Percentage: ${it.percentage * 100}%"
-            }
-        }
+class HistoryAdapter(private val predictions: List<Prediction>) :
+    RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
+
+    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val skinTypeTextView: TextView = view.findViewById(R.id.skinTypeTextView)
+        val percentageTextView: TextView = view.findViewById(R.id.percentageTextView)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemHistoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ViewHolder(binding)
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_history, parent, false)
+        return ViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        val prediction = predictions[position]
+        holder.skinTypeTextView.text = prediction.skinType
+        holder.percentageTextView.text = String.format("%.2f%%", prediction.percentage * 100)
     }
 
-    override fun getItemCount(): Int = items.size
-
-    fun updateData(newItems: List<HistoryItem>) {
-        items = newItems
-        notifyDataSetChanged()
-    }
+    override fun getItemCount(): Int = predictions.size
 }

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
-    <LinearLayout
-        android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/skinTypeTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:text="Skin Type"
+        android:textAppearance="?attr/textAppearanceListItem" />
 
-        <TextView
-            android:id="@+id/historyItemId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="History Item ID" />
-
-        <TextView
-            android:id="@+id/historyItemPredictions"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Predictions" />
-    </LinearLayout>
-</layout>
+    <TextView
+        android:id="@+id/percentageTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Percentage"
+        android:textAppearance="?attr/textAppearanceListItemSmall" />
+</LinearLayout>
