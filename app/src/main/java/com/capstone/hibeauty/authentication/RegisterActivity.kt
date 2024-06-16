@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.capstone.hibeauty.api.ApiConfig
+import com.capstone.hibeauty.api.RegisterRequest
+import com.capstone.hibeauty.api.RegisterResponse
 import com.capstone.hibeauty.databinding.ActivityRegisterBinding
 import retrofit2.Call
 import retrofit2.Callback

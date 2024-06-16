@@ -4,8 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.capstone.hibeauty.authentication.Product
+import com.capstone.hibeauty.api.Product
 import com.capstone.hibeauty.databinding.ItemProductHorizontalBinding
 import com.capstone.hibeauty.databinding.ItemProductVerticalBinding
 import com.capstone.hibeauty.product.ProductDetailActivity

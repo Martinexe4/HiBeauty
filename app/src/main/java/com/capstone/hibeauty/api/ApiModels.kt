@@ -1,8 +1,7 @@
-package com.capstone.hibeauty.authentication
+package com.capstone.hibeauty.api
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.sql.Timestamp
 
 data class RegisterRequest(
     val username: String,

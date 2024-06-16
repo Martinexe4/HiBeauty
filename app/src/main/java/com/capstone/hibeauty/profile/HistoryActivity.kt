@@ -6,15 +6,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.hibeauty.adapter.HistoryAdapter
-import com.capstone.hibeauty.authentication.HistoryItem
+import com.capstone.hibeauty.api.HistoryItem
 import com.capstone.hibeauty.authentication.LoginActivity
-import com.capstone.hibeauty.authentication.Prediction
+import com.capstone.hibeauty.api.Prediction
 import com.capstone.hibeauty.databinding.ActivityHistoryBinding
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection
 import java.net.URL

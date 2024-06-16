@@ -1,5 +1,11 @@
-package com.capstone.hibeauty.authentication
+package com.capstone.hibeauty.api
 
+import com.capstone.hibeauty.api.ApiResponse
+import com.capstone.hibeauty.api.LoginRequest
+import com.capstone.hibeauty.api.LoginResponse
+import com.capstone.hibeauty.api.ProductResponse
+import com.capstone.hibeauty.api.RegisterRequest
+import com.capstone.hibeauty.api.RegisterResponse
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET

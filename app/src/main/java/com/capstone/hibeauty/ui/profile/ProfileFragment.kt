@@ -1,11 +1,7 @@
 package com.capstone.hibeauty.ui.profile
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -17,17 +13,15 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.capstone.hibeauty.R
 import com.capstone.hibeauty.authentication.LoginActivity
 import com.capstone.hibeauty.databinding.FragmentProfileBinding
-import com.capstone.hibeauty.authentication.ApiConfig
-import com.capstone.hibeauty.authentication.ApiResponse
+import com.capstone.hibeauty.api.ApiConfig
+import com.capstone.hibeauty.api.ApiResponse
 import com.capstone.hibeauty.profile.HistoryActivity
 import com.capstone.hibeauty.profile.InfoUserActivity
 import com.capstone.hibeauty.profile.LanguageActivity
 import com.capstone.hibeauty.profile.PolicyActivity
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
-import com.capstone.hibeauty.authentication.User
 import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback

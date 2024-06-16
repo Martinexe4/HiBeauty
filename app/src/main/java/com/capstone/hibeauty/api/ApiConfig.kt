@@ -1,4 +1,4 @@
-package com.capstone.hibeauty.authentication
+package com.capstone.hibeauty.api
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

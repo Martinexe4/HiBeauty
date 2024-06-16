@@ -4,8 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.capstone.hibeauty.adapter.ImageSliderAdapter
-import com.capstone.hibeauty.authentication.Product
+import com.capstone.hibeauty.api.Product
 import com.capstone.hibeauty.databinding.ActivityProductDetailBinding
 
 class ProductDetailActivity : AppCompatActivity() {

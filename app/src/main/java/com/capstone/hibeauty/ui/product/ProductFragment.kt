@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.adapter.HorizontalProductAdapter
-import com.capstone.hibeauty.authentication.ApiConfig
+import com.capstone.hibeauty.api.ApiConfig
 import android.widget.Toast
 import com.capstone.hibeauty.adapter.VerticalProductAdapter
-import com.capstone.hibeauty.authentication.ProductResponse
+import com.capstone.hibeauty.api.ProductResponse
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import retrofit2.Call
 import retrofit2.Callback

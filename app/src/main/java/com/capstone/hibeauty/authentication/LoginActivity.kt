@@ -7,6 +7,9 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.hibeauty.MainActivity
+import com.capstone.hibeauty.api.ApiConfig
+import com.capstone.hibeauty.api.LoginRequest
+import com.capstone.hibeauty.api.LoginResponse
 import com.capstone.hibeauty.databinding.ActivityLoginBinding
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import retrofit2.Call

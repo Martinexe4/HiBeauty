@@ -3,7 +3,7 @@ package com.capstone.hibeauty.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.capstone.hibeauty.authentication.HistoryItem
+import com.capstone.hibeauty.api.HistoryItem
 import com.capstone.hibeauty.databinding.ItemHistoryBinding
 
 class HistoryAdapter(private var items: List<HistoryItem>) : RecyclerView.Adapter<HistoryAdapter.ViewHolder>() {
