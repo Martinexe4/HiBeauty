@@ -1,6 +1,5 @@
 package com.capstone.hibeauty.scan
 
-import android.content.Context
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -15,6 +14,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONObject
+import java.io.BufferedReader
+import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
@@ -61,65 +62,79 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun saveResultToDatabase() {
-        // Ambil token dari SharedPreferenceUtil
-        val token = SharedPreferenceUtil.getToken(this)
+        val url = "https://backend-q4bx5v5sia-et.a.run.app/predictions"
+        val skinId = 3 // Example skinId, you may change it according to your needs
+        val jsonBody = JSONObject()
+        jsonBody.put("skinId", skinId)
 
-        // Pastikan token tidak kosong atau null sebelum menggunakan
-        if (token.isNullOrEmpty()) {
-            showToast("Token not found, please login again")
-            return
+        val predictionsArray = JSONArray()
+        results?.forEach { (key, value) ->
+            val predictionObject = JSONObject()
+            predictionObject.put("id", getIdForKey(key)) // You need to implement getIdForKey function
+            predictionObject.put("percentage", value)
+            predictionsArray.put(predictionObject)
         }
+        jsonBody.put("predictions", predictionsArray)
 
-        // Create JSON payload
-        val jsonObject = JSONObject().apply {
-            put("skinId", "3") // Sesuaikan skinId sesuai kebutuhan
-            val predictionsArray = JSONArray()
-            results?.forEach { (key, value) ->
-                val prediction = JSONObject().apply {
-                    put("id", key) // Menggunakan key sebagai string
-                    put("percentage", value)
-                }
-                predictionsArray.put(prediction)
-            }
-            put("predictions", predictionsArray)
-        }
+        // Print the payload to logcat for debugging
+        println("Payload: $jsonBody")
 
-        // Coroutine untuk menjalankan operasi jaringan di thread background
         CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val url = URL("https://backend-q4bx5v5sia-et.a.run.app/predictions")
-                val connection = (url.openConnection() as HttpURLConnection).apply {
-                    requestMethod = "POST"
-                    setRequestProperty("Content-Type", "application/json; utf-8")
-                    setRequestProperty("Authorization", "Bearer $token") // Gunakan token dari SharedPreferenceUtil
-                    doOutput = true
-                }
-
-                connection.outputStream.use { outputStream ->
-                    OutputStreamWriter(outputStream).use { writer ->
-                        writer.write(jsonObject.toString())
-                        writer.flush()
-                    }
-                }
-
-                val responseCode = connection.responseCode
-                val responseBody = connection.inputStream.bufferedReader().use { it.readText() }
-
+            val token = SharedPreferenceUtil.getToken(this@ResultActivity)
+            if (token == null) {
                 withContext(Dispatchers.Main) {
-                    if (responseCode == HttpURLConnection.HTTP_OK) {
-                        showToast("Results saved successfully!")
-                    } else {
-                        showToast("Failed to save results: $responseCode")
-                        // Tambahkan log untuk respons dari server
-                        println("Response body: $responseBody")
+                    showToast("Authentication token is missing.")
+                }
+                return@launch
+            }
+
+            try {
+                val urlConnection = URL(url).openConnection() as HttpURLConnection
+                urlConnection.requestMethod = "POST"
+                urlConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8")
+                urlConnection.setRequestProperty("Authorization", "Bearer $token")
+                urlConnection.doOutput = true
+
+                val outputStreamWriter = OutputStreamWriter(urlConnection.outputStream)
+                outputStreamWriter.write(jsonBody.toString())
+                outputStreamWriter.flush()
+                outputStreamWriter.close()
+
+                val responseCode = urlConnection.responseCode
+                val responseMessage = urlConnection.responseMessage
+
+                if (responseCode in 200..299) {
+                    withContext(Dispatchers.Main) {
+                        showToast("Results saved successfully.")
+                    }
+                } else {
+                    val errorStream = BufferedReader(InputStreamReader(urlConnection.errorStream))
+                    val errorResponse = StringBuilder()
+                    var line: String?
+                    while (errorStream.readLine().also { line = it } != null) {
+                        errorResponse.append(line)
+                    }
+                    errorStream.close()
+
+                    withContext(Dispatchers.Main) {
+                        showToast("Failed to save results: $responseCode $responseMessage")
+                        showToast("Error details: $errorResponse")
                     }
                 }
             } catch (e: Exception) {
-                e.printStackTrace()
                 withContext(Dispatchers.Main) {
-                    showToast("An error occurred: ${e.message}")
+                    showToast("Error: ${e.message}")
                 }
             }
+        }
+    }
+
+    private fun getIdForKey(key: String): Int {
+        return when (key) {
+            "acne" -> 1
+            "eye bags" -> 2
+            "oily" -> 3
+            else -> -1 // Handle unknown keys appropriately
         }
     }
 
