@@ -12,7 +12,6 @@ import com.capstone.hibeauty.adapter.PersonalizationAdapter
 import com.capstone.hibeauty.api.ApiConfig
 import com.capstone.hibeauty.api.AgeGenderRequest
 import com.capstone.hibeauty.api.AgeGenderResponse
-import com.capstone.hibeauty.databinding.ActivityPersonalizationBinding
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
