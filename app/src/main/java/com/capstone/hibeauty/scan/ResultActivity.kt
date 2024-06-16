@@ -63,7 +63,7 @@ class ResultActivity : AppCompatActivity() {
 
     private fun saveResultToDatabase() {
         val url = "https://backend-q4bx5v5sia-et.a.run.app/predictions"
-        val skinId = 3 // Example skinId, you may change it according to your needs
+        val skinId = "3" // Example skinId as a string
         val jsonBody = JSONObject()
         jsonBody.put("skinId", skinId)
 
@@ -128,7 +128,6 @@ class ResultActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun getIdForKey(key: String): Int {
         return when (key) {
             "acne" -> 1
