@@ -1,10 +1,12 @@
 package com.capstone.hibeauty.ui.home
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,12 +20,19 @@ import androidx.viewpager2.widget.ViewPager2
 import com.capstone.hibeauty.MainActivity
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.adapter.SlideInfoAdapter
+import com.capstone.hibeauty.api.ApiConfig
+import com.capstone.hibeauty.api.ApiResponse
 import com.capstone.hibeauty.databinding.FragmentHomeBinding
+import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
+@Suppress("NAME_SHADOWING")
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -122,9 +131,46 @@ class HomeFragment : Fragment() {
     }
 
     private fun loadUserName() {
-        currentUser?.let { user ->
-            val displayName = user.displayName ?: "User"
-            binding.tvGreeting.text = "Hello $displayName,"
+//        currentUser?.let { user ->
+//            val displayName = user.displayName ?: "User"
+//            binding.tvGreeting.text = "Hello $displayName,"
+//        }
+        val apiService = ApiConfig.apiService
+        val token = SharedPreferenceUtil.getToken(requireContext())
+
+        Log.d("Home Fragment", "Token $token")
+
+        if (token != null) {
+            val call = apiService.getUserProfile("Bearer $token")
+
+            call.enqueue(object : Callback<ApiResponse> {
+                @SuppressLint("SetTextI18n")
+                override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
+                    if (response.isSuccessful) {
+                        val apiResponse = response.body()
+
+                        if (apiResponse != null) {
+                            val user = apiResponse.data
+
+                            if (user.isNotEmpty()) {
+                                val user = user[0]
+                                binding?.tvGreeting?.text = "Hello ${user.USERNAME}"
+                            }
+                        } else {
+                            Log.d("ProfileFragment", "Response body is null")
+                        }
+                    } else {
+                        Log.d("ProfileFragment", "Failed to fetch user profile: ${response.code()}")
+                    }
+                }
+
+                override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                    Log.d("ProfileFragment", "Failed to fetch user profile: ${t.message}")
+                }
+
+            })
+        } else {
+            Log.d("ProfileFragment", "Token not found")
         }
     }
 

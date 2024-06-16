@@ -118,6 +118,6 @@ dependencies {
     //error camera activity
     implementation(libs.guava)
 
-    implementation("com.squareup.picasso:picasso:2.71828")
+    implementation(libs.picasso)
 
 }

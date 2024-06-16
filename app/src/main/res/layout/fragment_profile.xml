@@ -54,14 +54,14 @@
                     android:id="@+id/card_image_profile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:cardBackgroundColor="@android:color/transparent"
                     android:layout_marginTop="76dp"
-                    app:strokeColor="@color/colorPrimarySoft"
-                    app:strokeWidth="2dp"
+                    app:cardBackgroundColor="@android:color/transparent"
                     app:cardCornerRadius="100dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView">
+                    app:layout_constraintTop_toTopOf="@+id/textView"
+                    app:strokeColor="@color/colorPrimarySoft"
+                    app:strokeWidth="2dp">
 
                     <ImageView
                         android:id="@+id/imgProfile"
@@ -94,12 +94,12 @@
                     android:background="#00FFFFFF"
                     android:fontFamily="@font/poppins_bold"
                     android:maxWidth="250dp"
-                    android:text="Username"
                     android:textAlignment="center"
                     android:textSize="18sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Username" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

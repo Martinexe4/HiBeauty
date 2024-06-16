@@ -28,6 +28,7 @@ constraintlayout = "2.1.4"
 materialVersion = "1.4.0"
 navigationFragmentKtxVersion = "2.7.4"
 navigationUiKtxVersion = "2.7.4"
+picasso = "2.71828"
 playServicesAuth = "21.1.0"
 retrofit = "2.9.0"
 roomRuntime = "2.6.1"
@@ -88,6 +89,7 @@ google-services = { group = "com.google.gms", name = "google-services", version.
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 material-v140 = { module = "com.google.android.material:material", version.ref = "materialVersion" }
 material-v190 = { module = "com.google.android.material:material", version.ref = "googleMaterial" }
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
 play-services-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playServicesAuth" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
