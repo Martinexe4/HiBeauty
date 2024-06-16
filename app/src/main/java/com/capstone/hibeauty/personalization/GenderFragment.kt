@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.fragment.app.Fragment
-import com.capstone.hibeauty.R
 import com.capstone.hibeauty.databinding.FragmentGenderBinding
 
 class GenderFragment : Fragment() {

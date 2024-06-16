@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.capstone.hibeauty.databinding.FragmentAgeBinding
 
-
 class AgeFragment : Fragment() {
 
     private var _binding: FragmentAgeBinding? = null
