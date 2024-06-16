@@ -1,17 +1,20 @@
 package com.capstone.hibeauty.ui.product
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.SearchView
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.adapter.HorizontalProductAdapter
-import com.capstone.hibeauty.api.ApiConfig
-import android.widget.Toast
 import com.capstone.hibeauty.adapter.VerticalProductAdapter
+import com.capstone.hibeauty.api.ApiConfig
+import com.capstone.hibeauty.api.Product
 import com.capstone.hibeauty.api.ProductResponse
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import retrofit2.Call
@@ -22,8 +25,10 @@ class ProductFragment : Fragment() {
 
     private lateinit var horizontalRecyclerView: RecyclerView
     private lateinit var verticalRecyclerView: RecyclerView
+    private lateinit var searchView: SearchView
     private lateinit var horizontalAdapter: HorizontalProductAdapter
     private lateinit var verticalAdapter: VerticalProductAdapter
+    private var products: List<Product> = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +38,7 @@ class ProductFragment : Fragment() {
 
         horizontalRecyclerView = view.findViewById(R.id.horizontal_recycler_view)
         verticalRecyclerView = view.findViewById(R.id.vertical_recycler_view)
+        searchView = view.findViewById(R.id.search_view)
 
         horizontalAdapter = HorizontalProductAdapter(emptyList())
         verticalAdapter = VerticalProductAdapter(emptyList())
@@ -48,6 +54,9 @@ class ProductFragment : Fragment() {
 
         // Fetch products
         fetchProducts()
+
+        // Set up search functionality
+        setupSearchView()
 
         return view
     }
@@ -68,7 +77,9 @@ class ProductFragment : Fragment() {
                         val productResponse = response.body()
 
                         if (productResponse != null) {
-                            val products = productResponse.data
+                            products = productResponse.data
+
+                            Log.d("ProductFragment", "Fetched products: $products")
 
                             horizontalAdapter.updateData(products.take(5)) // Take first 5 products for horizontal RecyclerView
                             verticalAdapter.updateData(products.drop(5))  // Drop first 5 products for vertical RecyclerView
@@ -87,6 +98,32 @@ class ProductFragment : Fragment() {
         } else {
             showToast("Token not found")
         }
+    }
+
+    private fun setupSearchView() {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                query?.let { filterProducts(it) }
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                newText?.let { filterProducts(it) }
+                return false
+            }
+        })
+    }
+
+    private fun filterProducts(query: String) {
+        val filteredProducts = products.filter {
+            it.name.contains(query, ignoreCase = true) ||
+                    it.description.contains(query, ignoreCase = true)
+        }
+
+        Log.d("ProductFragment", "Filtered products: $filteredProducts for query: $query")
+
+        horizontalAdapter.updateData(filteredProducts.take(5)) // Take first 5 filtered products for horizontal RecyclerView
+        verticalAdapter.updateData(filteredProducts.drop(5))  // Drop first 5 filtered products for vertical RecyclerView
     }
 
     private fun showToast(message: String) {
