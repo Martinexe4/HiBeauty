@@ -105,7 +105,6 @@ class ResultActivity : AppCompatActivity() {
                             if (data.has("SKINID")) {
                                 val skinId = data.getString("SKINID")
                                 Log.d("SKINID", "SKINID: $skinId")
-                                saveSkinIdToPreferences(skinId)  // Save SKINID to SharedPreferences
                                 savePredictionToDatabase(skinId)
                             } else {
                                 withContext(Dispatchers.Main) {
@@ -131,13 +130,6 @@ class ResultActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun saveSkinIdToPreferences(skinId: String) {
-        val sharedPreferences = getSharedPreferences("HiBeautyPreferences", MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        editor.putString("SKINID", skinId)
-        editor.apply()
     }
 
     private fun savePredictionToDatabase(skinId: String) {

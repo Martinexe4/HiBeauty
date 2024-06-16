@@ -17,7 +17,6 @@ import com.capstone.hibeauty.authentication.LoginActivity
 import com.capstone.hibeauty.databinding.FragmentProfileBinding
 import com.capstone.hibeauty.api.ApiConfig
 import com.capstone.hibeauty.api.ApiResponse
-import com.capstone.hibeauty.profile.HistoryActivity
 import com.capstone.hibeauty.profile.InfoUserActivity
 import com.capstone.hibeauty.profile.LanguageActivity
 import com.capstone.hibeauty.profile.PolicyActivity
@@ -61,11 +60,6 @@ class ProfileFragment : Fragment() {
 
         binding?.infoUser?.setOnClickListener {
             val intent = Intent(activity, InfoUserActivity::class.java)
-            startActivity(intent)
-        }
-
-        binding?.historyAnalysis?.setOnClickListener {
-            val intent = Intent(activity, HistoryActivity::class.java)
             startActivity(intent)
         }
 

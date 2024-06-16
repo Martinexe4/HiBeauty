@@ -28,9 +28,6 @@
             android:name=".personalization.PersonalizationActivity"
             android:exported="false" />
         <activity
-            android:name=".profile.HistoryActivity"
-            android:exported="false" />
-        <activity
             android:name=".profile.PolicyActivity"
             android:exported="false" />
         <activity

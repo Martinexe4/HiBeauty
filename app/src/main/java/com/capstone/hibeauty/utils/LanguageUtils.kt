@@ -1,4 +1,4 @@
-package com.capstone.hibeauty.profile
+package com.capstone.hibeauty.utils
 
 import android.content.Context
 import android.content.res.Configuration

@@ -13,7 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.authentication.LoginActivity
 import com.capstone.hibeauty.databinding.ActivityOnboardingBinding
-import com.capstone.hibeauty.profile.LanguageUtils
+import com.capstone.hibeauty.utils.LanguageUtils
 
 @Suppress("DEPRECATION")
 class OnboardingActivity : AppCompatActivity() {

@@ -44,5 +44,5 @@
         android:contentDescription="@string/center_button"
         app:backgroundTint="@color/colorPrimary"
         app:layout_anchor="@id/nav"
-        app:srcCompat="@drawable/ic_scan" />
+        app:srcCompat="@drawable/ic_scan_white" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
