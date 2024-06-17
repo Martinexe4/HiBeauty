@@ -80,6 +80,12 @@ data class ProductResponse(
     val data: List<Product>
 )
 
+data class ApiResponse(
+    val status: Boolean,
+    val message: String,
+    val data: List<User>
+)
+
 data class UserProfileResponse(
     val status: Boolean,
     val message: String,
@@ -90,12 +96,6 @@ data class UserProfileData(
     val USERNAME: String,
     val AGE: Int,
     val GENDER: String
-)
-
-data class ApiResponse(
-    val status: Boolean,
-    val message: String,
-    val data: List<User>
 )
 
 

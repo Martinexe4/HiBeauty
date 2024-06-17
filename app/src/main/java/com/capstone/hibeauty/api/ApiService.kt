@@ -17,9 +17,6 @@ interface ApiService {
     @GET("products")
     fun getAllProducts(@Header("Authorization") token: String): Call<ProductResponse>
 
-    @GET("users")
-    fun getUserProfile(@Header("Authorization") token: String): Call<ApiResponse>
-
     @POST("user/{id}/age-gender")
     fun updateUserAgeGender(
         @Header("Authorization") token: String,
@@ -29,4 +26,10 @@ interface ApiService {
 
     @GET("user/{USERID}/profile")
     fun getUserProfile2(@Path("USERID") userId: String): Call<UserProfileResponse>
+
+    @GET("user/{userId}/profile")
+    fun getUserProfile(
+        @Header("Authorization") token: String,
+        @Path("userId") userId: String
+    ): Call<UserProfileResponse>
 }

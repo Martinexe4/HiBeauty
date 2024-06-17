@@ -13,10 +13,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.capstone.hibeauty.api.ApiConfig
+import com.capstone.hibeauty.api.UserProfileResponse
 import com.capstone.hibeauty.authentication.LoginActivity
 import com.capstone.hibeauty.databinding.FragmentProfileBinding
-import com.capstone.hibeauty.api.ApiConfig
-import com.capstone.hibeauty.api.ApiResponse
 import com.capstone.hibeauty.profile.InfoUserActivity
 import com.capstone.hibeauty.profile.LanguageActivity
 import com.capstone.hibeauty.profile.PolicyActivity
@@ -86,62 +86,44 @@ class ProfileFragment : Fragment() {
         }
     }
 
-
-
     private fun fetchUserProfile() {
         val apiService = ApiConfig.apiService
         val token = SharedPreferenceUtil.getToken(requireContext())
+        val userId = SharedPreferenceUtil.getUserId(requireContext())
 
-        Log.d("ProfileFragment", "Token: $token")
+        Log.d("ProfileFragment", "Token: $token, UserId: $userId")
 
-        if (token != null) {
-            val call = apiService.getUserProfile("Bearer $token")
+        if (token != null && userId != null) {
+            val call = apiService.getUserProfile("Bearer $token", userId)
 
-            call.enqueue(object : Callback<ApiResponse> {
-                override fun onResponse(call: Call<ApiResponse>, response: Response<ApiResponse>) {
+            call.enqueue(object : Callback<UserProfileResponse> {
+                override fun onResponse(call: Call<UserProfileResponse>, response: Response<UserProfileResponse>) {
                     if (response.isSuccessful) {
-                        val apiResponse = response.body()
+                        val userProfileResponse = response.body()
 
-                        if (apiResponse != null) {
-                            val users = apiResponse.data
-
-                            Log.d("ProfileFragment", "Response body: $users")
-
-                            // Assuming you're displaying the first user's data
-                            if (users.isNotEmpty()) {
-                                val user = users[0]
-                                binding?.txtDisplayName?.text = user.USERNAME
-                                if (user.PROFILEIMG != null) {
-                                    Picasso.get().load(user.PROFILEIMG).into(binding?.imgProfile)
-                                } else {
-                                    // Handle case where PROFILEIMG is null
-                                    // Example:
-                                    // Picasso.get().load(R.drawable.placeholder_image).into(binding?.imgProfile)
-                                    // or
-                                    // binding?.imgProfile?.setImageResource(R.drawable.placeholder_image)
-                                }
-                            }
+                        if (userProfileResponse != null && userProfileResponse.status) {
+                            val user = userProfileResponse.data
+                            binding?.txtDisplayName?.text = user.USERNAME
+                            // Load user profile picture if available
+//                            if (!user.profilePicture.isNullOrEmpty()) {
+//                                Picasso.get().load(user.profilePicture).into(binding?.profileImageView)
+//                            }
                         } else {
-                            Log.d("ProfileFragment", "Response body is null")
-                            showToast("Failed to fetch user profile: Response body is null")
+                            Log.d("ProfileFragment", "Response body is null or status is false")
                         }
                     } else {
                         Log.d("ProfileFragment", "Failed to fetch user profile: ${response.code()}")
-                        showToast("Failed to fetch user profile: ${response.code()}")
                     }
                 }
 
-                override fun onFailure(call: Call<ApiResponse>, t: Throwable) {
+                override fun onFailure(call: Call<UserProfileResponse>, t: Throwable) {
                     Log.d("ProfileFragment", "Failed to fetch user profile: ${t.message}")
-                    showToast("Failed to fetch user profile: ${t.message}")
                 }
             })
         } else {
-            Log.d("ProfileFragment", "Token not found")
-            showToast("Token not found")
+            Log.d("ProfileFragment", "Token or UserId not found")
         }
     }
-
 
     private fun showToast(message: String) {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()

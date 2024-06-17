@@ -1,6 +1,7 @@
 package com.capstone.hibeauty.profile
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.hibeauty.api.ApiConfig
@@ -20,37 +21,36 @@ class InfoUserActivity : AppCompatActivity() {
         binding = ActivityInfoUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.hide()
-
-        val userId = SharedPreferenceUtil.getUserId(this)
-        if (userId != null) {
-            fetchUserProfile(userId)
-        } else {
-            Toast.makeText(this, "User ID not found", Toast.LENGTH_SHORT).show()
-        }
-
+        val userId = SharedPreferenceUtil.getUserId(this) ?: ""
+        val token = SharedPreferenceUtil.getToken(this) ?: ""
+        fetchUserProfile(userId, token)
 
         binding.closeButton.setOnClickListener {
             finish()
         }
     }
 
-    private fun fetchUserProfile(userId: String) {
-        val call = ApiConfig.apiService.getUserProfile2(userId)
+    private fun fetchUserProfile(userId: String, token: String) {
+        val call = ApiConfig.apiService.getUserProfile("Bearer $token", userId)
+
         call.enqueue(object : Callback<UserProfileResponse> {
             override fun onResponse(call: Call<UserProfileResponse>, response: Response<UserProfileResponse>) {
                 if (response.isSuccessful && response.body()?.status == true) {
                     val userProfile = response.body()?.data
-                    binding.tvName.text = userProfile?.USERNAME
-                    binding.tvAge.text = userProfile?.AGE.toString()
-                    binding.tvGender.text = userProfile?.GENDER
+                    userProfile?.let {
+                        binding.tvName.text = it.USERNAME
+                        binding.tvAge.text = it.AGE.toString()
+                        binding.tvGender.text = it.GENDER
+                    }
                 } else {
-                    Toast.makeText(this@InfoUserActivity, "Failed to retrieve user profile", Toast.LENGTH_SHORT).show()
+                    Log.e("ProfileInfo", "Failed to retrieve profile: ${response.errorBody()?.string()}")
+                    Toast.makeText(this@InfoUserActivity, "Failed to retrieve profile", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<UserProfileResponse>, t: Throwable) {
-                Toast.makeText(this@InfoUserActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                Log.e("ProfileInfo", "Error retrieving profile", t)
+                Toast.makeText(this@InfoUserActivity, "Error retrieving profile", Toast.LENGTH_SHORT).show()
             }
         })
     }

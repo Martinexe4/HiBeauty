@@ -97,7 +97,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun handleLoginSuccess() {
         if (SharedPreferenceUtil.isPersonalizationCompleted(this)) {
-            navigateToPersonalizationActivity() //chaneee navigateToMainActivity()
+            navigateToMainActivity() //chaneee navigateToMainActivity()
         } else {
             navigateToPersonalizationActivity()
         }
