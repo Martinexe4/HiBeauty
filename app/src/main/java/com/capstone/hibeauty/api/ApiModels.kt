@@ -135,3 +135,9 @@ data class UserProfileData(
 )
 
 
+
+data class Recommendation(
+    val name: String,
+    val description: String // Adjust fields as per actual response
+)
+

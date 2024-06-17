@@ -1,5 +1,6 @@
 package com.capstone.hibeauty.scan
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -63,13 +64,15 @@ class ResultActivity : AppCompatActivity() {
     }
 
     private fun saveImageToDatabase() {
+        val token = SharedPreferenceUtil.getToken(this)
+
         imageUri?.let { uri ->
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val url = URL("https://backend-q4bx5v5sia-et.a.run.app/skin/upload")
                     val connection = url.openConnection() as HttpURLConnection
                     connection.requestMethod = "POST"
-                    connection.setRequestProperty("Authorization", "Bearer <your_token_here>")
+                    connection.setRequestProperty("Authorization", "Bearer $token")
                     connection.doOutput = true
                     connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=boundary")
 
@@ -173,6 +176,10 @@ class ResultActivity : AppCompatActivity() {
                     Log.d("SavePredictionResponse", "Response: $response")  // Log the response for debugging
                     withContext(Dispatchers.Main) {
                         showToast("Prediction saved successfully")
+                        // Navigate to RecommendationActivity
+                        val intent = Intent(this@ResultActivity, RecommendationActivity::class.java)
+                        intent.putExtra("skinId", skinId)
+                        startActivity(intent)
                     }
                 } else {
                     val errorResponse = BufferedReader(InputStreamReader(connection.errorStream)).use { it.readText() }
