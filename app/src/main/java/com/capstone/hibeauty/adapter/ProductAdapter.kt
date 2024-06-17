@@ -32,10 +32,28 @@ class HorizontalProductAdapter(private var productList: List<Product>) : Recycle
         notifyDataSetChanged()
     }
 
+    private fun mapTypeIdToString(typeId: Int): String {
+        return when (typeId) {
+            1 -> "Moisturizer"
+            2 -> "Cleanser"
+            3 -> "Powder"
+            4 -> "Balm"
+            5 -> "Serum"
+            6 -> "Toner"
+            7 -> "Face Wash"
+            8 -> "Eye Cream"
+            9 -> "Face Scrub"
+            10 -> "Sunscreen"
+            11 -> "Micellar Water"
+            12 -> "Acne Spot"
+            else -> "Unknown"
+        }
+    }
+
     inner class ViewHolder(private val binding: ItemProductHorizontalBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             binding.productName.text = product.name
-            binding.productType.text = product.description
+            binding.productType.text = mapTypeIdToString(product.typeId)
             Glide.with(binding.productImage.context)
                 .load(product.image)
                 .placeholder(R.drawable.placeholder_image)
@@ -71,10 +89,28 @@ class VerticalProductAdapter(private var productList: List<Product>) : RecyclerV
         notifyDataSetChanged()
     }
 
+    private fun mapTypeIdToString(typeId: Int): String {
+        return when (typeId) {
+            1 -> "Moisturizer"
+            2 -> "Cleanser"
+            3 -> "Powder"
+            4 -> "Balm"
+            5 -> "Serum"
+            6 -> "Toner"
+            7 -> "Face Wash"
+            8 -> "Eye Cream"
+            9 -> "Face Scrub"
+            10 -> "Sunscreen"
+            11 -> "Micellar Water"
+            12 -> "Acne Spot"
+            else -> "Unknown"
+        }
+    }
+
     inner class ViewHolder(private val binding: ItemProductVerticalBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) {
             binding.productName.text = product.name
-            binding.productType.text = product.description
+            binding.productType.text = mapTypeIdToString(product.typeId)
             Glide.with(binding.productImage.context)
                 .load(product.image) // Ensure this is the correct image URL
                 .placeholder(R.drawable.placeholder_image) // Optionally add a placeholder

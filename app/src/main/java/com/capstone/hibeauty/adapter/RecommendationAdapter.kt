@@ -32,12 +32,12 @@ class RecommendationAdapter(private val context: Context) : ListAdapter<ProductR
     inner class RecommendationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val cardView: CardView= itemView.findViewById(R.id.cardView)
         private val nameTextView: TextView = itemView.findViewById(R.id.recommendationNameTextView)
-        private val descriptionTextView: TextView = itemView.findViewById(R.id.recommendationDescriptionTextView)
+        private val typeTextView: TextView = itemView.findViewById(R.id.recommendationTypeTextView)
         private val imageView: ImageView = itemView.findViewById(R.id.recommendationImageView)
 
         fun bind(recommendation: ProductRecommendation) {
             nameTextView.text = recommendation.name
-            descriptionTextView.text = recommendation.description
+            typeTextView.text = mapTypeIdToString(recommendation.typeId)
 
             // Load image using Glide
             Glide.with(context)
@@ -53,6 +53,7 @@ class RecommendationAdapter(private val context: Context) : ListAdapter<ProductR
                     putExtra("recommendationIngredients", recommendation.ingridients)
                     putExtra("recommendationLink", recommendation.link)
                     putExtra("recommendationImage", recommendation.image)
+                    putExtra("recommendationType", recommendation.typeId)
                 }
                 context.startActivity(intent)
             }
@@ -66,6 +67,24 @@ class RecommendationAdapter(private val context: Context) : ListAdapter<ProductR
 
         override fun areContentsTheSame(oldItem: ProductRecommendation, newItem: ProductRecommendation): Boolean {
             return oldItem == newItem
+        }
+    }
+
+    private fun mapTypeIdToString(typeId: Int): String {
+        return when (typeId) {
+            1 -> "Moisturizer"
+            2 -> "Cleanser"
+            3 -> "Powder"
+            4 -> "Balm"
+            5 -> "Serum"
+            6 -> "Toner"
+            7 -> "Face Wash"
+            8 -> "Eye Cream"
+            9 -> "Face Scrub"
+            10 -> "Sunscreen"
+            11 -> "Micellar Water"
+            12 -> "Acne Spot"
+            else -> "Unknown"
         }
     }
 }

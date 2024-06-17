@@ -22,12 +22,14 @@ class DetailRecommendationActivity : AppCompatActivity() {
         val recommendationDescription = intent.getStringExtra("recommendationDescription")
         val recommendationIngredients = intent.getStringExtra("recommendationIngredients")
         val recommendationLink = intent.getStringExtra("recommendationLink")
-        val recommendationImage = intent.getStringExtra("recommendationImage") // tambahkan ini
+        val recommendationImage = intent.getStringExtra("recommendationImage")// tambahkan ini
+        val recommendationType = intent.getIntExtra("recommendationType", -1)
 
         // Set data ke view
         binding.productTitle.text = recommendationName
         binding.productDescription.text = recommendationDescription
         binding.productIngredients.text = recommendationIngredients
+        binding.productType.text = mapTypeIdToString(recommendationType)
 
         // Load image using Glide
         Glide.with(this)
@@ -46,6 +48,24 @@ class DetailRecommendationActivity : AppCompatActivity() {
         // Set click listener untuk close button
         binding.closeButton.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun mapTypeIdToString(typeId: Int): String {
+        return when (typeId) {
+            1 -> "Moisturizer"
+            2 -> "Cleanser"
+            3 -> "Powder"
+            4 -> "Balm"
+            5 -> "Serum"
+            6 -> "Toner"
+            7 -> "Face Wash"
+            8 -> "Eye Cream"
+            9 -> "Face Scrub"
+            10 -> "Sunscreen"
+            11 -> "Micellar Water"
+            12 -> "Acne Spot"
+            else -> "Unknown"
         }
     }
 }
