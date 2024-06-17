@@ -10,6 +10,7 @@ object SharedPreferenceUtil {
     private const val KEY_USERNAME = "USERNAME"
     private const val KEY_USER_ID = "USER_ID"
     private const val KEY_PERSONALIZATION_COMPLETED = "PERSONALIZATION_COMPLETED"
+    private const val KEY_PROFILE_IMAGE_URL = "profile_image_url"
 
     fun saveToken(context: Context, token: String) {
         context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
@@ -86,6 +87,16 @@ object SharedPreferenceUtil {
             .remove(KEY_USERNAME)
             .remove(KEY_USER_ID)
             .apply()
+    }
+
+    fun saveProfileImageUrl(context: Context, url: String) {
+        val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        prefs.edit().putString(KEY_PROFILE_IMAGE_URL, url).apply()
+    }
+
+    fun getProfileImageUrl(context: Context): String? {
+        val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
+        return prefs.getString(KEY_PROFILE_IMAGE_URL, null)
     }
 
     // Add other methods as needed

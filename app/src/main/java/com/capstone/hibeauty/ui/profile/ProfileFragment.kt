@@ -1,9 +1,14 @@
 package com.capstone.hibeauty.ui.profile
 
+import android.Manifest
+import android.app.Activity
+import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.OpenableColumns
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,22 +18,46 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.capstone.hibeauty.api.ApiConfig
+import com.capstone.hibeauty.api.ApiService
 import com.capstone.hibeauty.api.UserProfileResponse
+import com.capstone.hibeauty.api.YourResponseModel
 import com.capstone.hibeauty.authentication.LoginActivity
 import com.capstone.hibeauty.databinding.FragmentProfileBinding
 import com.capstone.hibeauty.profile.InfoUserActivity
 import com.capstone.hibeauty.profile.LanguageActivity
 import com.capstone.hibeauty.profile.PolicyActivity
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
-import com.squareup.picasso.Picasso
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Header
+import retrofit2.http.Multipart
+import retrofit2.http.PUT
+import retrofit2.http.Part
+import retrofit2.http.Path
+import java.io.File
+import java.io.IOException
+
 
 class ProfileFragment : Fragment() {
-    var binding: FragmentProfileBinding? = null
+    private var binding: FragmentProfileBinding? = null
     private val PICK_IMAGE_REQUEST = 1
+    private var selectedImageUri: Uri? = null
+    private lateinit var userService: ApiService // Ensure this is initialized properly
+
 
 
     override fun onCreateView(
@@ -72,12 +101,12 @@ class ProfileFragment : Fragment() {
     private fun choosePhoto() {
         if (ContextCompat.checkSelfPermission(
                 requireContext(),
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
+                Manifest.permission.READ_EXTERNAL_STORAGE
             ) != PackageManager.PERMISSION_GRANTED
         ) {
             ActivityCompat.requestPermissions(
                 requireActivity(),
-                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+                arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
                 PICK_IMAGE_REQUEST
             )
         } else {
@@ -85,6 +114,77 @@ class ProfileFragment : Fragment() {
             startActivityForResult(intent, PICK_IMAGE_REQUEST)
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null && data.data != null) {
+            selectedImageUri = data.data
+            uploadImage()
+        }
+    }
+
+    private fun uploadImage() {
+        val userId = SharedPreferenceUtil.getUserId(requireActivity())
+        val token = SharedPreferenceUtil.getToken(requireActivity())
+
+        val contentResolver = requireActivity().contentResolver
+        val inputStream = contentResolver.openInputStream(selectedImageUri!!)
+        val file = File(requireActivity().cacheDir, contentResolver.getFileName(selectedImageUri!!))
+        val outputStream = file.outputStream()
+        inputStream!!.copyTo(outputStream)
+
+        val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
+        val body = MultipartBody.Part.createFormData("IMAGE", file.name, requestFile)
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("https://backend-q4bx5v5sia-et.a.run.app/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val service = retrofit.create(ApiService::class.java)
+        val call = userId?.let { service.uploadProfileImage("Bearer $token", it, body) }
+
+        call?.enqueue(object : Callback<ResponseBody> {
+            override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                if (response.isSuccessful) {
+                    // Handle success
+                    Toast.makeText(requireContext(), "Image uploaded successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Handle failure
+                    Toast.makeText(requireContext(), "Image upload failed", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
+                // Handle failure
+                Toast.makeText(requireContext(), "Image upload failed: ${t.message}", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    // Extension function to get the file name from the Uri
+    private fun ContentResolver.getFileName(uri: Uri): String {
+        var name = ""
+        val returnCursor = this.query(uri, null, null, null, null)
+        if (returnCursor != null) {
+            val nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+            returnCursor.moveToFirst()
+            name = returnCursor.getString(nameIndex)
+            returnCursor.close()
+        }
+        return name
+    }
+
+    interface ApiService {
+        @Multipart
+        @PUT("user/{id}")
+        fun uploadProfileImage(
+            @Header("Authorization") authHeader: String,
+            @Path("id") userId: String,
+            @Part image: MultipartBody.Part
+        ): Call<ResponseBody>
+    }
+
 
     private fun fetchUserProfile() {
         val apiService = ApiConfig.apiService
@@ -104,10 +204,6 @@ class ProfileFragment : Fragment() {
                         if (userProfileResponse != null && userProfileResponse.status) {
                             val user = userProfileResponse.data
                             binding?.txtDisplayName?.text = user.USERNAME
-                            // Load user profile picture if available
-//                            if (!user.profilePicture.isNullOrEmpty()) {
-//                                Picasso.get().load(user.profilePicture).into(binding?.profileImageView)
-//                            }
                         } else {
                             Log.d("ProfileFragment", "Response body is null or status is false")
                         }
@@ -123,10 +219,6 @@ class ProfileFragment : Fragment() {
         } else {
             Log.d("ProfileFragment", "Token or UserId not found")
         }
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
     private fun showLogoutConfirmationDialog() {
@@ -146,6 +238,8 @@ class ProfileFragment : Fragment() {
             .setNegativeButton("No", null)
             .show()
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

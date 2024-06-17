@@ -3,6 +3,42 @@ package com.capstone.hibeauty.api
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
+
+//khusus
+import com.google.gson.annotations.SerializedName
+
+data class YourResponseModel(
+    @SerializedName("status")
+    val status: Boolean,
+    @SerializedName("message")
+    val message: String,
+    @SerializedName("data")
+    val data: UserData
+)
+
+data class UserData(
+    @SerializedName("USERID")
+    val userId: String,
+    @SerializedName("USERNAME")
+    val username: String,
+    @SerializedName("EMAIL")
+    val email: String,
+    @SerializedName("PASSWORD")
+    val password: String,
+    @SerializedName("PROFILEIMG")
+    val profileImage: String?, // Assuming profile image is a string path or URL
+    @SerializedName("CREATEDAT")
+    val createdAt: String,
+    @SerializedName("UPDATEDAT")
+    val updatedAt: String,
+    @SerializedName("skinId")
+    val skinId: String?, // Assuming skinId can be nullable
+    @SerializedName("AGE")
+    val age: Int,
+    @SerializedName("GENDER")
+    val gender: String
+)
+//khusus
 data class RegisterRequest(
     val username: String,
     val email: String,
@@ -83,7 +119,7 @@ data class ProductResponse(
 data class ApiResponse(
     val status: Boolean,
     val message: String,
-    val data: List<User>
+    val data: User
 )
 
 data class UserProfileResponse(
