@@ -134,10 +134,19 @@ data class UserProfileData(
     val GENDER: String
 )
 
-
-
-data class Recommendation(
+data class ProductRecommendation(
+    val id: Int,
     val name: String,
-    val description: String // Adjust fields as per actual response
+    val description: String,
+    val ingridients: String,
+    val link: String,
+    val recomId: Int,
+    val typeId: Int
+)
+
+data class RecommendationResponse(
+    val status: Boolean,
+    val message: String,
+    val data: List<ProductRecommendation>
 )
 

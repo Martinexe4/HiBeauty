@@ -108,29 +108,14 @@
                             android:gravity="center"
                             android:orientation="horizontal">
 
-                            <!-- Vertical LinearLayout untuk Dry -->
-                            <LinearLayout
+                            <TextView
+                                android:id="@+id/resultTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="16dp"
-                                android:gravity="center"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/categoryTextView"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/poppins_bold"
-                                    android:text="Category"
-                                    android:textColor="@color/white" />
-
-                                <TextView
-                                    android:id="@+id/probabilityTextView"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/poppins_medium"
-                                    android:textColor="@color/white" />
-                            </LinearLayout>
+                                android:fontFamily="@font/poppins_bold"
+                                android:textSize="24sp"
+                                android:text="Result"
+                                android:textColor="@color/white" />
 
 
                         </LinearLayout>
@@ -162,72 +147,21 @@
                             android:textColor="@color/colorGrayDark" />
                     </LinearLayout>
 
-                    <!-- Kotak Keempat -->
-                    <LinearLayout
-                        android:id="@+id/linearLayout5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_bold"
-                            android:text="Skincare Recomendation Ingridients"
-                            android:textColor="@color/colorGrayDark" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/poppins_medium"
-                            android:text="Ini adalah konten dari kotak ketiga. Anda dapat menambahkan informasi lain di sini."
-                            android:textColor="@color/colorGrayDark" />
-                    </LinearLayout>
 
                     <!-- Bottom Buttons -->
-                    <LinearLayout
-                        android:id="@+id/bottom_buttons"
+                    <Button
+                        android:id="@+id/saveResultButton"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp"
-                        android:background="@android:color/white"
+                        android:layout_height="60dp"
+                        android:background="@drawable/button_selector"
+                        android:fontFamily="@font/poppins_bold"
                         android:gravity="center"
-                        android:orientation="horizontal"
+                        android:text="Get Recommendations"
+                        android:textColor="@android:color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
-
-                        <Button
-                            android:id="@+id/saveResultButton"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="16dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:background="@drawable/button_selector"
-                            android:fontFamily="@font/poppins_bold"
-                            android:gravity="center"
-                            android:text="Save result"
-                            android:textColor="@android:color/white" />
-
-                        <Button
-                            android:id="@+id/recommend_button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="16dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:background="@drawable/button_selector"
-                            android:fontFamily="@font/poppins_bold"
-                            android:gravity="center"
-                            android:text="Find Product"
-                            android:textColor="@android:color/white" />
-                    </LinearLayout>
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout4" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
         </androidx.constraintlayout.widget.ConstraintLayout>

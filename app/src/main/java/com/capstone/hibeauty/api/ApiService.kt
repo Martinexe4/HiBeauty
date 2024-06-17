@@ -37,5 +37,9 @@ interface ApiService {
         @Path("userId") userId: String
     ): Call<UserProfileResponse>
 
-
+    @GET("recommendations/{skinId}")
+    fun getRecommendations(
+        @Path("skinId") skinId: String,
+        @Header("Authorization") token: String
+    ): Call<RecommendationResponse>
 }

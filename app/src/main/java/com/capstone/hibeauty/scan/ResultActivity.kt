@@ -177,10 +177,17 @@ class ResultActivity : AppCompatActivity() {
                     withContext(Dispatchers.Main) {
                         showToast("Prediction saved successfully")
                         // Navigate to RecommendationActivity
-                        val intent = Intent(this@ResultActivity, RecommendationActivity::class.java)
-                        intent.putExtra("skinId", skinId)
-                        startActivity(intent)
+                        val fragment = RecommendationsFragment().apply {
+                            arguments = Bundle().apply {
+                                putString("skinId", skinId)
+                            }
+                        }
+                        fragment.show(supportFragmentManager, "RecommendationsFragment")
                     }
+
+
+
+
                 } else {
                     val errorResponse = BufferedReader(InputStreamReader(connection.errorStream)).use { it.readText() }
                     Log.e("SavePredictionError", "Failed to save prediction, response code: $responseCode, error: $errorResponse")

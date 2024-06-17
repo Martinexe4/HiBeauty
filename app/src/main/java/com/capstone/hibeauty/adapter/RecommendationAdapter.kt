@@ -1,16 +1,19 @@
 package com.capstone.hibeauty.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.capstone.hibeauty.R
-import com.capstone.hibeauty.api.Recommendation
+import com.capstone.hibeauty.api.ProductRecommendation
 
-class RecommendationAdapter : RecyclerView.Adapter<RecommendationAdapter.RecommendationViewHolder>() {
-
-    private val recommendations = mutableListOf<Recommendation>()
+class RecommendationAdapter : ListAdapter<ProductRecommendation, RecommendationAdapter.RecommendationViewHolder>(RecommendationDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecommendationViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recommendation, parent, false)
@@ -18,25 +21,31 @@ class RecommendationAdapter : RecyclerView.Adapter<RecommendationAdapter.Recomme
     }
 
     override fun onBindViewHolder(holder: RecommendationViewHolder, position: Int) {
-        val recommendation = recommendations[position]
+        val recommendation = getItem(position)
         holder.bind(recommendation)
     }
 
-    override fun getItemCount(): Int = recommendations.size
+    inner class RecommendationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val nameTextView: TextView = itemView.findViewById(R.id.recommendationNameTextView)
+        private val descriptionTextView: TextView = itemView.findViewById(R.id.recommendationDescriptionTextView)
+        private val ingredientsTextView: TextView = itemView.findViewById(R.id.recommendationIngredientsTextView)
+        private val linkTextView: TextView = itemView.findViewById(R.id.recommendationLinkTextView)
 
-    fun submitList(list: List<Recommendation>) {
-        recommendations.clear()
-        recommendations.addAll(list)
-        notifyDataSetChanged()
-    }
-
-    class RecommendationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val nameTextView: TextView = itemView.findViewById(R.id.recommendationName)
-        private val descriptionTextView: TextView = itemView.findViewById(R.id.recommendationDescription)
-
-        fun bind(recommendation: Recommendation) {
+        fun bind(recommendation: ProductRecommendation) {
             nameTextView.text = recommendation.name
             descriptionTextView.text = recommendation.description
+            ingredientsTextView.text = "Ingredients: ${recommendation.ingridients}"
+            linkTextView.text = "Link: ${recommendation.link}"
+        }
+    }
+
+    class RecommendationDiffCallback : DiffUtil.ItemCallback<ProductRecommendation>() {
+        override fun areItemsTheSame(oldItem: ProductRecommendation, newItem: ProductRecommendation): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: ProductRecommendation, newItem: ProductRecommendation): Boolean {
+            return oldItem == newItem
         }
     }
 }
