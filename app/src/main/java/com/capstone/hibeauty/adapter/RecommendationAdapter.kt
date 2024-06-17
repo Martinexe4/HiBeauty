@@ -6,11 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.api.ProductRecommendation
 import com.capstone.hibeauty.scan.DetailRecommendationActivity
@@ -31,12 +33,17 @@ class RecommendationAdapter(private val context: Context) : ListAdapter<ProductR
         private val cardView: CardView= itemView.findViewById(R.id.cardView)
         private val nameTextView: TextView = itemView.findViewById(R.id.recommendationNameTextView)
         private val descriptionTextView: TextView = itemView.findViewById(R.id.recommendationDescriptionTextView)
-
+        private val imageView: ImageView = itemView.findViewById(R.id.recommendationImageView)
 
         fun bind(recommendation: ProductRecommendation) {
             nameTextView.text = recommendation.name
             descriptionTextView.text = recommendation.description
 
+            // Load image using Glide
+            Glide.with(context)
+                .load(recommendation.image) // Load the product image URL
+                .placeholder(R.drawable.placeholder_image) // Placeholder image while loading
+                .into(imageView)
 
             cardView.setOnClickListener {
                 val intent = Intent(context, DetailRecommendationActivity::class.java).apply {
@@ -45,6 +52,7 @@ class RecommendationAdapter(private val context: Context) : ListAdapter<ProductR
                     putExtra("recommendationDescription", recommendation.description)
                     putExtra("recommendationIngredients", recommendation.ingridients)
                     putExtra("recommendationLink", recommendation.link)
+                    putExtra("recommendationImage", recommendation.image)
                 }
                 context.startActivity(intent)
             }

@@ -43,7 +43,7 @@
             <TextView
                 android:id="@+id/product_type"
                 android:layout_width="168dp"
-                android:layout_height="wrap_content"
+                android:layout_height="30dp"
                 android:maxEms="3"
                 android:maxLines="4"
                 android:text="Moisturizer"

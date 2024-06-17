@@ -1,6 +1,7 @@
 package com.capstone.hibeauty.api
 
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -42,4 +43,20 @@ interface ApiService {
         @Path("skinId") skinId: String,
         @Header("Authorization") token: String
     ): Call<RecommendationResponse>
+
+
+    @GET("user/{userId}/profile-image")
+    fun getUserProfileImage(
+        @Header("Authorization") authToken: String,
+        @Path("userId") userId: String
+    ): Call<ProfileImageResponse>
+
+
+    @Multipart
+    @PUT("user/{id}")
+    fun uploadProfileImage(
+        @Header("Authorization") authHeader: String,
+        @Path("id") userId: String,
+        @Part image: MultipartBody.Part
+    ): Call<ResponseBody>
 }

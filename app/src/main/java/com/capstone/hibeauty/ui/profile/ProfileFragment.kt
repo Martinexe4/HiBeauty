@@ -13,30 +13,27 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
+import com.capstone.hibeauty.R
 import com.capstone.hibeauty.api.ApiConfig
 import com.capstone.hibeauty.api.ApiService
+import com.capstone.hibeauty.api.ProfileImageResponse
 import com.capstone.hibeauty.api.UserProfileResponse
-import com.capstone.hibeauty.api.YourResponseModel
 import com.capstone.hibeauty.authentication.LoginActivity
 import com.capstone.hibeauty.databinding.FragmentProfileBinding
 import com.capstone.hibeauty.profile.InfoUserActivity
 import com.capstone.hibeauty.profile.LanguageActivity
 import com.capstone.hibeauty.profile.PolicyActivity
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
-import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -57,6 +54,7 @@ class ProfileFragment : Fragment() {
     private val PICK_IMAGE_REQUEST = 1
     private var selectedImageUri: Uri? = null
     private lateinit var userService: ApiService // Ensure this is initialized properly
+    private lateinit var profileImageView: ImageView
 
 
 
@@ -71,7 +69,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        profileImageView = view.findViewById(R.id.imgProfile) // Ensure you have an ImageView with this ID in your layout
 
+        loadUserImage()
         fetchUserProfile()
 
         binding?.iconEditPhoto?.setOnClickListener {
@@ -123,6 +123,7 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    //maaf sangat berantakan di sini
     private fun uploadImage() {
         val userId = SharedPreferenceUtil.getUserId(requireActivity())
         val token = SharedPreferenceUtil.getToken(requireActivity())
@@ -149,6 +150,8 @@ class ProfileFragment : Fragment() {
                 if (response.isSuccessful) {
                     // Handle success
                     Toast.makeText(requireContext(), "Image uploaded successfully", Toast.LENGTH_SHORT).show()
+                    loadUserImage()
+
                 } else {
                     // Handle failure
                     Toast.makeText(requireContext(), "Image upload failed", Toast.LENGTH_SHORT).show()
@@ -175,15 +178,6 @@ class ProfileFragment : Fragment() {
         return name
     }
 
-    interface ApiService {
-        @Multipart
-        @PUT("user/{id}")
-        fun uploadProfileImage(
-            @Header("Authorization") authHeader: String,
-            @Path("id") userId: String,
-            @Part image: MultipartBody.Part
-        ): Call<ResponseBody>
-    }
 
 
     private fun fetchUserProfile() {
@@ -218,6 +212,45 @@ class ProfileFragment : Fragment() {
             })
         } else {
             Log.d("ProfileFragment", "Token or UserId not found")
+        }
+    }
+
+    private fun loadUserImage() {
+        val apiService = ApiConfig.apiService
+        val token = SharedPreferenceUtil.getToken(requireContext())
+        val userId = SharedPreferenceUtil.getUserId(requireContext())
+
+        Log.d("ProfileFragment", "Token: $token, UserId: $userId")
+
+        if (token != null && userId != null) {
+            val call = apiService.getUserProfileImage("Bearer $token", userId)
+
+            call.enqueue(object : Callback<ProfileImageResponse> {
+                override fun onResponse(call: Call<ProfileImageResponse>, response: Response<ProfileImageResponse>) {
+                    if (response.isSuccessful) {
+                        val profileImage = response.body()?.data?.profileImage
+                        if (profileImage != null) {
+                            Glide.with(this@ProfileFragment)
+                                .load(profileImage)
+                                .placeholder(R.drawable.placeholder_image) // Add a placeholder image in your drawable resources
+                                .into(profileImageView)
+                        } else {
+                            profileImageView.setImageResource(R.drawable.placeholder_image)
+                        }
+                    } else {
+                        Log.d("ProfileFragment", "Response not successful")
+                        profileImageView.setImageResource(R.drawable.placeholder_image)
+                    }
+                }
+
+                override fun onFailure(call: Call<ProfileImageResponse>, t: Throwable) {
+                    Log.d("ProfileFragment", "Failed to fetch user profile image: ${t.message}")
+                    profileImageView.setImageResource(R.drawable.placeholder_image)
+                }
+            })
+        } else {
+            Log.d("ProfileFragment", "Token or UserId not found")
+            profileImageView.setImageResource(R.drawable.placeholder_image)
         }
     }
 

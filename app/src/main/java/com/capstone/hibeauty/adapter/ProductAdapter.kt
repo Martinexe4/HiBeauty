@@ -4,6 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.capstone.hibeauty.R
 import com.capstone.hibeauty.api.Product
 import com.capstone.hibeauty.databinding.ItemProductHorizontalBinding
 import com.capstone.hibeauty.databinding.ItemProductVerticalBinding
@@ -34,9 +36,10 @@ class HorizontalProductAdapter(private var productList: List<Product>) : Recycle
         fun bind(product: Product) {
             binding.productName.text = product.name
             binding.productType.text = product.description
-//            Glide.with(binding.productImage.context)
-//                .load(product.link)
-//                .into(binding.productImage)
+            Glide.with(binding.productImage.context)
+                .load(product.image)
+                .placeholder(R.drawable.placeholder_image)
+                .into(binding.productImage)
 
             itemView.setOnClickListener {
                 val context = itemView.context
@@ -72,9 +75,10 @@ class VerticalProductAdapter(private var productList: List<Product>) : RecyclerV
         fun bind(product: Product) {
             binding.productName.text = product.name
             binding.productType.text = product.description
-//            Glide.with(binding.productImage.context)
-//                .load(product.link)
-//                .into(binding.productImage)
+            Glide.with(binding.productImage.context)
+                .load(product.image) // Ensure this is the correct image URL
+                .placeholder(R.drawable.placeholder_image) // Optionally add a placeholder
+                .into(binding.productImage)
 
             itemView.setOnClickListener {
                 val context = itemView.context

@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
+import com.capstone.hibeauty.R
 import com.capstone.hibeauty.api.Product
 import com.capstone.hibeauty.databinding.ActivityProductDetailBinding
 
@@ -25,6 +27,12 @@ class ProductDetailActivity : AppCompatActivity() {
                 productTitle.text = it.name
                 productDescription.text = it.description
                 productIngredients.text = it.ingridients
+
+                // Load image using Glide
+                Glide.with(this@ProductDetailActivity)
+                    .load(it.image) // Load the product image URL
+                    .placeholder(R.drawable.placeholder_image) // Placeholder image while loading
+                    .into(productImage)
             }
         }
 

@@ -100,6 +100,7 @@ data class Product(
     val description: String,
     val ingridients: String,
     val link: String,
+    val image: String,
     val recomId: Int,
     val typeId: Int
 ) : Parcelable
@@ -140,6 +141,7 @@ data class ProductRecommendation(
     val description: String,
     val ingridients: String,
     val link: String,
+    val image: String,
     val recomId: Int,
     val typeId: Int
 )
@@ -150,3 +152,14 @@ data class RecommendationResponse(
     val data: List<ProductRecommendation>
 )
 
+
+//load photo profile
+data class ProfileImageResponse(
+    val status: Boolean,
+    val message: String,
+    val data: ProfileImageData
+)
+
+data class ProfileImageData(
+    val profileImage: String?
+)

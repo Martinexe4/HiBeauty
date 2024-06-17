@@ -3,50 +3,48 @@ package com.capstone.hibeauty.scan
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.capstone.hibeauty.R
+import com.capstone.hibeauty.databinding.ActivityDetailRecommendationBinding
 
 class DetailRecommendationActivity : AppCompatActivity() {
 
-    private lateinit var nameTextView: TextView
-    private lateinit var descriptionTextView: TextView
-    private lateinit var ingredientsTextView: TextView
-    private lateinit var linkButton: Button
-    private lateinit var closeButton: ImageButton
+    private lateinit var binding: ActivityDetailRecommendationBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detail_recommendation)
-
-        // Inisialisasi view
-        nameTextView = findViewById(R.id.nameTextView)
-        descriptionTextView = findViewById(R.id.descriptionTextView)
-        ingredientsTextView = findViewById(R.id.ingredientsTextView)
-        linkButton = findViewById(R.id.linkButton)
-        closeButton = findViewById(R.id.closeButton)
+        binding = ActivityDetailRecommendationBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Ambil data dari intent
         val recommendationName = intent.getStringExtra("recommendationName")
         val recommendationDescription = intent.getStringExtra("recommendationDescription")
         val recommendationIngredients = intent.getStringExtra("recommendationIngredients")
         val recommendationLink = intent.getStringExtra("recommendationLink")
+        val recommendationImage = intent.getStringExtra("recommendationImage") // tambahkan ini
 
         // Set data ke view
-        nameTextView.text = recommendationName
-        descriptionTextView.text = recommendationDescription
-        ingredientsTextView.text = "Ingredients: $recommendationIngredients"
-        linkButton.setOnClickListener {
+        binding.productTitle.text = recommendationName
+        binding.productDescription.text = recommendationDescription
+        binding.productIngredients.text = recommendationIngredients
+
+        // Load image using Glide
+        Glide.with(this)
+            .load(recommendationImage) // Load the product image URL
+            .placeholder(R.drawable.placeholder_image) // Placeholder image while loading
+            .into(binding.productImage)
+
+        // Set click listener untuk link button
+        binding.goToShopButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(recommendationLink)
             }
             startActivity(intent)
         }
 
-        // Set close button action
-        closeButton.setOnClickListener {
+        // Set click listener untuk close button
+        binding.closeButton.setOnClickListener {
             finish()
         }
     }

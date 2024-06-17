@@ -35,8 +35,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.viewpager.widget.ViewPager
-            android:id="@+id/product_image_slider"
+        <ImageView
+            android:id="@+id/product_image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:layout_below="@id/close_button"
@@ -58,7 +58,7 @@
             android:textSize="20sp"
             android:theme="@style/Theme.AppCompat.Light"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/product_image_slider" />
+            app:layout_constraintTop_toBottomOf="@+id/product_image" />
 
         <TextView
             android:id="@+id/titleDescription"
