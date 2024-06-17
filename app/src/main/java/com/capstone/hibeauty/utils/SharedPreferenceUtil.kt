@@ -89,15 +89,6 @@ object SharedPreferenceUtil {
             .apply()
     }
 
-    fun saveProfileImageUrl(context: Context, url: String) {
-        val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        prefs.edit().putString(KEY_PROFILE_IMAGE_URL, url).apply()
-    }
-
-    fun getProfileImageUrl(context: Context): String? {
-        val prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-        return prefs.getString(KEY_PROFILE_IMAGE_URL, null)
-    }
 
     // Add other methods as needed
 }
