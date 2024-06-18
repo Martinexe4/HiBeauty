@@ -7,15 +7,6 @@ import kotlinx.parcelize.Parcelize
 //khusus
 import com.google.gson.annotations.SerializedName
 
-data class YourResponseModel(
-    @SerializedName("status")
-    val status: Boolean,
-    @SerializedName("message")
-    val message: String,
-    @SerializedName("data")
-    val data: UserData
-)
-
 data class UserData(
     @SerializedName("USERID")
     val userId: String,
@@ -88,11 +79,6 @@ data class AgeGenderResponse(
     val message: String
 )
 
-data class Prediction(
-    val skinType: String,
-    val percentage: Float
-)
-
 @Parcelize
 data class Product(
     val id: Int,
@@ -115,12 +101,6 @@ data class ProductResponse(
     val status: Boolean,
     val message: String,
     val data: List<Product>
-)
-
-data class ApiResponse(
-    val status: Boolean,
-    val message: String,
-    val data: User
 )
 
 data class UserProfileResponse(

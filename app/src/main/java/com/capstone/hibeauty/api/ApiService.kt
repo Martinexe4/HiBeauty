@@ -29,9 +29,6 @@ interface ApiService {
         @Body ageGenderRequest: AgeGenderRequest
     ): Call<AgeGenderResponse>
 
-    @GET("user/{USERID}/profile")
-    fun getUserProfile2(@Path("USERID") userId: String): Call<UserProfileResponse>
-
     @GET("user/{userId}/profile")
     fun getUserProfile(
         @Header("Authorization") token: String,

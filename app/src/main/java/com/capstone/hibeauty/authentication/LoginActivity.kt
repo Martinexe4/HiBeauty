@@ -10,6 +10,7 @@ import com.capstone.hibeauty.MainActivity
 import com.capstone.hibeauty.api.ApiConfig
 import com.capstone.hibeauty.api.LoginRequest
 import com.capstone.hibeauty.api.LoginResponse
+import com.capstone.hibeauty.api.UserProfileResponse
 import com.capstone.hibeauty.databinding.ActivityLoginBinding
 import com.capstone.hibeauty.personalization.PersonalizationActivity
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
@@ -96,12 +97,38 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleLoginSuccess() {
-        if (SharedPreferenceUtil.isPersonalizationCompleted(this)) {
-            navigateToMainActivity() //chaneee navigateToMainActivity()
+        val token = SharedPreferenceUtil.getToken(this)
+        if (token != null) {
+            fetchUserProfile(token)
         } else {
-            navigateToPersonalizationActivity()
+            Toast.makeText(this, "Error: Token not found", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun fetchUserProfile(token: String) {
+        val userId = SharedPreferenceUtil.getUserId(this)
+
+        val call = userId?.let { ApiConfig.apiService.getUserProfile("Bearer $token", it) }
+        call?.enqueue(object : Callback<UserProfileResponse> {
+            override fun onResponse(call: Call<UserProfileResponse>, response: Response<UserProfileResponse>) {
+                if (response.isSuccessful) {
+                    val userProfile = response.body()?.data
+                    if (userProfile != null && userProfile.AGE != 0 && userProfile.GENDER.isNotEmpty()) {
+                        navigateToMainActivity()
+                    } else {
+                        navigateToPersonalizationActivity()
+                    }
+                } else {
+                    Toast.makeText(this@LoginActivity, "Failed to fetch user profile", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<UserProfileResponse>, t: Throwable) {
+                Toast.makeText(this@LoginActivity, "Error fetching user profile", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
     private fun navigateToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)

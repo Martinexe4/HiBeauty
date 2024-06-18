@@ -21,7 +21,6 @@ import com.capstone.hibeauty.MainActivity
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.adapter.SlideInfoAdapter
 import com.capstone.hibeauty.api.ApiConfig
-import com.capstone.hibeauty.api.ApiResponse
 import com.capstone.hibeauty.api.UserProfileResponse
 import com.capstone.hibeauty.databinding.FragmentHomeBinding
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
@@ -42,8 +41,6 @@ class HomeFragment : Fragment() {
     private lateinit var runnable: Runnable
     private var currentPage = 0
 
-    private val firebaseAuth = FirebaseAuth.getInstance()
-    private var currentUser: FirebaseUser? = null
 
     private val cameraPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -66,7 +63,6 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        currentUser = firebaseAuth.currentUser
         loadUserName()
 
         binding.btnReadNow1.setOnClickListener { view ->
