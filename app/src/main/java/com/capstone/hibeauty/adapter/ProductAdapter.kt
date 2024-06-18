@@ -56,7 +56,7 @@ class HorizontalProductAdapter(private var productList: List<Product>) : Recycle
             binding.productType.text = mapTypeIdToString(product.typeId)
             Glide.with(binding.productImage.context)
                 .load(product.image)
-                .placeholder(R.drawable.placeholder_image)
+                .placeholder(R.drawable.skincare_image_placeholder)
                 .into(binding.productImage)
 
             itemView.setOnClickListener {
@@ -113,7 +113,7 @@ class VerticalProductAdapter(private var productList: List<Product>) : RecyclerV
             binding.productType.text = mapTypeIdToString(product.typeId)
             Glide.with(binding.productImage.context)
                 .load(product.image) // Ensure this is the correct image URL
-                .placeholder(R.drawable.placeholder_image) // Optionally add a placeholder
+                .placeholder(R.drawable.skincare_image_placeholder) // Optionally add a placeholder
                 .into(binding.productImage)
 
             itemView.setOnClickListener {

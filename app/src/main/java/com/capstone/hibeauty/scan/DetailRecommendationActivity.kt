@@ -16,6 +16,7 @@ class DetailRecommendationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailRecommendationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         // Ambil data dari intent
         val recommendationName = intent.getStringExtra("recommendationName")

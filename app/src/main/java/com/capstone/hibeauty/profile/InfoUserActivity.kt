@@ -20,6 +20,7 @@ class InfoUserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityInfoUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         val userId = SharedPreferenceUtil.getUserId(this) ?: ""
         val token = SharedPreferenceUtil.getToken(this) ?: ""

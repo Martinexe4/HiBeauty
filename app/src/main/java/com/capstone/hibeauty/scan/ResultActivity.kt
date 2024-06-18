@@ -1,6 +1,5 @@
 package com.capstone.hibeauty.scan
 
-import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
@@ -74,7 +73,10 @@ class ResultActivity : AppCompatActivity() {
                     connection.requestMethod = "POST"
                     connection.setRequestProperty("Authorization", "Bearer $token")
                     connection.doOutput = true
-                    connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=boundary")
+                    connection.setRequestProperty(
+                        "Content-Type",
+                        "multipart/form-data; boundary=boundary"
+                    )
 
                     val boundary = "boundary"
                     val LINE_FEED = "\r\n"
@@ -99,7 +101,8 @@ class ResultActivity : AppCompatActivity() {
 
                     val responseCode = connection.responseCode
                     if (responseCode == HttpURLConnection.HTTP_OK) {
-                        val response = BufferedReader(InputStreamReader(connection.inputStream)).use { it.readText() }
+                        val response =
+                            BufferedReader(InputStreamReader(connection.inputStream)).use { it.readText() }
                         Log.d("Response", "Response: $response")  // Log the response for debugging
 
                         val jsonResponse = JSONObject(response)
@@ -172,8 +175,12 @@ class ResultActivity : AppCompatActivity() {
 
                 val responseCode = connection.responseCode
                 if (responseCode == HttpURLConnection.HTTP_OK) {
-                    val response = BufferedReader(InputStreamReader(connection.inputStream)).use { it.readText() }
-                    Log.d("SavePredictionResponse", "Response: $response")  // Log the response for debugging
+                    val response =
+                        BufferedReader(InputStreamReader(connection.inputStream)).use { it.readText() }
+                    Log.d(
+                        "SavePredictionResponse",
+                        "Response: $response"
+                    )  // Log the response for debugging
                     withContext(Dispatchers.Main) {
                         showToast("Prediction saved successfully")
                         // Navigate to RecommendationActivity
@@ -185,12 +192,13 @@ class ResultActivity : AppCompatActivity() {
                         fragment.show(supportFragmentManager, "RecommendationsFragment")
                     }
 
-
-
-
                 } else {
-                    val errorResponse = BufferedReader(InputStreamReader(connection.errorStream)).use { it.readText() }
-                    Log.e("SavePredictionError", "Failed to save prediction, response code: $responseCode, error: $errorResponse")
+                    val errorResponse =
+                        BufferedReader(InputStreamReader(connection.errorStream)).use { it.readText() }
+                    Log.e(
+                        "SavePredictionError",
+                        "Failed to save prediction, response code: $responseCode, error: $errorResponse"
+                    )
                     withContext(Dispatchers.Main) {
                         showToast("Failed to save prediction")
                     }
