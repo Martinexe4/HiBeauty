@@ -34,7 +34,7 @@
                 android:theme="@style/Theme.AppCompat.Light"
                 app:iconifiedByDefault="false"
                 app:queryBackground="@android:color/transparent"
-                app:queryHint="Search Product" />
+                app:queryHint="@string/search_product_hint" />
         </com.google.android.material.card.MaterialCardView>
     </com.google.android.material.appbar.AppBarLayout>
 

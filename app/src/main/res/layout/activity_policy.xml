@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_bold"
-        android:text="Privacy Policy"
+        android:text="@string/privacy_policy_title"
         android:textSize="20sp" />
 
     <ScrollView

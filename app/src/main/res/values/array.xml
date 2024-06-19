@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="text_message_list">
+        <item>@string/text_message_1</item>
+        <item>@string/text_message_2</item>
+        <item>@string/text_message_3</item>
+    </string-array>
+
+    <string-array name="language_list">
+        <item>@string/english</item>
+        <item>@string/indonesian</item>
+    </string-array>
+</resources>

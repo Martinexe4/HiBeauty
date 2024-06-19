@@ -16,7 +16,7 @@
             android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <!-- Custom Indicator -->
         <LinearLayout
@@ -34,22 +34,22 @@
                 android:id="@+id/indicator1"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:background="@drawable/indicator_active"
-                android:layout_margin="4dp"/>
+                android:layout_margin="4dp"
+                android:background="@drawable/indicator_active" />
 
             <!-- Indikator kedua (tidak aktif) -->
             <View
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:background="@drawable/indicator_inactive"
-                android:layout_margin="4dp"/>
+                android:layout_margin="4dp"
+                android:background="@drawable/indicator_inactive" />
 
             <!-- Indikator ketiga (tidak aktif) -->
             <View
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:background="@drawable/indicator_inactive"
-                android:layout_margin="4dp"/>
+                android:layout_margin="4dp"
+                android:background="@drawable/indicator_inactive" />
         </LinearLayout>
     </LinearLayout>
 
@@ -78,18 +78,18 @@
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:padding="8dp"
-            android:text="Get Started"
+            android:text="@string/start_button"
             android:textColor="@android:color/white"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="@+id/iv_app_logo"
-            app:layout_constraintTop_toBottomOf="@id/iv_app_logo"
-            app:layout_constraintStart_toStartOf="@id/iv_app_logo"/>
+            app:layout_constraintStart_toStartOf="@id/iv_app_logo"
+            app:layout_constraintTop_toBottomOf="@id/iv_app_logo" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginTop="8dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="@+id/buttonStart"
             app:layout_constraintStart_toStartOf="@+id/buttonStart"
             app:layout_constraintTop_toBottomOf="@+id/buttonStart">
@@ -98,15 +98,15 @@
                 android:id="@+id/already_have_account"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:text="Already have an account?"
+                android:layout_marginEnd="8dp"
+                android:text="@string/account_hint"
                 android:textColor="@color/colorPrimaryDark" />
 
             <TextView
                 android:id="@+id/login_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="@string/sign_in"
                 android:textColor="@color/colorAccent" />
         </LinearLayout>
 

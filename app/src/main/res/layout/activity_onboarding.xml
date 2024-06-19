@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -11,7 +10,7 @@
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1" />
 
     <!-- Custom Indicator -->
     <LinearLayout
@@ -29,70 +28,70 @@
             android:id="@+id/indicator1"
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:background="@drawable/indicator_active"
-            android:layout_margin="4dp"/>
+            android:layout_margin="4dp"
+            android:background="@drawable/indicator_active" />
 
         <!-- Indikator kedua (tidak aktif) -->
         <View
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:background="@drawable/indicator_inactive"
-            android:layout_margin="4dp"/>
+            android:layout_margin="4dp"
+            android:background="@drawable/indicator_inactive" />
 
         <!-- Indikator ketiga (tidak aktif) -->
         <View
             android:layout_width="12dp"
             android:layout_height="12dp"
-            android:background="@drawable/indicator_inactive"
-            android:layout_margin="4dp"/>
+            android:layout_margin="4dp"
+            android:background="@drawable/indicator_inactive" />
     </LinearLayout>
 
     <!-- Tombol Navigasi dengan Desain Lebih Menarik -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center_horizontal"
+        android:orientation="horizontal"
         android:paddingTop="16dp">
 
         <Button
             android:id="@+id/buttonStart"
             android:layout_width="290dp"
             android:layout_height="72dp"
-            android:text="Get Started"
-            android:background="@drawable/button_selector"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:fontFamily="@font/poppins_bold"
+            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginHorizontal="16dp"
+            android:background="@drawable/button_selector"
+            android:fontFamily="@font/poppins_bold"
             android:gravity="center"
-            android:padding="8dp"/>
+            android:padding="8dp"
+            android:text="@string/start_button"
+            android:textColor="@android:color/white"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:gravity="center"
+        android:orientation="horizontal"
         android:paddingBottom="24dp">
 
         <TextView
             android:id="@+id/already_have_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Already have an account?"
+            android:layout_marginEnd="8dp"
+            android:text="@string/account_hint"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
-            android:layout_marginRight="8dp" />
+            android:textColor="@color/colorPrimaryDark" />
 
         <TextView
             android:id="@+id/login_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:text="@string/sign_in"
             android:textColor="@color/colorAccent" />
     </LinearLayout>
 

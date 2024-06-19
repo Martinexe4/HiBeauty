@@ -53,9 +53,8 @@
                             android:id="@+id/register_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/icon"
                             android:layout_marginTop="16dp"
-                            android:text="Sign Up"
+                            android:text="@string/sign_up_title"
                             android:textColor="@color/colorGrayDark"
                             android:textSize="24sp"
                             android:textStyle="bold" />
@@ -64,9 +63,8 @@
                             android:id="@+id/register_description"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/register_title"
                             android:layout_marginTop="8dp"
-                            android:text="Sign up now for free and start explore HiBeauty."
+                            android:text="@string/sign_up_desc"
                             android:textColor="@color/colorGrayDark"
                             android:textSize="14sp" />
 
@@ -75,7 +73,6 @@
                             android:id="@+id/textInputLayout1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/register_description"
                             android:layout_marginTop="8dp"
                             android:textColorHint="@color/colorGrayDark"
                             app:boxBackgroundColor="@color/white"
@@ -96,7 +93,6 @@
                             android:id="@+id/textInputLayout2"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/textInputLayout1"
                             android:layout_marginTop="8dp"
                             android:textColorHint="@color/colorGrayDark"
                             app:boxBackgroundColor="@color/white"
@@ -118,7 +114,6 @@
                             android:id="@+id/textInputLayout3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/textInputLayout2"
                             android:layout_marginTop="8dp"
                             android:textColorHint="@color/colorGrayDark"
                             app:boxBackgroundColor="@color/white"
@@ -141,7 +136,6 @@
                             android:id="@+id/textInputLayout4"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/textInputLayout3"
                             android:layout_marginTop="8dp"
                             android:textColorHint="@color/colorGrayDark"
                             app:boxBackgroundColor="@color/white"
@@ -155,7 +149,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:ems="10"
-                                android:hint="Password Confirmation"
+                                android:hint="@string/password_confirmation_hint"
                                 android:inputType="textPassword"
                                 android:textColor="@color/colorGrayDark" />
                         </com.google.android.material.textfield.TextInputLayout>
@@ -174,7 +168,7 @@
                                 android:layout_alignParentEnd="true"
                                 android:background="@drawable/button_selector"
                                 android:padding="8dp"
-                                android:text="SIGN UP"
+                                android:text="@string/sign_up_btn"
                                 android:textColor="@android:color/white"
                                 android:textSize="18sp"
                                 app:layout_constraintBottom_toBottomOf="parent"
@@ -195,8 +189,8 @@
                                     android:id="@+id/already_have_account"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginRight="8dp"
-                                    android:text="Already have an account?"
+                                    android:layout_marginEnd="8dp"
+                                    android:text="@string/account_hint"
                                     android:textAlignment="center"
                                     android:textColor="@color/colorPrimaryDark" />
 
@@ -204,7 +198,7 @@
                                     android:id="@+id/login_button"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Sign In"
+                                    android:text="@string/sign_in"
                                     android:textColor="@color/colorAccent" />
                             </LinearLayout>
                         </androidx.constraintlayout.widget.ConstraintLayout>

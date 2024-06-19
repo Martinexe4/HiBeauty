@@ -26,8 +26,6 @@ import com.capstone.hibeauty.databinding.FragmentHomeBinding
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,12 +34,9 @@ import retrofit2.Response
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
     private var currentPage = 0
-
-
     private val cameraPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
@@ -74,18 +69,18 @@ class HomeFragment : Fragment() {
 
         val slides = listOf(
             mapOf(
-                "title" to "Cuci Wajah dengan Lembut",
-                "description" to "Gunakan pembersih wajah yang sesuai dengan jenis kulit Anda dan hindari menggosok terlalu keras.",
+                "title" to getString(R.string.slide1_title),
+                "description" to getString(R.string.slide1_desc),
                 "image" to R.drawable.slide_home_image1 // Ganti dengan ID gambar yang sesuai
             ),
             mapOf(
-                "title" to "Gunakan Tabir Surya",
-                "description" to "Selalu gunakan tabir surya dengan SPF minimal 30 setiap hari untuk melindungi kulit dari sinar UV.",
+                "title" to getString(R.string.slide2_title),
+                "description" to getString(R.string.slide2_desc),
                 "image" to R.drawable.slide_home_image2 // Ganti dengan ID gambar yang sesuai
             ),
             mapOf(
-                "title" to "Pakai Pelembap",
-                "description" to "Gunakan pelembap setiap hari untuk menjaga kelembapan kulit, pilih yang sesuai dengan jenis kulit Anda.",
+                "title" to getString(R.string.slide3_title),
+                "description" to getString(R.string.slide3_desc),
                 "image" to R.drawable.slide_home_image3 // Ganti dengan ID gambar yang sesuai
             )
         )
@@ -145,7 +140,8 @@ class HomeFragment : Fragment() {
 
                         if (userProfileResponse != null && userProfileResponse.status) {
                             val user = userProfileResponse.data
-                            binding.tvGreeting.text = "Hello ${user.USERNAME}"
+                            val greetings = getString(R.string.greetings)
+                            binding.tvGreeting.text = "$greetings ${user.USERNAME}"
                         } else {
                             Log.d("HomeFragment", "Response body is null or status is false")
                         }

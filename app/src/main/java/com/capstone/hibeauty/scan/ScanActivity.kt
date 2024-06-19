@@ -48,7 +48,6 @@ class ScanActivity : AppCompatActivity() {
                             val progress = i * 10
                             withContext(Dispatchers.Main) {
                                 if (progress == 100) {
-                                    // Loading animation complete
                                     binding.darkOverlayView.visibility = android.view.View.GONE
                                     binding.loadingPercentageTextView.visibility =
                                         android.view.View.GONE
@@ -66,7 +65,7 @@ class ScanActivity : AppCompatActivity() {
         }
 
         binding.backButton.setOnClickListener {
-            finish() // Finish the activity and return to the previous screen
+            finish()
         }
     }
 
@@ -86,9 +85,9 @@ class ScanActivity : AppCompatActivity() {
     }
 
     private fun processImage(imageUri: Uri, callback: (Map<String, Float>) -> Unit) {
+        startLoadingAnimation()
         val results = imageClassifierHelper.classifyStaticImage(imageUri)
         callback(results)
-        startLoadingAnimation()
     }
 
     private fun moveToResult(imageUri: Uri, results: Map<String, Float>) {
@@ -112,10 +111,9 @@ class ScanActivity : AppCompatActivity() {
                 if (progress <= 100) {
                     binding.loadingPercentageTextView.text = "$progress%"
                     progress++
-                    handler.postDelayed(this, 50) // Update progress every 50ms
+                    handler.postDelayed(this, 50)
                 } else {
                     handler.removeCallbacks(this)
-                    // Loading animation complete
                     binding.darkOverlayView.visibility = android.view.View.GONE
                     binding.loadingPercentageTextView.visibility = android.view.View.GONE
                 }
@@ -128,8 +126,8 @@ class ScanActivity : AppCompatActivity() {
     }
 
     private fun markButtonDisable(button: Button) {
-        button?.isEnabled = false
-        button?.setTextColor(ContextCompat.getColor(this, R.color.colorGrayDark))
-        button?.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimarySoft))
+        button.isEnabled = false
+        button.setTextColor(ContextCompat.getColor(this, R.color.colorGrayDark))
+        button.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimarySoft))
     }
 }

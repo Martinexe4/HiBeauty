@@ -43,5 +43,17 @@
         android:id="@+id/navigation_profile"
         android:name="com.capstone.hibeauty.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_navigation_profile_to_languageActivity"
+            app:destination="@id/languageActivity" />
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
+    <activity
+        android:id="@+id/languageActivity"
+        android:name="com.capstone.hibeauty.profile.LanguageActivity"
+        android:label="activity_language"
+        tools:layout="@layout/activity_language" />
 </navigation>

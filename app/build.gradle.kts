@@ -74,6 +74,7 @@ dependencies {
     //onboarding
     implementation(libs.glide)
     implementation(libs.androidx.runtime.android)
+    implementation(libs.androidx.preference.ktx)
     annotationProcessor(libs.compiler)
 
     //scan
@@ -119,7 +120,6 @@ dependencies {
     implementation(libs.guava)
 
     implementation(libs.picasso)
-    implementation("androidx.fragment:fragment:1.3.0")
-    implementation("androidx.viewpager2:viewpager2:1.0.0")
-
+    implementation(libs.androidx.fragment)
+    implementation(libs.androidx.viewpager2.v100)
 }

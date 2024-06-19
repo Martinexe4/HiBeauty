@@ -136,14 +136,14 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_bold"
-                            android:text="Description"
+                            android:text="@string/description_result_label"
                             android:textColor="@color/colorGrayDark" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_medium"
-                            android:text="Ini adalah konten dari kotak kedua. Anda dapat menambahkan informasi lain di sini."
+                            android:text="@string/text_desc_example"
                             android:textColor="@color/colorGrayDark" />
                     </LinearLayout>
 
@@ -158,7 +158,7 @@
                         android:layout_marginTop="48dp"
                         android:layout_marginBottom="72dp"
                         android:gravity="center"
-                        android:text="Get Recommendations"
+                        android:text="@string/get_rec_btn"
                         android:textColor="@android:color/white"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

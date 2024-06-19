@@ -28,7 +28,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
-            android:text="Product Detail"
+            android:text="@string/product_detail_title"
             android:textSize="20sp"
             android:theme="@style/Theme.AppCompat.Light"
             app:layout_constraintBottom_toBottomOf="@+id/close_button"
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Description: "
+                android:text="@string/description_label"
                 android:theme="@style/Theme.AppCompat.Light" />
 
             <TextView
@@ -98,7 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Ingredients: "
+                android:text="@string/ingredients_label"
                 android:theme="@style/Theme.AppCompat.Light" />
 
             <TextView
@@ -116,7 +116,7 @@
             android:layout_marginTop="100dp"
             android:layout_marginBottom="48dp"
             android:backgroundTint="?attr/colorPrimary"
-            android:text="Go to Shop"
+            android:text="@string/go_to_shop_btn"
             android:textColor="@android:color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

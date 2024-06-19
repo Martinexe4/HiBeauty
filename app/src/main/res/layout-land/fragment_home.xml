@@ -31,9 +31,10 @@
         <TextView
             android:id="@+id/tvSubtitle"
             android:layout_width="wrap_content"
+            android:textAlignment="center"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_light"
-            android:text="Scan, analyze and find personalize product."
+            android:text="@string/app_feature_text"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="@+id/tvGreeting"
@@ -114,7 +115,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="4dp"
-                            android:text="Skincare Products"
+                            android:text="@string/skincare_products"
                             android:textColor="@android:color/holo_red_light"
                             android:textSize="14sp" />
 
@@ -123,7 +124,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
-                            android:text="The perfect product for your skin."
+                            android:text="@string/tv_sub_2"
                             android:textColor="@android:color/black"
                             android:textSize="18sp" />
 
@@ -133,10 +134,10 @@
                             android:layout_height="wrap_content"
                             android:backgroundTint="#FF8473"
                             android:fontFamily="@font/poppins_bold"
-                            android:text="Find Product"
+                            android:text="@string/btn_find_product"
                             android:textColor="@android:color/white"
-                            android:textSize="10sp" />
-
+                            android:textSize="10sp"
+                            tools:ignore="SmallSp" />
                     </LinearLayout>
 
                     <ImageView
@@ -187,7 +188,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="Scan your skin now!"
+                        android:text="@string/scan_now_txt"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -200,7 +201,7 @@
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/white"
                         android:fontFamily="@font/poppins_bold"
-                        android:text="Analyze >"
+                        android:text="@string/btn_analyze"
                         android:textColor="@android:color/holo_red_light"
                         app:layout_constraintBottom_toBottomOf="@id/tvTitle2"
                         app:layout_constraintEnd_toEndOf="parent"

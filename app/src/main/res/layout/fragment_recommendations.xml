@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_bold"
-        android:text="Product Recommendations"
+        android:text="@string/product_rec_title"
         android:textColor="@color/colorGrayDark"
         android:textSize="20sp"
         android:textStyle="bold"

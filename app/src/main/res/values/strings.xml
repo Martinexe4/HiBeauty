@@ -4,7 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="default_web_client_id">956616711391-9e0khru3t57olff8nabqstd2c39eplqh.apps.googleusercontent.com</string>
-    <string name="profile">User Profile</string>
+    <string name="profile">Your Profile</string>
 
     <string name="probability_format">Probability: %.2f%%</string>
 
@@ -94,4 +94,64 @@
     <string name="required_storage">Storage permission required!</string>
     <string name="required_camera">Camera permission is required!</string>
     <string name="scan_result">Scan Result</string>
+    <string name="change_language_title">Change Language</string>
+    <string name="greetings">Hello</string>
+    <string name="change_language_message">Do you want to change your language to</string>
+    <string name="english">English</string>
+    <string name="indonesian">Indonesian</string>
+    <string name="language">Language</string>
+    <string name="app_feature_text">Scan, analyze and find personalize product.</string>
+    <string name="slide1_title">Wash Your Face Gently</string>
+    <string name="slide1_desc">Use a facial cleanser that suits your skin type and avoid scrubbing too hard.</string>
+    <string name="slide2_title">Use Sunscreen</string>
+    <string name="slide2_desc">Always use sunscreen with an SPF of at least 30 every day to protect your skin from UV rays.</string>
+    <string name="slide3_title">Use Moisturizer</string>
+    <string name="slide3_desc">Use moisturizer every day to keep your skin moist, choose one that suits your skin type.</string>
+    <string name="skincare_products">Skincare Products</string>
+    <string name="tv_sub_2">The perfect product for your skin.</string>
+    <string name="btn_find_product">Find Product</string>
+    <string name="scan_now_txt">Scan your skin now!</string>
+    <string name="btn_analyze">Analyze ></string>
+    <string name="menu_home">Home</string>
+    <string name="menu_product">Product</string>
+    <string name="menu_news">News</string>
+    <string name="menu_profile">Profile</string>
+    <string name="search_product_hint">Search Product</string>
+    <string name="product_detail_title">Product Detail</string>
+    <string name="go_to_shop_btn">Go to Shop</string>
+    <string name="description_label">Description:</string>
+    <string name="ingredients_label">Ingredients:</string>
+    <string name="text_message_1">Make sure the lighting around you is good</string>
+    <string name="text_message_2">Adjust the face to the camera frame</string>
+    <string name="text_message_3">Use a neutral facial expression</string>
+    <string name="get_rec_btn">Get Recommendations</string>
+    <string name="description_result_label">Description</string>
+    <string name="text_desc_example" translatable="false">Ini adalah konten dari kotak kedua. Anda dapat menambahkan informasi lain di sini.</string>
+    <string name="product_rec_title">Product Recommendations</string>
+    <string name="profile_information_menu">Information</string>
+    <string name="language_menu">Language</string>
+    <string name="privacy_policy_menu">Privacy policy</string>
+    <string name="user_information_title">User Information</string>
+    <string name="name_label">"Name: "</string>
+    <string name="age_lable">"Age: "</string>
+    <string name="gender_lable">"Gender: "</string>
+    <string name="privacy_policy_title">Privacy Policy</string>
+    <string name="logout_menu">Logout</string>
+    <string name="warning_logout">Are you sure you want to logout?</string>
+    <string name="choose_yes">Yes</string>
+    <string name="choose_no">No</string>
+    <string name="apply_btn">Apply</string>
+    <string name="gender_question">What is your gender?</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="finish_btn">Finish</string>
+    <string name="age_question">What is your age?</string>
+    <string name="enter_age_hint">Enter your age</string>
+    <string name="next_btn">Next</string>
+    <string name="sign_up_title">Sign Up</string>
+    <string name="sign_up_desc">Sign up now for free and start explore HiBeauty.</string>
+    <string name="password_confirmation_hint">Password Confirmation</string>
+    <string name="sign_up_btn">SIGN UP</string>
+    <string name="account_hint">Already have an account?</string>
+    <string name="start_button">Get Started</string>
 </resources>

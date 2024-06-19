@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="What is your age?"
+        android:text="@string/age_question"
         android:textSize="24sp"
         android:fontFamily="@font/poppins_bold"
         android:paddingBottom="16dp"
@@ -18,12 +18,12 @@
         android:id="@+id/editTextAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter your age"
+        android:hint="@string/enter_age_hint"
         android:inputType="number" />
 
     <Button
         android:id="@+id/buttonNext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next" />
+        android:text="@string/next_btn" />
 </LinearLayout>

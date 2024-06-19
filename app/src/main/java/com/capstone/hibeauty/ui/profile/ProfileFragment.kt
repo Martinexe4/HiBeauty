@@ -19,6 +19,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.api.ApiConfig
@@ -93,8 +94,7 @@ class ProfileFragment : Fragment() {
         }
 
         binding?.changeLanguage?.setOnClickListener {
-            val intent = Intent(activity, LanguageActivity::class.java)
-            startActivity(intent)
+            Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_languageActivity)
         }
     }
 
@@ -256,9 +256,9 @@ class ProfileFragment : Fragment() {
 
     private fun showLogoutConfirmationDialog() {
         AlertDialog.Builder(requireActivity())
-            .setTitle("Logout")
-            .setMessage("Are you sure you want to logout?")
-            .setPositiveButton("Yes") { dialog, which ->
+            .setTitle(getString(R.string.logout_menu))
+            .setMessage(getString(R.string.warning_logout))
+            .setPositiveButton(getString(R.string.choose_yes)) { dialog, which ->
                 // Menghapus status login dari SharedPreference
                 SharedPreferenceUtil.saveLoginStatus(requireActivity(), false)
 
@@ -268,7 +268,7 @@ class ProfileFragment : Fragment() {
                 startActivity(intent)
                 requireActivity().finish()
             }
-            .setNegativeButton("No", null)
+            .setNegativeButton(getString(R.string.choose_no), null)
             .show()
     }
 

@@ -17,6 +17,7 @@ import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -25,19 +26,16 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.databinding.ActivityCameraBinding
+import com.capstone.hibeauty.utils.InitApp
 import java.io.File
 
 class CameraActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCameraBinding
+    private lateinit var textMessages: Array<String>
     private var cameraSelector: CameraSelector = CameraSelector.DEFAULT_FRONT_CAMERA
     private var imageCapture: ImageCapture? = null
     private var currentFlashMode = FLASH_MODE_OFF
     private val handler = Handler(Looper.getMainLooper())
-    private val textMessages = listOf(
-        "Pastikan pencahayaan di sekitar anda baik",
-        "Sesuaikan wajah dengan frame kamera",
-        "Gunakan ekspresi wajah netral"
-    )
     private var textIndex = 0
     private val galleryPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -53,6 +51,8 @@ class CameraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCameraBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        textMessages = resources.getStringArray(R.array.text_message_list)
 
         binding.switchCamera.setOnClickListener {
             cameraSelector =

@@ -1,19 +1,18 @@
 package com.capstone.hibeauty.profile
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.capstone.hibeauty.MainActivity
+import com.capstone.hibeauty.R
 import com.capstone.hibeauty.databinding.ActivityLanguageBinding
-import com.capstone.hibeauty.ui.profile.ProfileFragment
-import java.util.Locale
 
 class LanguageActivity : AppCompatActivity() {
-
     private lateinit var binding: ActivityLanguageBinding
-    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var preference: LanguagePreference
+    private lateinit var languageList: Array<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,67 +21,43 @@ class LanguageActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        sharedPreferences = getSharedPreferences("app_preferences", Context.MODE_PRIVATE)
+        preference = LanguagePreference(this)
+
+        languageList = resources.getStringArray(R.array.language_list)
+
+        binding.languageSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, languageList)
+
+        val lang = preference.loadSettingLanguage()
+        val index = languageList.indexOf(lang)
+
+        if (index >= 0) {
+            binding.languageSpinner.setSelection(index)
+        }
+
+        binding.btnApply.setOnClickListener {
+            val savedInstance: String = when (binding.languageSpinner.selectedItemPosition) {
+                0 -> "en"
+                1 -> "in"
+                else -> "unknown"
+            }
+            showConfirmationDialog(savedInstance, languageList[binding.languageSpinner.selectedItemPosition])
+        }
 
         binding.closeButton.setOnClickListener {
             finish()
         }
-
-        binding.languageEnglish.setOnClickListener {
-            showConfirmationDialog("en")
-        }
-
-        binding.languageIndonesian.setOnClickListener {
-            showConfirmationDialog("id")
-        }
-
-        loadLocale()
     }
 
-    private fun showConfirmationDialog(languageCode: String) {
-        val languageName = if (languageCode == "en") "English" else "Indonesian"
+    private fun showConfirmationDialog(languageCode: String, languageName: String) {
         AlertDialog.Builder(this)
-            .setTitle("Change Language")
-            .setMessage("Are you sure you want to change the language to $languageName?")
-            .setPositiveButton("Yes") { _, _ ->
-                setLocale(languageCode)
-                // Navigate to ProfileFragment
-                navigateToProfileFragment()
+            .setTitle(R.string.change_language_title)
+            .setMessage("${getString(R.string.change_language_message)} ${languageName}?")
+            .setPositiveButton(R.string.choose_yes) { _, _ ->
+                preference.saveSettingLanguage(languageCode)
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
             }
-            .setNegativeButton("No", null)
+            .setNegativeButton(R.string.choose_no, null)
             .show()
-    }
-
-    private fun setLocale(languageCode: String) {
-        val editor = sharedPreferences.edit()
-        editor.putString("selected_language", languageCode)
-        editor.apply()
-
-        // Update the app's locale
-        val locale = Locale(languageCode)
-        Locale.setDefault(locale)
-        val config = resources.configuration
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.displayMetrics)
-
-        // Refresh activity to apply the new language
-        finish()
-        startActivity(intent)
-    }
-
-    private fun loadLocale() {
-        val languageCode = sharedPreferences.getString("selected_language", "en")
-        val locale = Locale(languageCode ?: "en")
-        Locale.setDefault(locale)
-        val config = resources.configuration
-        config.setLocale(locale)
-        resources.updateConfiguration(config, resources.displayMetrics)
-    }
-
-    private fun navigateToProfileFragment() {
-        val fragment = ProfileFragment() // Replace with the actual fragment initialization if needed
-        supportFragmentManager.beginTransaction()
-            .replace(android.R.id.content, fragment)
-            .commit()
     }
 }

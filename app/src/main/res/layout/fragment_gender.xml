@@ -8,7 +8,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="What is your gender?"
+        android:text="@string/gender_question"
         android:textSize="24sp"
         android:fontFamily="@font/poppins_bold"
         android:paddingBottom="16dp"
@@ -24,18 +24,18 @@
             android:id="@+id/radioButtonMale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Male" />
+            android:text="@string/male" />
 
         <RadioButton
             android:id="@+id/radioButtonFemale"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Female" />
+            android:text="@string/female" />
     </RadioGroup>
 
     <Button
         android:id="@+id/buttonFinish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Finish" />
+        android:text="@string/finish_btn" />
 </LinearLayout>

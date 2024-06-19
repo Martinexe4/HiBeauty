@@ -29,6 +29,8 @@ class PersonalizationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_personalization)
 
+        supportActionBar?.hide()
+
         viewPager = findViewById(R.id.viewPager)
         tabLayout = findViewById(R.id.tabLayout)
 
