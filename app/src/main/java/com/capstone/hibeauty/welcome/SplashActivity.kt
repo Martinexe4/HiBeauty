@@ -44,20 +44,6 @@ class SplashActivity : AppCompatActivity() {
         }, 3000L)
     }
 
-    private fun goToMainActivity(){
-        Intent(this, MainActivity::class.java).also{
-            startActivity(it)
-            finish()
-        }
-    }
-
-//    private fun goToPersonalizationActivity(){
-//        Intent(this, PersonalizationActivity::class.java).also{
-//            startActivity(it)
-//            finish()
-//        }
-//    }
-
     private fun goToOnboardingActivity(){
         Intent(this, OnboardingActivity::class.java).also{
             startActivity(it)

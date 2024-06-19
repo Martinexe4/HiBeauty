@@ -56,4 +56,7 @@ interface ApiService {
         @Path("id") userId: String,
         @Part image: MultipartBody.Part
     ): Call<ResponseBody>
+
+    @GET ("everything?q=wajah&language=id&sortBy=popularity&apiKey=edf3226670f340bea5c2ecac0db6e19d")
+    fun getNews(): Call<NewsResponse>
 }

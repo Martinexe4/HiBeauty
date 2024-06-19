@@ -154,4 +154,10 @@
     <string name="sign_up_btn">SIGN UP</string>
     <string name="account_hint">Already have an account?</string>
     <string name="start_button">Get Started</string>
+
+    <string name="acne_description">Your face is predominantly acne-prone. Recommended treatments include using products with active ingredients like salicylic acid or benzoyl peroxide.</string>
+    <string name="oily_description">Your face is predominantly oily. It is recommended to use oil-controlling products such as toner with astringent active ingredients.</string>
+    <string name="eye_bags_description">You have noticeable eye bags. It is recommended to use eye cream containing caffeine to reduce swelling.</string>
+    <string name="unknown_description">Unknown result. Please consult with a skin specialist for further explanation.</string>
+
 </resources>

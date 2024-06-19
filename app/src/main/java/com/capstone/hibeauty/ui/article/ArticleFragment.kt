@@ -11,19 +11,19 @@ import com.capstone.hibeauty.databinding.FragmentArticleBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import android.widget.SearchView
-import com.capstone.hibeauty.article.ApiConfigNews
-import com.capstone.hibeauty.article.ApiServiceNews
 import com.capstone.hibeauty.adapter.ArticleAdapter
-import com.capstone.hibeauty.article.ArticlesItem
-import com.capstone.hibeauty.article.NewsResponse
+import com.capstone.hibeauty.api.ApiConfig
+import com.capstone.hibeauty.api.ApiService
+import com.capstone.hibeauty.api.ArticlesItem
+import com.capstone.hibeauty.api.NewsResponse
+
 
 class ArticleFragment : Fragment() {
     private var _binding: FragmentArticleBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var newsAdapter: ArticleAdapter
-    private lateinit var apiService: ApiServiceNews
+    private lateinit var apiService: ApiService
     private var allArticles: List<ArticlesItem?> = emptyList()  // Simpan semua artikel
 
     override fun onCreateView(
@@ -42,7 +42,7 @@ class ArticleFragment : Fragment() {
         newsAdapter = ArticleAdapter(emptyList())
         binding.recyclerView.adapter = newsAdapter
 
-        apiService = ApiConfigNews.getApiService()
+        apiService = ApiConfig.getApiServiceNews()
 
         // Fetch data untuk pertama kali
         fetchNews()

@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.capstone.hibeauty.R
-import com.capstone.hibeauty.article.ArticlesItem
+import com.capstone.hibeauty.api.ArticlesItem
 import com.capstone.hibeauty.article.DetailArticleActivity
 
 class ArticleAdapter(private var articles: List<ArticlesItem?>) :

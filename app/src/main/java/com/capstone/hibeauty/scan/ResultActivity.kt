@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
+import com.capstone.hibeauty.R
 import com.capstone.hibeauty.databinding.ActivityResultBinding
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import kotlinx.coroutines.CoroutineScope
@@ -59,6 +60,21 @@ class ResultActivity : AppCompatActivity() {
                 "${entry.key}: ${String.format("%.2f%%", entry.value * 100)}"
             }
             binding.resultTextView?.text = resultsText
+
+            val highestResult = it.maxByOrNull { entry -> entry.value }
+            highestResult?.let { entry ->
+                val description = getDescriptionForResult(entry.key)
+                binding.descriptionResult?.text = description
+            }
+        }
+    }
+
+    private fun getDescriptionForResult(resultKey: String): String {
+        return when (resultKey) {
+            "acne" -> getString(R.string.acne_description)
+            "oily" -> getString(R.string.oily_description)
+            "eye bags" -> getString(R.string.eye_bags_description)
+            else -> getString(R.string.unknown_description)
         }
     }
 

@@ -146,4 +146,10 @@
     <string name="sign_up_btn">DAFTAR</string>
     <string name="account_hint">Sudah memiliki akun?</string>
     <string name="start_button">Memulai</string>
+
+    <string name="acne_description">Wajah Anda dominan berjerawat. Perawatan yang direkomendasikan adalah menggunakan produk dengan bahan aktif seperti asam salisilat atau benzoyl peroxide.</string>
+    <string name="oily_description">Wajah Anda dominan berminyak. Disarankan untuk menggunakan produk yang mengontrol minyak seperti toner dengan bahan aktif astringen.</string>
+    <string name="eye_bags_description">Anda memiliki kantung mata yang cukup terlihat. Disarankan untuk menggunakan krim mata yang mengandung kafein untuk mengurangi pembengkakan.</string>
+    <string name="unknown_description">Hasil tidak dikenal. Silakan konsultasikan dengan spesialis kulit untuk penjelasan lebih lanjut.</string>
+
 </resources>
