@@ -47,6 +47,10 @@ router.post('/predictions',accessValidation, modelController.savePredictions);
 // User routes
 router.put('/user/:userId', accessValidation, multer.single('IMAGE'), images.uploadToGcs, userController.updateProfile);
 router.get('/users', accessValidation, auth.getUsers )
+router.post('/user/:userId/age-gender', accessValidation, userController.addAgeAndGender);
+router.get('/user/:userId/profile', accessValidation, userController.getUserProfile);
+router.get('/user/:userId/profile-image', accessValidation, userController.getProfileImage);
+
 
 //upload skin user
 router.post('/skin/upload', multer.single('file'), images.uploadToGcs, skinController.uploadSkinImage);

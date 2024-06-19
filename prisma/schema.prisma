@@ -20,10 +20,12 @@ model User {
   EMAIL            String           @db.VarChar(200) @unique
   PASSWORD         String           @db.VarChar(255)
   PROFILEIMG       String?          @db.VarChar(255)
+  AGE              Int?             // Field untuk umur
+  GENDER           String?          // Field untuk jenis kelamin
   CREATEDAT        DateTime         @default(now()) @db.Timestamp(0)
   UPDATEDAT        DateTime         @default(now()) @db.Timestamp(0)
   skinId           String?
-  skins            UserSkin[]       //Many-to-many relation of Skin and User
+  skins            UserSkin[]       // Many-to-many relation of Skin and User
 }
 
 model UserSkin {
@@ -41,6 +43,7 @@ model Product {
   description     String          @db.VarChar(200)
   ingridients     String          
   link            String
+  image           String?          @db.VarChar(255)
   recomId         Int             
   recommendation  Recommendation  @relation(fields: [recomId], references : [id])
   typeId          Int             
