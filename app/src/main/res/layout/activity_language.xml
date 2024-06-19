@@ -48,6 +48,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:theme="@style/Theme.AppCompat.Light">
@@ -55,7 +56,7 @@
             <Spinner
                 android:id="@+id/language_spinner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="60dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
