@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE `product` ALTER COLUMN `ingridients` DROP DEFAULT,
+    ALTER COLUMN `recomId` DROP DEFAULT,
+    ALTER COLUMN `typeId` DROP DEFAULT;
