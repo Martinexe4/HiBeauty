@@ -54,8 +54,13 @@ class LanguageActivity : AppCompatActivity() {
             .setMessage("${getString(R.string.change_language_message)} ${languageName}?")
             .setPositiveButton(R.string.choose_yes) { _, _ ->
                 preference.saveSettingLanguage(languageCode)
-                startActivity(Intent(this, MainActivity::class.java))
-                finish()
+                AlertDialog.Builder(this)
+                    .setTitle(getString(R.string.language_changed_alert))
+                    .setMessage("${getString(R.string.language_message_1)} ${languageName}${getString(R.string.language_message_2)}")
+                    .setPositiveButton(getString(R.string.ok)) { _, _ ->
+                        // do nothing
+                    }
+                    .show()
             }
             .setNegativeButton(R.string.choose_no, null)
             .show()

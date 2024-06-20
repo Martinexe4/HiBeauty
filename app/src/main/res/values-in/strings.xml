@@ -161,5 +161,9 @@
 
     <string name="onboarding_title_3">Rekomendasi Skincare</string>
     <string name="onboarding_desc_3">Berdasarkan hasil pemindaian, kami akan merekomendasikan produk skincare yang paling sesuai untuk Anda. Siap untuk memulai perjalanan perawatan kulit Anda?</string>
+    <string name="language_changed_alert">Bahasa berhasil diganti!</string>
+    <string name="language_message_1">Bahasa telah diubah menjadi</string>
+    <string name="language_message_2">, silakan restart aplikasi untuk menerapkan pengaturan baru</string>
+    <string name="ok">Oke</string>
 
 </resources>

@@ -47,9 +47,6 @@
         <action
             android:id="@+id/action_navigation_profile_to_languageActivity"
             app:destination="@id/languageActivity" />
-        <action
-            android:id="@+id/action_navigation_profile_to_navigation_home"
-            app:destination="@id/navigation_home" />
     </fragment>
     <activity
         android:id="@+id/languageActivity"
