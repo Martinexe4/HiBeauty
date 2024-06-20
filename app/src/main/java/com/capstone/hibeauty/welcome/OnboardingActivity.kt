@@ -98,7 +98,7 @@ class OnboardingActivity : AppCompatActivity() {
         })
 
         // Start button to skip onboarding and go to LoginActivity
-        buttonStart.text = "Start"
+        buttonStart.text = getString(R.string.start_button)
         buttonStart.setOnClickListener {
             // Stop handler and move to another activity
             handler.removeCallbacks(runnable)

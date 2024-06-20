@@ -1,5 +1,8 @@
 package com.capstone.hibeauty.profile
 
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
@@ -8,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.capstone.hibeauty.MainActivity
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.databinding.ActivityLanguageBinding
+import kotlin.system.exitProcess
 
 class LanguageActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLanguageBinding
@@ -25,7 +29,8 @@ class LanguageActivity : AppCompatActivity() {
 
         languageList = resources.getStringArray(R.array.language_list)
 
-        binding.languageSpinner.adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, languageList)
+        binding.languageSpinner.adapter =
+            ArrayAdapter(this, android.R.layout.simple_list_item_1, languageList)
 
         val lang = preference.loadSettingLanguage()
         val index = languageList.indexOf(lang)
@@ -40,7 +45,10 @@ class LanguageActivity : AppCompatActivity() {
                 1 -> "in"
                 else -> "unknown"
             }
-            showConfirmationDialog(savedInstance, languageList[binding.languageSpinner.selectedItemPosition])
+            showConfirmationDialog(
+                savedInstance,
+                languageList[binding.languageSpinner.selectedItemPosition]
+            )
         }
 
         binding.closeButton.setOnClickListener {
@@ -56,9 +64,15 @@ class LanguageActivity : AppCompatActivity() {
                 preference.saveSettingLanguage(languageCode)
                 AlertDialog.Builder(this)
                     .setTitle(getString(R.string.language_changed_alert))
-                    .setMessage("${getString(R.string.language_message_1)} ${languageName}${getString(R.string.language_message_2)}")
+                    .setMessage(
+                        "${getString(R.string.language_message_1)} ${languageName}${
+                            getString(
+                                R.string.language_message_2
+                            )
+                        }"
+                    )
                     .setPositiveButton(getString(R.string.ok)) { _, _ ->
-                        // do nothing
+                        exitProcess(0)
                     }
                     .show()
             }

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
@@ -18,6 +19,7 @@ import com.capstone.hibeauty.databinding.ActivityMainBinding
 import com.capstone.hibeauty.profile.LanguagePreference
 import com.capstone.hibeauty.scan.CameraActivity
 import com.capstone.hibeauty.utils.ContextWrapper
+import com.capstone.hibeauty.utils.InitApp
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -36,6 +38,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        if (InitApp().isNightModeEnabled()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         setContentView(binding.root)
 
         bottomNavView = binding.navView
