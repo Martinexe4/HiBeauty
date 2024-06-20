@@ -160,4 +160,14 @@
     <string name="eye_bags_description">You have noticeable eye bags. It is recommended to use eye cream containing caffeine to reduce swelling.</string>
     <string name="unknown_description">Unknown result. Please consult with a skin specialist for further explanation.</string>
 
+
+    <string name="onboarding_title_1">Welcome</string>
+    <string name="onboarding_desc_1">Discover the right skincare products for your skin. We help you take care of your face with personalized recommendations.</string>
+
+    <string name="onboarding_title_2">Scan Your Face</string>
+    <string name="onboarding_desc_2">Use the scanning feature to analyze your skin condition. This is the first step to the right skincare recommendations.</string>
+
+    <string name="onboarding_title_3">Skincare Recommendations</string>
+    <string name="onboarding_desc_3">Based on the scan results, we will recommend the most suitable skincare products for you. Ready to start your skincare journey?</string>
+
 </resources>

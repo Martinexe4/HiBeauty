@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.capstone.hibeauty.R
+import com.capstone.hibeauty.adapter.OnboardingAdapter
 import com.capstone.hibeauty.authentication.LoginActivity
 import com.capstone.hibeauty.databinding.ActivityOnboardingBinding
 import com.capstone.hibeauty.utils.LanguageUtils

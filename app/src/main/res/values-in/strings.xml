@@ -152,4 +152,14 @@
     <string name="eye_bags_description">Anda memiliki kantung mata yang cukup terlihat. Disarankan untuk menggunakan krim mata yang mengandung kafein untuk mengurangi pembengkakan.</string>
     <string name="unknown_description">Hasil tidak dikenal. Silakan konsultasikan dengan spesialis kulit untuk penjelasan lebih lanjut.</string>
 
+
+    <string name="onboarding_title_1">Selamat Datang</string>
+    <string name="onboarding_desc_1">Temukan produk skincare yang tepat untuk kulit Anda. Kami membantu Anda merawat wajah dengan rekomendasi yang personal.</string>
+
+    <string name="onboarding_title_2">Pindai Wajah Anda</string>
+    <string name="onboarding_desc_2">Gunakan fitur pemindaian untuk menganalisis kondisi kulit Anda. Ini adalah langkah pertama untuk rekomendasi skincare yang tepat.</string>
+
+    <string name="onboarding_title_3">Rekomendasi Skincare</string>
+    <string name="onboarding_desc_3">Berdasarkan hasil pemindaian, kami akan merekomendasikan produk skincare yang paling sesuai untuk Anda. Siap untuk memulai perjalanan perawatan kulit Anda?</string>
+
 </resources>
