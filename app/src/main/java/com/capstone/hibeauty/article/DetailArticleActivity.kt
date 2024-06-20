@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
+import com.capstone.hibeauty.api.ArticlesItem
 import com.capstone.hibeauty.databinding.ActivityDetailArticleBinding
 
 class DetailArticleActivity : AppCompatActivity() {
