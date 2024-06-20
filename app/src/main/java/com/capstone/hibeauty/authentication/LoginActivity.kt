@@ -1,5 +1,6 @@
 package com.capstone.hibeauty.authentication
 
+import android.app.ActivityOptions
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -131,13 +132,15 @@ class LoginActivity : AppCompatActivity() {
 
     private fun navigateToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        val mBundle: Bundle = ActivityOptions.makeSceneTransitionAnimation(this@LoginActivity).toBundle()
+        startActivity(intent, mBundle)
         finish()
     }
 
     private fun navigateToPersonalizationActivity() {
         val intent = Intent(this, PersonalizationActivity::class.java)
-        startActivity(intent)
+        val mBundle: Bundle = ActivityOptions.makeSceneTransitionAnimation(this@LoginActivity).toBundle()
+        startActivity(intent, mBundle)
         finish()
     }
 

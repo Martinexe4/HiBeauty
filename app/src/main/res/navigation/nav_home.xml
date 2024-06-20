@@ -27,8 +27,7 @@
         android:id="@+id/navigation_product"
         android:name="com.capstone.hibeauty.ui.product.ProductFragment"
         android:label="fragment_product"
-        tools:layout="@layout/fragment_product" >
-    </fragment>
+        tools:layout="@layout/fragment_product" />
     <activity
         android:id="@+id/cameraActivity"
         android:name="com.capstone.hibeauty.scan.CameraActivity"
@@ -43,10 +42,14 @@
         android:id="@+id/navigation_profile"
         android:name="com.capstone.hibeauty.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_navigation_profile_to_languageActivity"
-            app:destination="@id/languageActivity" />
+            app:destination="@id/languageActivity"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <activity
         android:id="@+id/languageActivity"
