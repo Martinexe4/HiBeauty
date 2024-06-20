@@ -23,7 +23,6 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.api.ApiConfig
-import com.capstone.hibeauty.api.ApiService
 import com.capstone.hibeauty.api.ProfileImageResponse
 import com.capstone.hibeauty.api.UserProfileResponse
 import com.capstone.hibeauty.authentication.LoginActivity
@@ -38,8 +37,6 @@ import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 
 class ProfileFragment : Fragment() {
@@ -47,8 +44,6 @@ class ProfileFragment : Fragment() {
     private val PICK_IMAGE_REQUEST = 1
     private var selectedImageUri: Uri? = null
     private lateinit var profileImageView: ImageView
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -114,7 +109,6 @@ class ProfileFragment : Fragment() {
         }
     }
 
-    //maaf sangat berantakan di sini
     private fun uploadImage() {
         val userId = SharedPreferenceUtil.getUserId(requireActivity())
         val token = SharedPreferenceUtil.getToken(requireActivity())
@@ -128,12 +122,7 @@ class ProfileFragment : Fragment() {
         val requestFile = file.asRequestBody("image/*".toMediaTypeOrNull())
         val body = MultipartBody.Part.createFormData("IMAGE", file.name, requestFile)
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://backend-q4bx5v5sia-et.a.run.app/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val service = retrofit.create(ApiService::class.java)
+        val service = ApiConfig.apiService
         val call = userId?.let { service.uploadProfileImage("Bearer $token", it, body) }
 
         call?.enqueue(object : Callback<ResponseBody> {
@@ -141,7 +130,6 @@ class ProfileFragment : Fragment() {
                 if (response.isSuccessful) {
                     Toast.makeText(requireContext(), "Image uploaded successfully", Toast.LENGTH_SHORT).show()
                     loadUserImage()
-
                 } else {
                     Toast.makeText(requireContext(), "Image upload failed", Toast.LENGTH_SHORT).show()
                 }
@@ -205,8 +193,6 @@ class ProfileFragment : Fragment() {
         val token = SharedPreferenceUtil.getToken(requireContext())
         val userId = SharedPreferenceUtil.getUserId(requireContext())
 
-        Log.d("ProfileFragment", "Token: $token, UserId: $userId")
-
         if (token != null && userId != null) {
             val call = apiService.getUserProfileImage("Bearer $token", userId)
 
@@ -223,18 +209,15 @@ class ProfileFragment : Fragment() {
                             profileImageView.setImageResource(R.drawable.placeholder_image)
                         }
                     } else {
-                        Log.d("ProfileFragment", "Response not successful")
                         profileImageView.setImageResource(R.drawable.placeholder_image)
                     }
                 }
 
                 override fun onFailure(call: Call<ProfileImageResponse>, t: Throwable) {
-                    Log.d("ProfileFragment", "Failed to fetch user profile image: ${t.message}")
                     profileImageView.setImageResource(R.drawable.placeholder_image)
                 }
             })
         } else {
-            Log.d("ProfileFragment", "Token or UserId not found")
             profileImageView.setImageResource(R.drawable.placeholder_image)
         }
     }

@@ -1,7 +1,9 @@
 package com.capstone.hibeauty.api
 
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -48,6 +50,18 @@ interface ApiService {
         @Path("userId") userId: String
     ): Call<ProfileImageResponse>
 
+    @Multipart
+    @POST("skin/upload")
+    fun uploadImage(
+        @Header("Authorization") token: String,
+        @Part file: MultipartBody.Part
+    ): Call<JSONObject>
+
+    @POST("predictions")
+    fun savePrediction(
+        @Header("Authorization") token: String,
+        @Body body: RequestBody
+    ): Call<JSONObject>
 
     @Multipart
     @PUT("user/{id}")
@@ -60,16 +74,4 @@ interface ApiService {
     @GET ("everything?q=wajah&language=id&sortBy=popularity&apiKey=edf3226670f340bea5c2ecac0db6e19d")
     fun getNews(): Call<NewsResponse>
 
-    @Multipart
-    @POST("skin/upload")
-    fun uploadImage(
-        @Header("Authorization") token: String,
-        @Part file: MultipartBody.Part
-    ): Call<ResponseBody>
-
-    @POST("predictions")
-    fun savePredictions(
-        @Header("Authorization") token: String,
-        @Body requestBody: PredictionRequest
-    ): Call<ResponseBody>
 }

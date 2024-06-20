@@ -6,6 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import java.util.Locale
 
 object LanguageUtils {
+    fun setLanguagePreference(context: Context, language: String) {
+        val sharedPreferences = context.getSharedPreferences("language_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putString("selected_language", language)
+        editor.apply()
+    }
 
     fun getLanguagePreference(context: Context): String? {
         val sharedPreferences = context.getSharedPreferences("language_prefs", Context.MODE_PRIVATE)
