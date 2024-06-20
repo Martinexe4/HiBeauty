@@ -18,7 +18,6 @@ import com.capstone.hibeauty.databinding.ActivityMainBinding
 import com.capstone.hibeauty.profile.LanguagePreference
 import com.capstone.hibeauty.scan.CameraActivity
 import com.capstone.hibeauty.utils.ContextWrapper
-import com.google.firebase.FirebaseApp
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -35,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        FirebaseApp.initializeApp(this)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
