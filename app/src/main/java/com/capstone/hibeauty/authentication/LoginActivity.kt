@@ -131,15 +131,13 @@ class LoginActivity : AppCompatActivity() {
 
     private fun navigateToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
-        val mBundle: Bundle = ActivityOptions.makeSceneTransitionAnimation(this@LoginActivity).toBundle()
-        startActivity(intent, mBundle)
+        startActivity(intent)
         finish()
     }
 
     private fun navigateToPersonalizationActivity() {
         val intent = Intent(this, PersonalizationActivity::class.java)
-        val mBundle: Bundle = ActivityOptions.makeSceneTransitionAnimation(this@LoginActivity).toBundle()
-        startActivity(intent, mBundle)
+        startActivity(intent)
         finish()
     }
 

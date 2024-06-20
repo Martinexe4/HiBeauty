@@ -145,7 +145,7 @@
     <string name="password_confirmation_hint">Konfirmasi Password</string>
     <string name="sign_up_btn">DAFTAR</string>
     <string name="account_hint">Sudah memiliki akun?</string>
-    <string name="start_button">Mulailah</string>
+    <string name="start_button">Memulai</string>
 
     <string name="acne_description">Wajah Anda dominan berjerawat. Perawatan yang direkomendasikan adalah menggunakan produk dengan bahan aktif seperti asam salisilat atau benzoyl peroxide.</string>
     <string name="oily_description">Wajah Anda dominan berminyak. Disarankan untuk menggunakan produk yang mengontrol minyak seperti toner dengan bahan aktif astringen.</string>
