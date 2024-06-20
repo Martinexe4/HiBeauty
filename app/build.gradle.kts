@@ -51,11 +51,9 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
-    implementation(libs.firebase.storage.ktx)
     implementation(libs.androidx.navigation.fragment.ktx)
     implementation(libs.androidx.navigation.ui.ktx)
-    implementation(libs.firebase.firestore.ktx)
-    implementation(libs.firebase.firestore)
+
 
     implementation(kotlin("stdlib"))
     implementation(libs.androidx.appcompat.v140)
@@ -65,11 +63,6 @@ dependencies {
     implementation(libs.androidx.core.ktx.v170)
     implementation(libs.androidx.viewpager2.v100)
     implementation(libs.androidx.fragment.ktx)
-
-    //firebase
-    implementation(libs.firebase.auth)
-    implementation(libs.play.services.auth)
-    implementation(platform(libs.firebase.bom))
 
     //onboarding
     implementation(libs.glide)
