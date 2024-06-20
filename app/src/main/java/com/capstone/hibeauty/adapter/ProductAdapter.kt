@@ -11,8 +11,6 @@ import com.capstone.hibeauty.databinding.ItemProductHorizontalBinding
 import com.capstone.hibeauty.databinding.ItemProductVerticalBinding
 import com.capstone.hibeauty.product.ProductDetailActivity
 
-//import com.squareup.picasso.Picasso
-
 class HorizontalProductAdapter(private var productList: List<Product>) : RecyclerView.Adapter<HorizontalProductAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
