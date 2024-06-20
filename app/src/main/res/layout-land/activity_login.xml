@@ -67,61 +67,12 @@
                             android:textColor="@color/colorGrayDark"
                             android:textSize="14sp" />
 
-                        <Button
-                            android:id="@+id/google_sign_in_button"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_marginTop="4dp"
-                            android:backgroundTint="@color/colorGrayLight"
-                            android:drawableLeft="@drawable/google_logo"
-                            android:text="@string/continue_with_google"
-                            android:textAllCaps="false"
-                            android:textColor="@color/colorGrayDark"
-                            tools:ignore="RtlHardcoded" />
-
-                        <RelativeLayout
-                            android:id="@+id/separator"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            android:padding="8dp">
-
-                            <!-- Garis kiri -->
-                            <View
-                                android:layout_width="wrap_content"
-                                android:layout_height="1dp"
-                                android:layout_alignParentStart="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="8dp"
-                                android:layout_toStartOf="@id/or_text"
-                                android:background="#D3D3D3" />
-
-                            <!-- Teks "OR" -->
-                            <TextView
-                                android:id="@+id/or_text"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:text="@string/or"
-                                android:textColor="@color/colorGrayDark"
-                                android:textSize="14sp" />
-
-                            <!-- Garis kanan -->
-                            <View
-                                android:layout_width="wrap_content"
-                                android:layout_height="1dp"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginStart="8dp"
-                                android:layout_toEndOf="@id/or_text"
-                                android:background="#D3D3D3" />
-                        </RelativeLayout>
 
                         <com.google.android.material.textfield.TextInputLayout
                             android:id="@+id/textInputLayout1"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
+                            android:layout_marginTop="32dp"
                             android:textColorHint="@color/colorGrayDark"
                             app:boxBackgroundColor="@color/white"
                             app:boxStrokeColor="@color/colorGrayDark">
