@@ -2,9 +2,9 @@ package com.capstone.hibeauty.profile
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.capstone.hibeauty.R
 import com.capstone.hibeauty.api.ApiConfig
 import com.capstone.hibeauty.api.UserProfileResponse
 import com.capstone.hibeauty.databinding.ActivityInfoUserBinding
@@ -63,14 +63,12 @@ class InfoUserActivity : AppCompatActivity() {
                         binding.tvGender.text = translatedGender
                     }
                 } else {
-                    Log.e("ProfileInfo", "Failed to retrieve profile: ${response.errorBody()?.string()}")
-                    Toast.makeText(this@InfoUserActivity, "Failed to retrieve profile", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@InfoUserActivity, R.string.failed_to_retrieve_profile, Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<UserProfileResponse>, t: Throwable) {
-                Log.e("ProfileInfo", "Error retrieving profile", t)
-                Toast.makeText(this@InfoUserActivity, "Error retrieving profile", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@InfoUserActivity, R.string.error_retrieving_profile, Toast.LENGTH_SHORT).show()
             }
         })
     }

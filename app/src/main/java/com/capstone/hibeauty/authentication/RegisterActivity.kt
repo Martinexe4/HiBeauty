@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.capstone.hibeauty.R
 import com.capstone.hibeauty.api.ApiConfig
 import com.capstone.hibeauty.api.RegisterRequest
 import com.capstone.hibeauty.api.RegisterResponse
@@ -36,7 +37,7 @@ class RegisterActivity : AppCompatActivity() {
             if (password == confirmPassword) {
                 registerUser(username, email, password)
             } else {
-                Toast.makeText(this, "Passwords do not match", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, R.string.passwords_do_not_match, Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -60,34 +61,32 @@ class RegisterActivity : AppCompatActivity() {
                     if (registerResponse?.status == true) {
                         Toast.makeText(this@RegisterActivity, registerResponse.message, Toast.LENGTH_SHORT).show()
 
-                        // Extracting the userid and saving to SharedPreferences
                         val userid = registerResponse.data?.USERID
                         if (userid != null) {
                             Log.d(TAG, "UserID from response: $userid")
                             SharedPreferenceUtil.saveUserId(this@RegisterActivity, userid)
 
-                            // Verifying the saved userid from SharedPreferences
                             val savedUserid = SharedPreferenceUtil.getUserId(this@RegisterActivity)
                             Log.d(TAG, "UserID from SharedPreferences: $savedUserid")
                         }
 
-                        // Navigate to the LoginActivity
                         val intent = Intent(this@RegisterActivity, LoginActivity::class.java)
                         startActivity(intent)
                         finish()
                     } else {
-                        val message = registerResponse?.message ?: "Unknown error"
-                        Toast.makeText(this@RegisterActivity, "Registration failed: $message", Toast.LENGTH_SHORT).show()
+                        val message = registerResponse?.message ?: getString(R.string.unknown_error)
+                        Toast.makeText(this@RegisterActivity, getString(R.string.registration_failed_with_message, message), Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Log.d(TAG, "Response unsuccessful: ${response.errorBody()?.string()}")
-                    Toast.makeText(this@RegisterActivity, "Registration failed: ${response.errorBody()?.string()}", Toast.LENGTH_SHORT).show()
+                    val errorMessage = response.errorBody()?.string() ?: getString(R.string.unknown_error)
+                    Log.d(TAG, "Response unsuccessful: $errorMessage")
+                    Toast.makeText(this@RegisterActivity, getString(R.string.registration_failed_with_message, errorMessage), Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
                 showLoading(false)
-                Toast.makeText(this@RegisterActivity, "Registration failed: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@RegisterActivity, getString(R.string.registration_failed_with_message, t.message), Toast.LENGTH_SHORT).show()
             }
         })
     }

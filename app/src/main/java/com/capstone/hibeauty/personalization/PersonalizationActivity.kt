@@ -2,7 +2,6 @@ package com.capstone.hibeauty.personalization
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
@@ -40,8 +39,8 @@ class PersonalizationActivity : AppCompatActivity() {
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = when (position) {
-                0 -> "Age"
-                1 -> "Gender"
+                0 -> getString(R.string.tab_age)
+                1 -> getString(R.string.tab_gender)
                 else -> null
             }
         }.attach()
@@ -60,8 +59,6 @@ class PersonalizationActivity : AppCompatActivity() {
         val age = ageFragment.getAge()
         val gender = genderFragment.getGender()
 
-        Log.d("Personalization", "Collected Data - Age: $age, Gender: $gender")
-
         saveUserData(age, gender)
     }
 
@@ -70,25 +67,20 @@ class PersonalizationActivity : AppCompatActivity() {
         val userId = SharedPreferenceUtil.getUserId(this) ?: ""
         val request = AgeGenderRequest(AGE = age, GENDER = gender)
 
-        Log.d("Personalization", "Saving Data - Token: $token, UserID: $userId, Age: $age, Gender: $gender")
-
         val call = ApiConfig.apiService.updateUserAgeGender("Bearer $token", userId, request)
 
         call.enqueue(object : Callback<AgeGenderResponse> {
             override fun onResponse(call: Call<AgeGenderResponse>, response: Response<AgeGenderResponse>) {
                 if (response.isSuccessful) {
-                    Log.d("Personalization", "Data saved successfully: ${response.body()}")
                     SharedPreferenceUtil.savePersonalizationCompleted(this@PersonalizationActivity, true)
                     goToMainActivity()
                 } else {
-                    Log.e("Personalization", "Failed to save data: ${response.errorBody()?.string()}")
-                    Toast.makeText(this@PersonalizationActivity, "Failed to update data", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@PersonalizationActivity, getString(R.string.failed_to_update_data), Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<AgeGenderResponse>, t: Throwable) {
-                Log.e("Personalization", "Error saving data", t)
-                Toast.makeText(this@PersonalizationActivity, "Failed to connect to server", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@PersonalizationActivity, getString(R.string.failed_to_connect_server), Toast.LENGTH_SHORT).show()
             }
         })
     }

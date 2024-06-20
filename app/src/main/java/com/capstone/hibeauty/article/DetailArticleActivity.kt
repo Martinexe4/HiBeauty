@@ -17,10 +17,8 @@ class DetailArticleActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        // Terima data artikel dari Intent
         val article = intent.getSerializableExtra("article") as? ArticlesItem
 
-        // Atur nilai untuk komponen UI menggunakan ViewBinding
         binding.title.text = article?.title
         binding.description.text = article?.description
         binding.publishedAt.text = article?.publishedAt
@@ -31,17 +29,15 @@ class DetailArticleActivity : AppCompatActivity() {
             Glide.with(this).load(it).into(binding.image)
         }
 
-        // Menambahkan listener untuk membuka artikel di browser
         binding.openInBrowser.setOnClickListener {
             article?.url?.let { url ->
                 val browserIntent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url))
-                startActivity(browserIntent)  // Membuka browser dengan URL artikel
+                startActivity(browserIntent)
             }
-        }
 
-        // Menambahkan listener untuk tombol close
-        binding.closeButton.setOnClickListener {
-            finish()  // Menutup aktivitas saat tombol close ditekan
+            binding.closeButton.setOnClickListener {
+                finish()
+            }
         }
     }
 }

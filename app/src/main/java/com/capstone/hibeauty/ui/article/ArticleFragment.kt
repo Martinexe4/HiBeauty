@@ -17,14 +17,13 @@ import com.capstone.hibeauty.api.ApiService
 import com.capstone.hibeauty.api.ArticlesItem
 import com.capstone.hibeauty.api.NewsResponse
 
-
 class ArticleFragment : Fragment() {
     private var _binding: FragmentArticleBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var newsAdapter: ArticleAdapter
     private lateinit var apiService: ApiService
-    private var allArticles: List<ArticlesItem?> = emptyList()  // Simpan semua artikel
+    private var allArticles: List<ArticlesItem?> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,10 +43,8 @@ class ArticleFragment : Fragment() {
 
         apiService = ApiConfig.getApiServiceNews()
 
-        // Fetch data untuk pertama kali
         fetchNews()
 
-        // Mengatur SearchView untuk menyaring artikel
         binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
@@ -64,7 +61,6 @@ class ArticleFragment : Fragment() {
             }
         })
 
-        // Mengatur SwipeRefreshLayout untuk merefresh daftar berita
         binding.swipeRefreshLayout.setOnRefreshListener {
             fetchNews()
         }
@@ -79,7 +75,7 @@ class ArticleFragment : Fragment() {
                     val newsResponse = response.body()
                     val articles = newsResponse?.articles
                     if (articles != null) {
-                        allArticles = articles  // Simpan semua artikel
+                        allArticles = articles
                         if (isAdded) {
                             newsAdapter.updateData(articles)
                         }
@@ -102,13 +98,12 @@ class ArticleFragment : Fragment() {
     }
 
     private fun filterArticles(query: String) {
-        // Saring artikel berdasarkan query
         val filteredArticles = allArticles.filter {
             it?.title?.contains(query, true) == true ||
                     it?.description?.contains(query, true) == true
         }
         if (isAdded) {
-            newsAdapter.updateData(filteredArticles)  // Perbarui adapter dengan hasil filter
+            newsAdapter.updateData(filteredArticles)
         }
     }
 

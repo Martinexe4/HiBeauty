@@ -26,19 +26,16 @@ class DetailRecommendationActivity : AppCompatActivity() {
         val recommendationImage = intent.getStringExtra("recommendationImage")// tambahkan ini
         val recommendationType = intent.getIntExtra("recommendationType", -1)
 
-        // Set data ke view
         binding.productTitle.text = recommendationName
         binding.productDescription.text = recommendationDescription
         binding.productIngredients.text = recommendationIngredients
         binding.productType.text = mapTypeIdToString(recommendationType)
 
-        // Load image using Glide
         Glide.with(this)
-            .load(recommendationImage) // Load the product image URL
-            .placeholder(R.drawable.placeholder_image) // Placeholder image while loading
+            .load(recommendationImage)
+            .placeholder(R.drawable.placeholder_image)
             .into(binding.productImage)
 
-        // Set click listener untuk link button
         binding.goToShopButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(recommendationLink)
@@ -46,7 +43,6 @@ class DetailRecommendationActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Set click listener untuk close button
         binding.closeButton.setOnClickListener {
             finish()
         }
@@ -54,19 +50,19 @@ class DetailRecommendationActivity : AppCompatActivity() {
 
     private fun mapTypeIdToString(typeId: Int): String {
         return when (typeId) {
-            1 -> "Moisturizer"
-            2 -> "Cleanser"
-            3 -> "Powder"
-            4 -> "Balm"
-            5 -> "Serum"
-            6 -> "Toner"
-            7 -> "Face Wash"
-            8 -> "Eye Cream"
-            9 -> "Face Scrub"
-            10 -> "Sunscreen"
-            11 -> "Micellar Water"
-            12 -> "Acne Spot"
-            else -> "Unknown"
+            1 -> getString(R.string.moisturizer)
+            2 -> getString(R.string.cleanser)
+            3 -> getString(R.string.powder)
+            4 -> getString(R.string.balm)
+            5 -> getString(R.string.serum)
+            6 -> getString(R.string.toner)
+            7 -> getString(R.string.face_wash)
+            8 -> getString(R.string.eye_cream)
+            9 -> getString(R.string.face_scrub)
+            10 -> getString(R.string.sunscreen)
+            11 -> getString(R.string.micellar_water)
+            12 -> getString(R.string.acne_spot)
+            else -> getString(R.string.unknown)
         }
     }
 }

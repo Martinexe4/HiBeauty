@@ -10,7 +10,6 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.WindowInsetsCompat
-import com.capstone.hibeauty.MainActivity
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.utils.InitApp
 

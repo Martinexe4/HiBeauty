@@ -166,4 +166,46 @@
     <string name="language_message_2">, silakan restart aplikasi untuk menerapkan pengaturan baru</string>
     <string name="ok">Oke</string>
 
+    <string name="login_successful">Login berhasil</string>
+    <string name="token_empty_or_null">Token kosong atau null</string>
+    <string name="login_failed">Login gagal</string>
+    <string name="error_token_not_found">Kesalahan: Token tidak ditemukan</string>
+    <string name="failed_to_fetch_user_profile">Gagal mengambil profil pengguna</string>
+    <string name="error_fetching_user_profile">Kesalahan mengambil profil pengguna</string>
+
+    <string name="passwords_do_not_match">Kata sandi tidak cocok</string>
+    <string name="unknown_error">Kesalahan tidak diketahui</string>
+    <string name="registration_failed">Pendaftaran gagal</string>
+    <string name="registration_failed_with_message">Pendaftaran gagal: %1$s</string>
+
+    <string name="tab_age">Usia</string>
+    <string name="tab_gender">Jenis Kelamin</string>
+    <string name="failed_to_update_data">Gagal memperbarui data</string>
+    <string name="failed_to_connect_server">Gagal terhubung ke server</string>
+
+    <string name="failed_to_retrieve_profile">Gagal mengambil profil</string>
+    <string name="error_retrieving_profile">Kesalahan mengambil profil</string>
+
+    <string name="moisturizer">Pelembap</string>
+    <string name="cleanser">Pembersih</string>
+    <string name="powder">Bedak</string>
+    <string name="balm">Balsem</string>
+    <string name="serum">Serum</string>
+    <string name="toner">Toner</string>
+    <string name="face_wash">Pembersih Wajah</string>
+    <string name="eye_cream">Krim Mata</string>
+    <string name="face_scrub">Scrub Wajah</string>
+    <string name="sunscreen">Tabir Surya</string>
+    <string name="micellar_water">Air Micellar</string>
+    <string name="acne_spot">Obat Jerawat</string>
+    <string name="unknown">Tidak Diketahui</string>
+    <string name="go_to_shop">Buka Toko</string>
+    <string name="failed_to_open_link">Gagal membuka tautan</string>
+    <string name="select_image_first">Pilih gambar terlebih dahulu</string>
+    <string name="fetch_products_failed_null">Gagal mengambil produk: Respons dari server kosong</string>
+    <string name="fetch_products_failed_code">Gagal mengambil produk: %1$d</string>
+    <string name="fetch_products_failed_generic">Gagal mengambil produk: %1$s</string>
+    <string name="token_not_found">Token tidak ditemukan</string>
+    <string name="search_hint">Cari produk</string>
+
 </resources>

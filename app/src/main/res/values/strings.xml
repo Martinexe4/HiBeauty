@@ -174,4 +174,47 @@
     <string name="language_message_1">Language is changed to</string>
     <string name="language_message_2">, please restart the app to apply new settings</string>
     <string name="ok">Ok</string>
+
+    <string name="login_successful">Login successful</string>
+    <string name="token_empty_or_null">Token is empty or null</string>
+    <string name="login_failed">Login failed</string>
+    <string name="error_token_not_found">Error: Token not found</string>
+    <string name="failed_to_fetch_user_profile">Failed to fetch user profile</string>
+    <string name="error_fetching_user_profile">Error fetching user profile</string>
+
+    <string name="passwords_do_not_match">Passwords do not match</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="registration_failed">Registration failed</string>
+    <string name="registration_failed_with_message">Registration failed: %1$s</string>
+
+    <string name="tab_age">Age</string>
+    <string name="tab_gender">Gender</string>
+    <string name="failed_to_update_data">Failed to update data</string>
+    <string name="failed_to_connect_server">Failed to connect to server</string>
+
+    <string name="failed_to_retrieve_profile">Failed to retrieve profile</string>
+    <string name="error_retrieving_profile">Error retrieving profile</string>
+
+    <string name="moisturizer">Moisturizer</string>
+    <string name="cleanser">Cleanser</string>
+    <string name="powder">Powder</string>
+    <string name="balm">Balm</string>
+    <string name="serum">Serum</string>
+    <string name="toner">Toner</string>
+    <string name="face_wash">Face Wash</string>
+    <string name="eye_cream">Eye Cream</string>
+    <string name="face_scrub">Face Scrub</string>
+    <string name="sunscreen">Sunscreen</string>
+    <string name="micellar_water">Micellar Water</string>
+    <string name="acne_spot">Acne Spot</string>
+    <string name="unknown">Unknown</string>
+    <string name="go_to_shop">Go to Shop</string>
+    <string name="failed_to_open_link">Failed to open link</string>
+    <string name="select_image_first">Select image first</string>
+    <string name="fetch_products_failed_null">Failed to fetch products: Response body is null</string>
+    <string name="fetch_products_failed_code">Failed to fetch products: %1$d</string>
+    <string name="fetch_products_failed_generic">Failed to fetch products: %1$s</string>
+    <string name="token_not_found">Token not found</string>
+    <string name="search_hint">Search products</string>
+
 </resources>

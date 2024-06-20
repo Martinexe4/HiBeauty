@@ -19,7 +19,6 @@ class ImageClassifierHelper(private val context: Context) {
         val bitmap = MediaStore.Images.Media.getBitmap(context.contentResolver, uri)
         val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
 
-        // Normalize the image data to [0, 1] and convert to ByteBuffer
         val byteBuffer = convertBitmapToByteBuffer(resizedBitmap)
 
         val inputFeature0 = TensorBuffer.createFixedSize(intArrayOf(1, 224, 224, 3), DataType.FLOAT32)

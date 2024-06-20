@@ -39,10 +39,10 @@ class RecommendationAdapter(private val context: Context) : ListAdapter<ProductR
             nameTextView.text = recommendation.name
             typeTextView.text = mapTypeIdToString(recommendation.typeId)
 
-            // Load image using Glide
+
             Glide.with(context)
-                .load(recommendation.image) // Load the product image URL
-                .placeholder(R.drawable.placeholder_image) // Placeholder image while loading
+                .load(recommendation.image)
+                .placeholder(R.drawable.placeholder_image)
                 .into(imageView)
 
             cardView.setOnClickListener {

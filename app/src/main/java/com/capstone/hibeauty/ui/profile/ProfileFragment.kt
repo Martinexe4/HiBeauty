@@ -29,7 +29,6 @@ import com.capstone.hibeauty.api.UserProfileResponse
 import com.capstone.hibeauty.authentication.LoginActivity
 import com.capstone.hibeauty.databinding.FragmentProfileBinding
 import com.capstone.hibeauty.profile.InfoUserActivity
-import com.capstone.hibeauty.profile.LanguageActivity
 import com.capstone.hibeauty.profile.PolicyActivity
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -41,20 +40,12 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Header
-import retrofit2.http.Multipart
-import retrofit2.http.PUT
-import retrofit2.http.Part
-import retrofit2.http.Path
 import java.io.File
-import java.io.IOException
-
 
 class ProfileFragment : Fragment() {
     private var binding: FragmentProfileBinding? = null
     private val PICK_IMAGE_REQUEST = 1
     private var selectedImageUri: Uri? = null
-    private lateinit var userService: ApiService // Ensure this is initialized properly
     private lateinit var profileImageView: ImageView
 
 
@@ -70,7 +61,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        profileImageView = view.findViewById(R.id.imgProfile) // Ensure you have an ImageView with this ID in your layout
+        profileImageView = view.findViewById(R.id.imgProfile)
 
         loadUserImage()
         fetchUserProfile()
@@ -148,24 +139,20 @@ class ProfileFragment : Fragment() {
         call?.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
                 if (response.isSuccessful) {
-                    // Handle success
                     Toast.makeText(requireContext(), "Image uploaded successfully", Toast.LENGTH_SHORT).show()
                     loadUserImage()
 
                 } else {
-                    // Handle failure
                     Toast.makeText(requireContext(), "Image upload failed", Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                // Handle failure
                 Toast.makeText(requireContext(), "Image upload failed: ${t.message}", Toast.LENGTH_SHORT).show()
             }
         })
     }
 
-    // Extension function to get the file name from the Uri
     private fun ContentResolver.getFileName(uri: Uri): String {
         var name = ""
         val returnCursor = this.query(uri, null, null, null, null)
@@ -177,8 +164,6 @@ class ProfileFragment : Fragment() {
         }
         return name
     }
-
-
 
     private fun fetchUserProfile() {
         val apiService = ApiConfig.apiService
@@ -232,7 +217,7 @@ class ProfileFragment : Fragment() {
                         if (profileImage != null) {
                             Glide.with(this@ProfileFragment)
                                 .load(profileImage)
-                                .placeholder(R.drawable.placeholder_image) // Add a placeholder image in your drawable resources
+                                .placeholder(R.drawable.placeholder_image)
                                 .into(profileImageView)
                         } else {
                             profileImageView.setImageResource(R.drawable.placeholder_image)
@@ -259,10 +244,8 @@ class ProfileFragment : Fragment() {
             .setTitle(getString(R.string.logout_menu))
             .setMessage(getString(R.string.warning_logout))
             .setPositiveButton(getString(R.string.choose_yes)) { dialog, which ->
-                // Menghapus status login dari SharedPreference
                 SharedPreferenceUtil.saveLoginStatus(requireActivity(), false)
 
-                // Navigasi ke LoginActivity dan menutup semua activity sebelumnya
                 val intent = Intent(requireActivity(), LoginActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)

@@ -43,19 +43,15 @@ class ProductFragment : Fragment() {
         horizontalAdapter = HorizontalProductAdapter(emptyList())
         verticalAdapter = VerticalProductAdapter(emptyList())
 
-        // Set up horizontal RecyclerView
         horizontalRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         horizontalRecyclerView.adapter = horizontalAdapter
 
-        // Set up vertical RecyclerView
         verticalRecyclerView.layoutManager = LinearLayoutManager(context)
         verticalRecyclerView.adapter = verticalAdapter
 
-        // Fetch products
         fetchProducts()
 
-        // Set up search functionality
         setupSearchView()
 
         return view
@@ -64,7 +60,7 @@ class ProductFragment : Fragment() {
     private fun fetchProducts() {
         val apiService = ApiConfig.apiService
         val token = SharedPreferenceUtil.getToken(requireContext())
-        Log.d("ProductFragment", "User token: $token")  // Log the token
+        Log.d("ProductFragment", "User token: $token")
 
         if (token != null) {
             val call = apiService.getAllProducts("Bearer $token")
@@ -82,22 +78,22 @@ class ProductFragment : Fragment() {
 
                             Log.d("ProductFragment", "Fetched products: $products")
 
-                            horizontalAdapter.updateData(products.take(5)) // Take first 5 products for horizontal RecyclerView
-                            verticalAdapter.updateData(products.drop(5))  // Drop first 5 products for vertical RecyclerView
+                            horizontalAdapter.updateData(products.take(5))
+                            verticalAdapter.updateData(products.drop(5))
                         } else {
-                            showToast("Failed to fetch products: Response body is null")
+                            showToast(getString(R.string.fetch_products_failed_null))
                         }
                     } else {
-                        showToast("Failed to fetch products: ${response.code()}")
+                        showToast(getString(R.string.fetch_products_failed_code, response.code()))
                     }
                 }
 
                 override fun onFailure(call: Call<ProductResponse>, t: Throwable) {
-                    showToast("Failed to fetch products: ${t.message}")
+                    showToast(getString(R.string.fetch_products_failed_generic, t.message))
                 }
             })
         } else {
-            showToast("Token not found")
+            showToast(getString(R.string.token_not_found))
         }
     }
 
@@ -123,8 +119,8 @@ class ProductFragment : Fragment() {
 
         Log.d("ProductFragment", "Filtered products: $filteredProducts for query: $query")
 
-        horizontalAdapter.updateData(filteredProducts.take(5)) // Take first 5 filtered products for horizontal RecyclerView
-        verticalAdapter.updateData(filteredProducts.drop(5))  // Drop first 5 filtered products for vertical RecyclerView
+        horizontalAdapter.updateData(filteredProducts.take(5))
+        verticalAdapter.updateData(filteredProducts.drop(5))
     }
 
     private fun showToast(message: String) {

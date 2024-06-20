@@ -43,14 +43,6 @@ class ArticleAdapter(private var articles: List<ArticlesItem?>) :
         notifyDataSetChanged()  // Memberi tahu RecyclerView bahwa data telah diperbarui
     }
 
-//    fun updateData(newArticles: List<ArticlesItem?>) {
-//        val diffCallback = ArticleDiffCallback(articles, newArticles)
-//        val diffResult = DiffUtil.calculateDiff(diffCallback)
-//
-//        articles = newArticles
-//        diffResult.dispatchUpdatesTo(this)  // Memperbarui hanya perubahan yang diperlukan
-//    }
-
     class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val title: TextView = itemView.findViewById(R.id.title)
         private val description: TextView = itemView.findViewById(R.id.description)

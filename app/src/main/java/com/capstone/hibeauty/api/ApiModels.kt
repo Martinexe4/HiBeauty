@@ -6,31 +6,9 @@ import kotlinx.parcelize.Parcelize
 
 //khusus
 import com.google.gson.annotations.SerializedName
+import org.json.JSONArray
 import java.io.Serializable
 
-data class UserData(
-    @SerializedName("USERID")
-    val userId: String,
-    @SerializedName("USERNAME")
-    val username: String,
-    @SerializedName("EMAIL")
-    val email: String,
-    @SerializedName("PASSWORD")
-    val password: String,
-    @SerializedName("PROFILEIMG")
-    val profileImage: String?, // Assuming profile image is a string path or URL
-    @SerializedName("CREATEDAT")
-    val createdAt: String,
-    @SerializedName("UPDATEDAT")
-    val updatedAt: String,
-    @SerializedName("skinId")
-    val skinId: String?, // Assuming skinId can be nullable
-    @SerializedName("AGE")
-    val age: Int,
-    @SerializedName("GENDER")
-    val gender: String
-)
-//khusus
 data class RegisterRequest(
     val username: String,
     val email: String,
@@ -133,6 +111,10 @@ data class RecommendationResponse(
     val data: List<ProductRecommendation>
 )
 
+data class PredictionRequest(
+    val skinId: String,
+    val predictions: JSONArray
+)
 
 //load photo profile
 data class ProfileImageResponse(

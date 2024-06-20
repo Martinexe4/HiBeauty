@@ -27,6 +27,7 @@ import androidx.core.content.ContextCompat
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.databinding.ActivityCameraBinding
 import com.capstone.hibeauty.utils.InitApp
+import com.capstone.hibeauty.utils.createCustomTempFile
 import java.io.File
 
 class CameraActivity : AppCompatActivity() {

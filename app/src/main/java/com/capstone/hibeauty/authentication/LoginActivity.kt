@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.capstone.hibeauty.MainActivity
+import com.capstone.hibeauty.R
 import com.capstone.hibeauty.api.ApiConfig
 import com.capstone.hibeauty.api.LoginRequest
 import com.capstone.hibeauty.api.LoginResponse
@@ -31,7 +32,6 @@ class LoginActivity : AppCompatActivity() {
         supportActionBar?.hide()
         setContentView(binding.root)
 
-        // Check if user is already logged in
         if (isUserLoggedIn()) {
             handleLoginSuccess()
             finish()
@@ -59,30 +59,29 @@ class LoginActivity : AppCompatActivity() {
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                 showLoading(false)
                 if (response.isSuccessful) {
-                    val token = response.body()?.token // Ambil token dari response body
+                    val token = response.body()?.token
                     if (!token.isNullOrEmpty()) {
-                        saveToken(token) // Simpan token ke Shared Preferences
-                        Toast.makeText(this@LoginActivity, "Login successful", Toast.LENGTH_SHORT).show()
+                        saveToken(token)
+                        Toast.makeText(this@LoginActivity, getString(R.string.login_successful), Toast.LENGTH_SHORT).show()
                         saveLoginStatus(true)
                         handleLoginSuccess()
                         finish()
                     } else {
-                        Toast.makeText(this@LoginActivity, "Token is empty or null", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@LoginActivity, getString(R.string.token_empty_or_null), Toast.LENGTH_SHORT).show()
                     }
                 } else {
-                    Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                 showLoading(false)
-                Toast.makeText(this@LoginActivity, "Login failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     private fun saveToken(token: String) {
-        // Simpan token menggunakan SharedPreferenceUtil
         SharedPreferenceUtil.saveToken(this, token)
     }
 
@@ -102,7 +101,7 @@ class LoginActivity : AppCompatActivity() {
         if (token != null) {
             fetchUserProfile(token)
         } else {
-            Toast.makeText(this, "Error: Token not found", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.error_token_not_found), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -120,12 +119,12 @@ class LoginActivity : AppCompatActivity() {
                         navigateToPersonalizationActivity()
                     }
                 } else {
-                    Toast.makeText(this@LoginActivity, "Failed to fetch user profile", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@LoginActivity, getString(R.string.failed_to_fetch_user_profile), Toast.LENGTH_SHORT).show()
                 }
             }
 
             override fun onFailure(call: Call<UserProfileResponse>, t: Throwable) {
-                Toast.makeText(this@LoginActivity, "Error fetching user profile", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, getString(R.string.error_fetching_user_profile), Toast.LENGTH_SHORT).show()
             }
         })
     }

@@ -1,14 +1,9 @@
 package com.capstone.hibeauty.profile
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.capstone.hibeauty.MainActivity
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.databinding.ActivityLanguageBinding
 import kotlin.system.exitProcess

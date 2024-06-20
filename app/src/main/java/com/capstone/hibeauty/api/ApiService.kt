@@ -59,4 +59,17 @@ interface ApiService {
 
     @GET ("everything?q=wajah&language=id&sortBy=popularity&apiKey=edf3226670f340bea5c2ecac0db6e19d")
     fun getNews(): Call<NewsResponse>
+
+    @Multipart
+    @POST("skin/upload")
+    fun uploadImage(
+        @Header("Authorization") token: String,
+        @Part file: MultipartBody.Part
+    ): Call<ResponseBody>
+
+    @POST("predictions")
+    fun savePredictions(
+        @Header("Authorization") token: String,
+        @Body requestBody: PredictionRequest
+    ): Call<ResponseBody>
 }

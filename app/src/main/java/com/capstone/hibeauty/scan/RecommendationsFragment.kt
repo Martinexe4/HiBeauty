@@ -1,7 +1,6 @@
 package com.capstone.hibeauty.scan
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,16 +9,15 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.adapter.RecommendationAdapter
+import com.capstone.hibeauty.api.ApiConfig
 import com.capstone.hibeauty.api.ApiService
+import com.capstone.hibeauty.api.RecommendationResponse
 import com.capstone.hibeauty.databinding.FragmentRecommendationsBinding
 import com.capstone.hibeauty.utils.SharedPreferenceUtil
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RecommendationsFragment : BottomSheetDialogFragment() {
 
@@ -50,13 +48,7 @@ class RecommendationsFragment : BottomSheetDialogFragment() {
         val skinId = arguments?.getString("skinId") ?: return
         val token = SharedPreferenceUtil.getToken(requireContext()) ?: return
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("https://backend-q4bx5v5sia-et.a.run.app/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        recommendationApi = retrofit.create(ApiService::class.java)
-
+        recommendationApi = ApiConfig.apiService
         fetchRecommendations(skinId, token)
     }
 
@@ -68,31 +60,25 @@ class RecommendationsFragment : BottomSheetDialogFragment() {
         }
     }
 
-
     private fun fetchRecommendations(skinId: String, token: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            try {
-                val response = recommendationApi.getRecommendations(skinId, "Bearer $token").execute()
-                if (response.isSuccessful) {
-                    val recommendations = response.body()?.data ?: emptyList()
-                    withContext(Dispatchers.Main) {
+        recommendationApi.getRecommendations(skinId, "Bearer $token")
+            .enqueue(object : Callback<RecommendationResponse> {
+                override fun onResponse(
+                    call: Call<RecommendationResponse>,
+                    response: Response<RecommendationResponse>
+                ) {
+                    if (response.isSuccessful) {
+                        val recommendations = response.body()?.data ?: emptyList()
                         recommendationAdapter.submitList(recommendations)
-                    }
-                } else {
-                    // Log the response error message for debugging
-                    val errorBody = response.errorBody()?.string()
-                    Log.e("RecommendationActivity", "Error fetching recommendations: $errorBody")
-                    withContext(Dispatchers.Main) {
+                    } else {
+                        val errorBody = response.errorBody()?.string()
                         Toast.makeText(requireContext(), "Failed to fetch recommendations: $errorBody", Toast.LENGTH_SHORT).show()
                     }
                 }
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Log.e("RecommendationActivity", "Exception fetching recommendations", e)
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+
+                override fun onFailure(call: Call<RecommendationResponse>, t: Throwable) {
+                    Toast.makeText(requireContext(), "Error: ${t.message}", Toast.LENGTH_SHORT).show()
                 }
-            }
-        }
+            })
     }
 }

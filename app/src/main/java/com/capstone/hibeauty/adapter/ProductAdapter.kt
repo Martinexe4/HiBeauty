@@ -110,8 +110,8 @@ class VerticalProductAdapter(private var productList: List<Product>) : RecyclerV
             binding.productName.text = product.name
             binding.productType.text = mapTypeIdToString(product.typeId)
             Glide.with(binding.productImage.context)
-                .load(product.image) // Ensure this is the correct image URL
-                .placeholder(R.drawable.skincare_image_placeholder) // Optionally add a placeholder
+                .load(product.image)
+                .placeholder(R.drawable.skincare_image_placeholder)
                 .into(binding.productImage)
 
             itemView.setOnClickListener {

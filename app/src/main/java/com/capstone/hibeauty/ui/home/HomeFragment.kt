@@ -71,17 +71,17 @@ class HomeFragment : Fragment() {
             mapOf(
                 "title" to getString(R.string.slide1_title),
                 "description" to getString(R.string.slide1_desc),
-                "image" to R.drawable.slide_home_image1 // Ganti dengan ID gambar yang sesuai
+                "image" to R.drawable.slide_home_image1
             ),
             mapOf(
                 "title" to getString(R.string.slide2_title),
                 "description" to getString(R.string.slide2_desc),
-                "image" to R.drawable.slide_home_image2 // Ganti dengan ID gambar yang sesuai
+                "image" to R.drawable.slide_home_image2
             ),
             mapOf(
                 "title" to getString(R.string.slide3_title),
                 "description" to getString(R.string.slide3_desc),
-                "image" to R.drawable.slide_home_image3 // Ganti dengan ID gambar yang sesuai
+                "image" to R.drawable.slide_home_image3
             )
         )
 
@@ -90,7 +90,6 @@ class HomeFragment : Fragment() {
 
         val tabLayout: TabLayout = binding.tabLayout
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            // Tab indicator customization if needed
         }.attach()
 
         handler = Handler(Looper.getMainLooper())

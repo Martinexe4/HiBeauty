@@ -21,14 +21,13 @@ class OnboardingActivity : AppCompatActivity() {
     private lateinit var binding: ActivityOnboardingBinding
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
-    private val delay: Long = 3000  // Time for slide shift (3 seconds)
+    private val delay: Long = 3000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         supportActionBar?.hide()
 
-        // Check if onboarding has already been completed
         val sharedPreferences = getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
         val hasOnboarded = sharedPreferences.getBoolean("has_onboarded", false)
         if (hasOnboarded) {
@@ -48,44 +47,38 @@ class OnboardingActivity : AppCompatActivity() {
         binding = ActivityOnboardingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Language setting
         val language = LanguageUtils.getLanguagePreference(this)
         if (language != null) {
-            LanguageUtils.setLocale(this, language) // Apply language
+            LanguageUtils.setLocale(this, language)
         }
 
         val viewPager = binding.viewPager
         val indicatorLayout = binding.indicatorLayout
         val buttonStart = binding.buttonStart
 
-        // Set adapter for ViewPager2
         val adapter = OnboardingAdapter(this)
         viewPager.adapter = adapter
 
-        // Create Handler and Runnable
         handler = Handler(Looper.getMainLooper())
         runnable = object : Runnable {
             var currentPage = 0
 
             override fun run() {
                 if (currentPage >= adapter.itemCount) {
-                    currentPage = 0  // Return to the first page if exceeding the number of pages
+                    currentPage = 0
                 }
-                viewPager.setCurrentItem(currentPage, true)  // Move to the next page
+                viewPager.setCurrentItem(currentPage, true)
                 currentPage++
-                handler.postDelayed(this, delay)  // Run again after 3 seconds
+                handler.postDelayed(this, delay)
             }
         }
 
-        // Start running the runnable
         handler.postDelayed(runnable, delay)
 
-        // Logic to update indicators based on the selected page
         viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 
-                // Update indicators based on the position of ViewPager2
                 for (i in 0 until indicatorLayout.childCount) {
                     val indicator = indicatorLayout.getChildAt(i)
                     if (i == position) {
@@ -97,13 +90,10 @@ class OnboardingActivity : AppCompatActivity() {
             }
         })
 
-        // Start button to skip onboarding and go to LoginActivity
         buttonStart.text = getString(R.string.start_button)
         buttonStart.setOnClickListener {
-            // Stop handler and move to another activity
             handler.removeCallbacks(runnable)
             sharedPreferences.edit().putBoolean("has_onboarded", true).apply()
-
             navigateToLogin()
         }
     }

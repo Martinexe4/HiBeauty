@@ -24,7 +24,6 @@ class ScanActivity : AppCompatActivity() {
     private lateinit var binding: ActivityScanBinding
     private var currentImageUri: Uri? = null
 
-    // ML
     private lateinit var imageClassifierHelper: ImageClassifierHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +60,7 @@ class ScanActivity : AppCompatActivity() {
                         }
                     }
                 }
-            } ?: showToast("Pilih gambar terlebih dahulu")
+            } ?: showToast(getString(R.string.select_image_first))
         }
 
         binding.backButton.setOnClickListener {
@@ -103,22 +102,12 @@ class ScanActivity : AppCompatActivity() {
         binding.darkOverlayView.visibility = android.view.View.VISIBLE
         binding.loadingPercentageTextView.visibility = android.view.View.VISIBLE
 
-        val handler = Handler(Looper.getMainLooper())
-        var progress = 0
-
-        handler.post(object : Runnable {
-            override fun run() {
-                if (progress <= 100) {
-                    binding.loadingPercentageTextView.text = "$progress%"
-                    progress++
-                    handler.postDelayed(this, 50)
-                } else {
-                    handler.removeCallbacks(this)
-                    binding.darkOverlayView.visibility = android.view.View.GONE
-                    binding.loadingPercentageTextView.visibility = android.view.View.GONE
-                }
+        lifecycleScope.launch {
+            for (progress in 0..100 step 10) {
+                binding.loadingPercentageTextView.text = "$progress%"
+                delay(500)
             }
-        })
+        }
     }
 
     private fun showToast(message: String) {

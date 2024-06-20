@@ -196,10 +196,9 @@ class ResultActivity : AppCompatActivity() {
                     Log.d(
                         "SavePredictionResponse",
                         "Response: $response"
-                    )  // Log the response for debugging
+                    )
                     withContext(Dispatchers.Main) {
                         showToast("Prediction saved successfully")
-                        // Navigate to RecommendationActivity
                         val fragment = RecommendationsFragment().apply {
                             arguments = Bundle().apply {
                                 putString("skinId", skinId)
