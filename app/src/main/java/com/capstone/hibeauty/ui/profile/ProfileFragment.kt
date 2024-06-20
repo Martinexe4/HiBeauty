@@ -272,8 +272,6 @@ class ProfileFragment : Fragment() {
             .show()
     }
 
-
-
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null

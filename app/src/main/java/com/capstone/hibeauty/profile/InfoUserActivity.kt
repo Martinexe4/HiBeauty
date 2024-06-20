@@ -50,7 +50,7 @@ class InfoUserActivity : AppCompatActivity() {
                     userProfile?.let {
                         if (preference.loadSettingLanguage() == "in") {
                             when (it.GENDER) {
-                                "Male" -> translatedGender = "Laki-laki"
+                                "Male" -> translatedGender = "Laki-Laki"
                                 "Female" -> translatedGender = "Perempuan"
                                 else -> translatedGender = it.GENDER
                             }
