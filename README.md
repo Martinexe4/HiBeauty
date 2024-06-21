@@ -71,6 +71,16 @@ Basic instructions for using the application:
 - [Fragment](https://developer.android.com/guide/fragments?hl=id)
 - [Figma](https://www.figma.com/)
 
+## Color Theme Reference
+
+| Color             | Hex                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| Primary Color | ![#FF8473](https://via.placeholder.com/10/FF8473?text=+) #13C193 |
+| Primary Variant | ![##FFC1B9](https://via.placeholder.com/10/154D3E?text=+) ##FFC1B9 |
+| Light Grey | ![##E0E0E0](https://via.placeholder.com/10/#E0E0E0?text=+) #B56031 |
+| White | ![#FFFFFF](https://via.placeholder.com/10/FFFFFF?text=+) #FFFFFF |
+| Black | ![#000000](https://via.placeholder.com/10/000000?text=+) #000000 |
+
 ## Architecture
 
 This app is using [**MVC (Model-View-Controller)**](https://triare.net/insights/common-architecture-for-mobile-application/) Architecture.
