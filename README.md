@@ -14,6 +14,7 @@ To use the application please download the .apk file at the following [link](htt
 
 - **Facial condition scan**:  The app should allow users to use their device's camera to take clear photos of their facial skin as well as process the captured images using machine learning models.
 - **Product recommendations**: The app should fetch beauty product data from an API from google cloud sql and provide personalized product recommendations based on the analysis of the user's skin condition.
+- **Translate Language**: The app allows users to translate in app language into Indonesian and English.
 - **News features**:	The app should include a blog section where users can read articles about skin problems and their solutions.
 
 ## System Requirements
