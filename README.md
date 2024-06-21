@@ -76,12 +76,10 @@ Basic instructions for using the application:
 - **Pattern**: MVC (Model-View-Controller)
 - **Libraries**: Retrofit, Room, Dagger, etc.
 
-## Contact
+## Contact Us
 
-Email: redy.wijaya24@gmail.com
-GitHub: [redywi](https://github.com/redywi)
-Email: farhannn58@gmail.com
-GitHub: [parhannn](https://github.com/parhannn)
+- Email: redy.wijaya24@gmail.com, GitHub: [redywi](https://github.com/redywi)
+- Email: farhannn58@gmail.com, GitHub: [parhannn](https://github.com/parhannn)
 
 ---
 
