@@ -34,10 +34,10 @@ class DetailArticleActivity : AppCompatActivity() {
                 val browserIntent = Intent(Intent.ACTION_VIEW, android.net.Uri.parse(url))
                 startActivity(browserIntent)
             }
+        }
 
-            binding.closeButton.setOnClickListener {
-                finish()
-            }
+        binding.closeButton.setOnClickListener {
+            finish()
         }
     }
 }
