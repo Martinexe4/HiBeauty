@@ -55,6 +55,7 @@ class OnboardingActivity : AppCompatActivity() {
         val viewPager = binding.viewPager
         val indicatorLayout = binding.indicatorLayout
         val buttonStart = binding.buttonStart
+        val btnLogin = binding.loginButton
 
         val adapter = OnboardingAdapter(this)
         viewPager.adapter = adapter
@@ -92,6 +93,11 @@ class OnboardingActivity : AppCompatActivity() {
 
         buttonStart.text = getString(R.string.start_button)
         buttonStart.setOnClickListener {
+            handler.removeCallbacks(runnable)
+            sharedPreferences.edit().putBoolean("has_onboarded", true).apply()
+            navigateToLogin()
+        }
+        btnLogin.setOnClickListener {
             handler.removeCallbacks(runnable)
             sharedPreferences.edit().putBoolean("has_onboarded", true).apply()
             navigateToLogin()

@@ -67,13 +67,33 @@
                     app:strokeColor="@color/colorPrimarySoft"
                     app:strokeWidth="2dp">
 
-                    <ImageView
-                        android:id="@+id/imgProfile"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:background="#FF8473"
-                        android:scaleType="centerCrop"
-                        app:srcCompat="@drawable/placeholder_image" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/imgProfile"
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:background="#FF8473"
+                            android:scaleType="centerCrop"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:srcCompat="@drawable/placeholder_image" />
+
+                        <ProgressBar
+                            android:id="@+id/load_image"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:visibility="gone"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            tools:visibility="visible" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
                 <ImageView

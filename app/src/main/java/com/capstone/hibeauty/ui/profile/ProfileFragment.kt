@@ -80,7 +80,8 @@ class ProfileFragment : Fragment() {
         }
 
         binding?.changeLanguage?.setOnClickListener {
-            Navigation.findNavController(view).navigate(R.id.action_navigation_profile_to_languageActivity)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_navigation_profile_to_languageActivity)
         }
     }
 
@@ -125,18 +126,31 @@ class ProfileFragment : Fragment() {
         val service = ApiConfig.apiService
         val call = userId?.let { service.uploadProfileImage("Bearer $token", it, body) }
 
+        showLoading(true)
+
         call?.enqueue(object : Callback<ResponseBody> {
             override fun onResponse(call: Call<ResponseBody>, response: Response<ResponseBody>) {
+                showLoading(false)
+
                 if (response.isSuccessful) {
-                    Toast.makeText(requireContext(), "Image uploaded successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Image uploaded successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     loadUserImage()
                 } else {
-                    Toast.makeText(requireContext(), "Image upload failed", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Image upload failed", Toast.LENGTH_SHORT)
+                        .show()
                 }
             }
 
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
-                Toast.makeText(requireContext(), "Image upload failed: ${t.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Image upload failed: ${t.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         })
     }
@@ -164,7 +178,10 @@ class ProfileFragment : Fragment() {
             val call = apiService.getUserProfile("Bearer $token", userId)
 
             call.enqueue(object : Callback<UserProfileResponse> {
-                override fun onResponse(call: Call<UserProfileResponse>, response: Response<UserProfileResponse>) {
+                override fun onResponse(
+                    call: Call<UserProfileResponse>,
+                    response: Response<UserProfileResponse>
+                ) {
                     if (response.isSuccessful) {
                         val userProfileResponse = response.body()
 
@@ -193,11 +210,18 @@ class ProfileFragment : Fragment() {
         val token = SharedPreferenceUtil.getToken(requireContext())
         val userId = SharedPreferenceUtil.getUserId(requireContext())
 
+        showLoading(true)
+
         if (token != null && userId != null) {
             val call = apiService.getUserProfileImage("Bearer $token", userId)
 
             call.enqueue(object : Callback<ProfileImageResponse> {
-                override fun onResponse(call: Call<ProfileImageResponse>, response: Response<ProfileImageResponse>) {
+                override fun onResponse(
+                    call: Call<ProfileImageResponse>,
+                    response: Response<ProfileImageResponse>
+                ) {
+                    showLoading(false)
+
                     if (response.isSuccessful) {
                         val profileImage = response.body()?.data?.profileImage
                         if (profileImage != null) {
@@ -236,6 +260,10 @@ class ProfileFragment : Fragment() {
             }
             .setNegativeButton(getString(R.string.choose_no), null)
             .show()
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        binding?.loadImage?.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {
