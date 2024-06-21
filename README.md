@@ -85,11 +85,11 @@ Basic instructions for using the application:
 
 This app is using [**MVC (Model-View-Controller)**](https://triare.net/insights/common-architecture-for-mobile-application/) Architecture.
 
-This is our architecture app diagram
-
 ---
 
 <img width="1665" alt="user  interface" src="https://github.com/Martinexe4/HiBeauty/assets/90200753/291a50a8-2163-4f7f-931d-ea8d20247286">
+
+This is our architecture app diagram
 
 ## Contact Us
 
