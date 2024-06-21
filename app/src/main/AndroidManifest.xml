@@ -25,9 +25,6 @@
             android:name=".scan.DetailRecommendationActivity"
             android:exported="false" />
         <activity
-            android:name=".scan.RecommendationActivity"
-            android:exported="false" />
-        <activity
             android:name=".profile.InfoUserActivity"
             android:exported="false" />
         <activity
