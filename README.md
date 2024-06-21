@@ -7,7 +7,7 @@
 
 A beauty app that provides product recommendations based on facial analysis.
 
-## File APK
+## Download APK
 To use the application please download the .apk file at the following [link](https://drive.google.com/file/d/1Webv4S-Hi5yiSUG0vmuu7oqwOtrZH5wI/view?usp=drive_link)
 
 ## Features
@@ -73,8 +73,13 @@ Basic instructions for using the application:
 
 ## Architecture
 
-- **Pattern**: MVC (Model-View-Controller)
-- **Libraries**: Retrofit, Room, Dagger, etc.
+This app is using [**MVC (Model-View-Controller)**](https://triare.net/insights/common-architecture-for-mobile-application/) Architecture.
+
+This is our architecture app diagram
+
+---
+
+<img width="1665" alt="user  interface" src="https://github.com/Martinexe4/HiBeauty/assets/90200753/291a50a8-2163-4f7f-931d-ea8d20247286">
 
 ## Contact Us
 
@@ -84,3 +89,5 @@ Basic instructions for using the application:
 ---
 
 Thank you for using our app! If you have any questions or suggestions, don't hesitate to contact us.
+
+---
