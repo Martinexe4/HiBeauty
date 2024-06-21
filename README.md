@@ -91,10 +91,10 @@ This app is using [**MVC (Model-View-Controller)**](https://triare.net/insights/
 
 This is our architecture app diagram
 
-## Contact Us
+## Contributors
 
-- Email: redy.wijaya24@gmail.com, GitHub: [redywi](https://github.com/redywi)
-- Email: farhannn58@gmail.com, GitHub: [parhannn](https://github.com/parhannn)
+- [**redywi**](https://github.com/redywi)
+- [**parhannn**](https://github.com/parhannn)
 
 ---
 
