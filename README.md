@@ -22,16 +22,6 @@ To use the application please download the .apk file at the following [link](htt
 - Internet connection 
 - Adequate camera
 
-## Instalation
-
-1. Clone this repository:
-    ```bash
-    git clone https://github.com/Martinexe4/HiBeauty.git
-    ```
-2. Open the project in Android Studio.
-3. Sync the project with Gradle.
-4. Build and run the application on the device or emulator.
-
 ## Usage
 
 Basic instructions for using the application:
