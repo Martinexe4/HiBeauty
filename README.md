@@ -93,8 +93,8 @@ This is our architecture app diagram
 
 ## Contributors
 
-- [**redywi**](https://github.com/redywi)
-- [**parhannn**](https://github.com/parhannn)
+- **[redywi](https://github.com/redywi)**
+- **[parhannn](https://github.com/parhannn)**
 
 ---
 
