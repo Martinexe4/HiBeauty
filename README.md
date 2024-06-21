@@ -70,6 +70,8 @@ Basic instructions for using the application:
 - [CoordinatorLayout](https://developer.android.com/jetpack/androidx/releases/coordinatorlayout?hl=id)
 - [ConstraintLayout](https://developer.android.com/develop/ui/views/layout/constraint-layout)
 - [Fragment](https://developer.android.com/guide/fragments?hl=id)
+- [MaterialCardView](https://developer.android.com/reference/com/google/android/material/card/MaterialCardView)
+- [Android Studio](https://developer.android.com/studio?_gl=1*1t6k2c4*_up*MQ..&gclid=CjwKCAjwydSzBhBOEiwAj0XN4G40TbdAKLdD6QVfG-ch0pcGlLxk5S06PiNHp6kqjHziDr-I3YoqjhoCVegQAvD_BwE&gclsrc=aw.ds)
 - [Figma](https://www.figma.com/)
 
 ## Color Theme Reference
