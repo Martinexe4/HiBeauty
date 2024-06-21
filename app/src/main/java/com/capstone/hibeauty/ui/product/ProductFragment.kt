@@ -40,8 +40,8 @@ class ProductFragment : Fragment() {
         verticalRecyclerView = view.findViewById(R.id.vertical_recycler_view)
         searchView = view.findViewById(R.id.search_view)
 
-        horizontalAdapter = HorizontalProductAdapter(emptyList())
-        verticalAdapter = VerticalProductAdapter(emptyList())
+        horizontalAdapter = HorizontalProductAdapter(requireContext(), emptyList())
+        verticalAdapter = VerticalProductAdapter(requireContext(), emptyList())
 
         horizontalRecyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
@@ -56,7 +56,6 @@ class ProductFragment : Fragment() {
 
         return view
     }
-
     private fun fetchProducts() {
         val apiService = ApiConfig.apiService
         val token = SharedPreferenceUtil.getToken(requireContext())
