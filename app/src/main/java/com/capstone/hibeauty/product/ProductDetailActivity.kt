@@ -56,11 +56,11 @@ class ProductDetailActivity : AppCompatActivity() {
             5 -> getString(R.string.serum)
             6 -> getString(R.string.toner)
             7 -> getString(R.string.face_wash)
-            8 -> getString(R.string.eye_cream)
-            9 -> getString(R.string.face_scrub)
-            10 -> getString(R.string.sunscreen)
-            11 -> getString(R.string.micellar_water)
-            12 -> getString(R.string.acne_spot)
+            8 -> getString(R.string.face_scrub)
+            9 -> getString(R.string.eye_cream)
+            10 -> getString(R.string.cream)
+            11 -> getString(R.string.sunscreen)
+            12 -> getString(R.string.micellar_water)
             else -> getString(R.string.unknown)
         }
     }

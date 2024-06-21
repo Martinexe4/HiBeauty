@@ -72,19 +72,19 @@ class RecommendationAdapter(private val context: Context) : ListAdapter<ProductR
 
     private fun mapTypeIdToString(typeId: Int): String {
         return when (typeId) {
-            1 -> "Moisturizer"
-            2 -> "Cleanser"
-            3 -> "Powder"
-            4 -> "Balm"
-            5 -> "Serum"
-            6 -> "Toner"
-            7 -> "Face Wash"
-            8 -> "Eye Cream"
-            9 -> "Face Scrub"
-            10 -> "Sunscreen"
-            11 -> "Micellar Water"
-            12 -> "Acne Spot"
-            else -> "Unknown"
+            1 -> context.getString(R.string.moisturizer)
+            2 -> context.getString(R.string.cleanser)
+            3 -> context.getString(R.string.powder)
+            4 -> context.getString(R.string.balm)
+            5 -> context.getString(R.string.serum)
+            6 -> context.getString(R.string.toner)
+            7 -> context.getString(R.string.face_wash)
+            8 -> context.getString(R.string.face_scrub)
+            9 -> context.getString(R.string.eye_cream)
+            10 -> context.getString(R.string.cream)
+            11 -> context.getString(R.string.sunscreen)
+            12 -> context.getString(R.string.micellar_water)
+            else -> context.getString(R.string.unknown)
         }
     }
 }
