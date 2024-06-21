@@ -1,16 +1,13 @@
 package com.capstone.hibeauty.profile
 
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.capstone.hibeauty.MainActivity
+import androidx.appcompat.app.AppCompatDelegate
 import com.capstone.hibeauty.R
 import com.capstone.hibeauty.databinding.ActivityLanguageBinding
+import com.capstone.hibeauty.utils.InitApp
 import kotlin.system.exitProcess
 
 class LanguageActivity : AppCompatActivity() {
@@ -21,6 +18,13 @@ class LanguageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLanguageBinding.inflate(layoutInflater)
+
+        if (InitApp().isNightModeEnabled()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
+
         setContentView(binding.root)
 
         supportActionBar?.hide()
