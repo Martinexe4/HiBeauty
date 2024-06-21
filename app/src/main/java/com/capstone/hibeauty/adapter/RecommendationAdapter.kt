@@ -84,6 +84,7 @@ class RecommendationAdapter(private val context: Context) : ListAdapter<ProductR
             10 -> context.getString(R.string.cream)
             11 -> context.getString(R.string.sunscreen)
             12 -> context.getString(R.string.micellar_water)
+            13 -> context.getString(R.string.acne_spot)
             else -> context.getString(R.string.unknown)
         }
     }

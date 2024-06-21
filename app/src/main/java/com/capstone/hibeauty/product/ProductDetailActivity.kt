@@ -61,6 +61,7 @@ class ProductDetailActivity : AppCompatActivity() {
             10 -> getString(R.string.cream)
             11 -> getString(R.string.sunscreen)
             12 -> getString(R.string.micellar_water)
+            13 -> getString(R.string.acne_spot)
             else -> getString(R.string.unknown)
         }
     }

@@ -45,6 +45,7 @@ class HorizontalProductAdapter(private val context: Context, private var product
             10 -> context.getString(R.string.cream)
             11 -> context.getString(R.string.sunscreen)
             12 -> context.getString(R.string.micellar_water)
+            13 -> context.getString(R.string.acne_spot)
             else -> context.getString(R.string.unknown)
         }
     }
@@ -101,6 +102,7 @@ class VerticalProductAdapter(private val context: Context, private var productLi
             10 -> context.getString(R.string.cream)
             11 -> context.getString(R.string.sunscreen)
             12 -> context.getString(R.string.micellar_water)
+            13 -> context.getString(R.string.acne_spot)
             else -> context.getString(R.string.unknown)
         }
     }
