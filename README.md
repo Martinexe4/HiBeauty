@@ -132,4 +132,4 @@ To use the model, follow these steps:
 
 - [Muhammad Ridho Mujahid] (https://github.com/Moedjaheed)
 - [Martin Ompusunggu] (https://github.com/Martinexe4)
-- Yanuar Putra Kharisma Adhiyasa
+- [Yanuar Putra Kharisma Adhiyasa] (https://github.com/Yasaism)
